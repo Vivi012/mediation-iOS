@@ -1,0 +1,584 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		CA83AFB121F064C700655A95 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CA83AFB021F064C700655A95 /* AppDelegate.m */; };
+		CA83AFB421F064C700655A95 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA83AFB321F064C700655A95 /* ViewController.m */; };
+		CA83AFB721F064C700655A95 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA83AFB521F064C700655A95 /* Main.storyboard */; };
+		CA83AFB921F064C700655A95 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CA83AFB821F064C700655A95 /* Assets.xcassets */; };
+		CA83AFBC21F064C700655A95 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA83AFBA21F064C700655A95 /* LaunchScreen.storyboard */; };
+		CA83AFBF21F064C700655A95 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CA83AFBE21F064C700655A95 /* main.m */; };
+		CA83AFC921F064C700655A95 /* MTGMediationSampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CA83AFC821F064C700655A95 /* MTGMediationSampleTests.m */; };
+		CA83AFD421F064C700655A95 /* MTGMediationSampleUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = CA83AFD321F064C700655A95 /* MTGMediationSampleUITests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		CA83AFC521F064C700655A95 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CA83AFA421F064C600655A95 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CA83AFAB21F064C600655A95;
+			remoteInfo = MTGMediationSample;
+		};
+		CA83AFD021F064C700655A95 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CA83AFA421F064C600655A95 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CA83AFAB21F064C600655A95;
+			remoteInfo = MTGMediationSample;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		CA83AFAC21F064C700655A95 /* MTGMediationSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MTGMediationSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CA83AFAF21F064C700655A95 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		CA83AFB021F064C700655A95 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		CA83AFB221F064C700655A95 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		CA83AFB321F064C700655A95 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		CA83AFB621F064C700655A95 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		CA83AFB821F064C700655A95 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		CA83AFBB21F064C700655A95 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		CA83AFBD21F064C700655A95 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CA83AFBE21F064C700655A95 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		CA83AFC421F064C700655A95 /* MTGMediationSampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MTGMediationSampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CA83AFC821F064C700655A95 /* MTGMediationSampleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MTGMediationSampleTests.m; sourceTree = "<group>"; };
+		CA83AFCA21F064C700655A95 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CA83AFCF21F064C700655A95 /* MTGMediationSampleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MTGMediationSampleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CA83AFD321F064C700655A95 /* MTGMediationSampleUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MTGMediationSampleUITests.m; sourceTree = "<group>"; };
+		CA83AFD521F064C700655A95 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		CA83AFA921F064C600655A95 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CA83AFC121F064C700655A95 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CA83AFCC21F064C700655A95 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		CA83AFA321F064C600655A95 = {
+			isa = PBXGroup;
+			children = (
+				CA83AFAE21F064C700655A95 /* MTGMediationSample */,
+				CA83AFC721F064C700655A95 /* MTGMediationSampleTests */,
+				CA83AFD221F064C700655A95 /* MTGMediationSampleUITests */,
+				CA83AFAD21F064C700655A95 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		CA83AFAD21F064C700655A95 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CA83AFAC21F064C700655A95 /* MTGMediationSample.app */,
+				CA83AFC421F064C700655A95 /* MTGMediationSampleTests.xctest */,
+				CA83AFCF21F064C700655A95 /* MTGMediationSampleUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CA83AFAE21F064C700655A95 /* MTGMediationSample */ = {
+			isa = PBXGroup;
+			children = (
+				CA83AFAF21F064C700655A95 /* AppDelegate.h */,
+				CA83AFB021F064C700655A95 /* AppDelegate.m */,
+				CA83AFB221F064C700655A95 /* ViewController.h */,
+				CA83AFB321F064C700655A95 /* ViewController.m */,
+				CA83AFB521F064C700655A95 /* Main.storyboard */,
+				CA83AFB821F064C700655A95 /* Assets.xcassets */,
+				CA83AFBA21F064C700655A95 /* LaunchScreen.storyboard */,
+				CA83AFBD21F064C700655A95 /* Info.plist */,
+				CA83AFBE21F064C700655A95 /* main.m */,
+			);
+			path = MTGMediationSample;
+			sourceTree = "<group>";
+		};
+		CA83AFC721F064C700655A95 /* MTGMediationSampleTests */ = {
+			isa = PBXGroup;
+			children = (
+				CA83AFC821F064C700655A95 /* MTGMediationSampleTests.m */,
+				CA83AFCA21F064C700655A95 /* Info.plist */,
+			);
+			path = MTGMediationSampleTests;
+			sourceTree = "<group>";
+		};
+		CA83AFD221F064C700655A95 /* MTGMediationSampleUITests */ = {
+			isa = PBXGroup;
+			children = (
+				CA83AFD321F064C700655A95 /* MTGMediationSampleUITests.m */,
+				CA83AFD521F064C700655A95 /* Info.plist */,
+			);
+			path = MTGMediationSampleUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		CA83AFAB21F064C600655A95 /* MTGMediationSample */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CA83AFD821F064C700655A95 /* Build configuration list for PBXNativeTarget "MTGMediationSample" */;
+			buildPhases = (
+				CA83AFA821F064C600655A95 /* Sources */,
+				CA83AFA921F064C600655A95 /* Frameworks */,
+				CA83AFAA21F064C600655A95 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MTGMediationSample;
+			productName = MTGMediationSample;
+			productReference = CA83AFAC21F064C700655A95 /* MTGMediationSample.app */;
+			productType = "com.apple.product-type.application";
+		};
+		CA83AFC321F064C700655A95 /* MTGMediationSampleTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CA83AFDB21F064C700655A95 /* Build configuration list for PBXNativeTarget "MTGMediationSampleTests" */;
+			buildPhases = (
+				CA83AFC021F064C700655A95 /* Sources */,
+				CA83AFC121F064C700655A95 /* Frameworks */,
+				CA83AFC221F064C700655A95 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CA83AFC621F064C700655A95 /* PBXTargetDependency */,
+			);
+			name = MTGMediationSampleTests;
+			productName = MTGMediationSampleTests;
+			productReference = CA83AFC421F064C700655A95 /* MTGMediationSampleTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		CA83AFCE21F064C700655A95 /* MTGMediationSampleUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CA83AFDE21F064C700655A95 /* Build configuration list for PBXNativeTarget "MTGMediationSampleUITests" */;
+			buildPhases = (
+				CA83AFCB21F064C700655A95 /* Sources */,
+				CA83AFCC21F064C700655A95 /* Frameworks */,
+				CA83AFCD21F064C700655A95 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CA83AFD121F064C700655A95 /* PBXTargetDependency */,
+			);
+			name = MTGMediationSampleUITests;
+			productName = MTGMediationSampleUITests;
+			productReference = CA83AFCF21F064C700655A95 /* MTGMediationSampleUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		CA83AFA421F064C600655A95 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1010;
+				ORGANIZATIONNAME = CharkZhang;
+				TargetAttributes = {
+					CA83AFAB21F064C600655A95 = {
+						CreatedOnToolsVersion = 10.1;
+					};
+					CA83AFC321F064C700655A95 = {
+						CreatedOnToolsVersion = 10.1;
+						TestTargetID = CA83AFAB21F064C600655A95;
+					};
+					CA83AFCE21F064C700655A95 = {
+						CreatedOnToolsVersion = 10.1;
+						TestTargetID = CA83AFAB21F064C600655A95;
+					};
+				};
+			};
+			buildConfigurationList = CA83AFA721F064C600655A95 /* Build configuration list for PBXProject "MTGMediationSample" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = CA83AFA321F064C600655A95;
+			productRefGroup = CA83AFAD21F064C700655A95 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				CA83AFAB21F064C600655A95 /* MTGMediationSample */,
+				CA83AFC321F064C700655A95 /* MTGMediationSampleTests */,
+				CA83AFCE21F064C700655A95 /* MTGMediationSampleUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		CA83AFAA21F064C600655A95 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CA83AFBC21F064C700655A95 /* LaunchScreen.storyboard in Resources */,
+				CA83AFB921F064C700655A95 /* Assets.xcassets in Resources */,
+				CA83AFB721F064C700655A95 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CA83AFC221F064C700655A95 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CA83AFCD21F064C700655A95 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		CA83AFA821F064C600655A95 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CA83AFB421F064C700655A95 /* ViewController.m in Sources */,
+				CA83AFBF21F064C700655A95 /* main.m in Sources */,
+				CA83AFB121F064C700655A95 /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CA83AFC021F064C700655A95 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CA83AFC921F064C700655A95 /* MTGMediationSampleTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CA83AFCB21F064C700655A95 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CA83AFD421F064C700655A95 /* MTGMediationSampleUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		CA83AFC621F064C700655A95 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CA83AFAB21F064C600655A95 /* MTGMediationSample */;
+			targetProxy = CA83AFC521F064C700655A95 /* PBXContainerItemProxy */;
+		};
+		CA83AFD121F064C700655A95 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CA83AFAB21F064C600655A95 /* MTGMediationSample */;
+			targetProxy = CA83AFD021F064C700655A95 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		CA83AFB521F064C700655A95 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CA83AFB621F064C700655A95 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		CA83AFBA21F064C700655A95 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CA83AFBB21F064C700655A95 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		CA83AFD621F064C700655A95 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		CA83AFD721F064C700655A95 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		CA83AFD921F064C700655A95 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = DJRJZKDWWH;
+				INFOPLIST_FILE = MTGMediationSample/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.mintegral.MTGMediationSample;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		CA83AFDA21F064C700655A95 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = DJRJZKDWWH;
+				INFOPLIST_FILE = MTGMediationSample/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.mintegral.MTGMediationSample;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		CA83AFDC21F064C700655A95 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = DJRJZKDWWH;
+				INFOPLIST_FILE = MTGMediationSampleTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.mintegral.MTGMediationSampleTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MTGMediationSample.app/MTGMediationSample";
+			};
+			name = Debug;
+		};
+		CA83AFDD21F064C700655A95 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = DJRJZKDWWH;
+				INFOPLIST_FILE = MTGMediationSampleTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.mintegral.MTGMediationSampleTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MTGMediationSample.app/MTGMediationSample";
+			};
+			name = Release;
+		};
+		CA83AFDF21F064C700655A95 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = DJRJZKDWWH;
+				INFOPLIST_FILE = MTGMediationSampleUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.mintegral.MTGMediationSampleUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = MTGMediationSample;
+			};
+			name = Debug;
+		};
+		CA83AFE021F064C700655A95 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = DJRJZKDWWH;
+				INFOPLIST_FILE = MTGMediationSampleUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.mintegral.MTGMediationSampleUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = MTGMediationSample;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		CA83AFA721F064C600655A95 /* Build configuration list for PBXProject "MTGMediationSample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CA83AFD621F064C700655A95 /* Debug */,
+				CA83AFD721F064C700655A95 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CA83AFD821F064C700655A95 /* Build configuration list for PBXNativeTarget "MTGMediationSample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CA83AFD921F064C700655A95 /* Debug */,
+				CA83AFDA21F064C700655A95 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CA83AFDB21F064C700655A95 /* Build configuration list for PBXNativeTarget "MTGMediationSampleTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CA83AFDC21F064C700655A95 /* Debug */,
+				CA83AFDD21F064C700655A95 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CA83AFDE21F064C700655A95 /* Build configuration list for PBXNativeTarget "MTGMediationSampleUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CA83AFDF21F064C700655A95 /* Debug */,
+				CA83AFE021F064C700655A95 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = CA83AFA421F064C600655A95 /* Project object */;
+}
