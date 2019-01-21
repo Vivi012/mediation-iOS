@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>mtg_unitId1_tobeReplace</key>
+	<array>
+		<dict>
+			<key>apikey</key>
+			<string>apikey_mtg</string>
+			<key>appid</key>
+			<string>appid_mtg</string>
+			<key>classname</key>
+			<string>MTGMintegralAdapter</string>
+			<key>network</key>
+			<string>mobvista</string>
+			<key>unitid</key>
+			<string>unitid1</string>
+		</dict>
+		<dict>
+			<key>classname</key>
+			<string>IronSourceAdapter</string>
+			<key>network</key>
+			<string>ironsource</string>
+			<key>unitid</key>
+			<string>is_unitid1</string>
+		</dict>
+	</array>
+	<key>mtg_unitId2_tobeReplace</key>
+	<array>
+		<dict>
+			<key>apikey</key>
+			<string>apikey_mtg</string>
+			<key>appid</key>
+			<string>appid_mtg</string>
+			<key>classname</key>
+			<string>MTGMintegralAdapter</string>
+			<key>network</key>
+			<string>mobvista</string>
+			<key>unitid</key>
+			<string>unitid2</string>
+		</dict>
+		<dict>
+			<key>classname</key>
+			<string>IronSourceAdapter</string>
+			<key>network</key>
+			<string>ironsource</string>
+			<key>unitid</key>
+			<string>is_unitid2</string>
+		</dict>
+	</array>
+</dict>
+</plist>
