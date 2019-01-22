@@ -10,14 +10,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol MTGAdServerCommunicatorDelegate <NSObject>
 
-@required
-- (void)communicatorDidReceiveAdUnitInfos:(NSArray *)infos;
-- (void)communicatorDidFailWithError:(NSError *)error;
 
-@end
-
+@protocol MTGAdServerCommunicatorDelegate;
 
 @interface MTGAdServerCommunicator : NSObject
 
@@ -28,5 +23,17 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 @end
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+@protocol MTGAdServerCommunicatorDelegate <NSObject>
+
+@required
+- (void)communicatorDidReceiveAdUnitInfos:(NSArray *)infos;
+- (void)communicatorDidFailWithError:(NSError *)error;
+
+@end
+
 
 NS_ASSUME_NONNULL_END

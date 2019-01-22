@@ -9,10 +9,9 @@
 #import "MTGAdServerCommunicator.h"
 #import "MTGAdInfo.h"
 
-@protocol MTGAdServerCommunicatorDelegate;
 @interface MTGAdServerCommunicator()
 
-@property (nonatomic,weak) MTGAdServerCommunicatorDelegate *delegate;
+@property (nonatomic,weak) id<MTGAdServerCommunicatorDelegate> delegate;
 
 @end
 
