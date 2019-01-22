@@ -31,7 +31,7 @@
     // request local configuration for ad infos
     NSArray *rewardVideoInfos = [MTGAdInfo rewardVideoInfosWithAdUnitId:adUnitId];
     if (rewardVideoInfos.count) {
-        
+        #warning  Chark TODO  校验开发者配置的数据
         if (_delegate && [_delegate respondsToSelector:@selector(communicatorDidReceiveAdUnitInfos:)]) {
             [_delegate communicatorDidReceiveAdUnitInfos:rewardVideoInfos];
         }

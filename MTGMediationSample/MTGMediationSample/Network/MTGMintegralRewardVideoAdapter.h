@@ -6,11 +6,11 @@
 //  Copyright © 2019 CharkZhang. All rights reserved.
 //
 
-#import "MTGRewardedVideoCustomEvent.h"
+#import "MTGRewardVideoCustomEvent.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface MTGMintegralRewardVideoAdapter : MTGRewardedVideoCustomEvent
+@interface MTGMintegralRewardVideoAdapter : MTGRewardVideoCustomEvent
 
 @end
 
