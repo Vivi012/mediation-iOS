@@ -11,7 +11,9 @@
 @interface MTGRewardVideoAdapter ()<MTGRewardVideoAdapterDelegate>
 
 @property (nonatomic, weak) id<MTGRewardVideoAdapterDelegate> delegate;
-@property (nonatomic,copy) void (^__nullable)(BOOL success,NSError *error) block;
+@property (nonatomic,copy) void(^completionHandler)(BOOL success,NSError *error);
+
+
 @end
 
 @implementation MTGRewardVideoAdapter
