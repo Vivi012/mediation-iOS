@@ -21,10 +21,10 @@
 		CAAD3D2521F71E06007EF61B /* MTGIronSourceRewardVideoAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = CAAD3D2021F71E06007EF61B /* MTGIronSourceRewardVideoAdapter.m */; };
 		CAAD3D3421F71E0E007EF61B /* MTGRewardVideoAdManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CAAD3D2721F71E0E007EF61B /* MTGRewardVideoAdManager.m */; };
 		CAAD3D3521F71E0E007EF61B /* MTGRewardVideoAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = CAAD3D2A21F71E0E007EF61B /* MTGRewardVideoAdapter.m */; };
-		CAAD3D3621F71E0E007EF61B /* MTGMediationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CAAD3D2D21F71E0E007EF61B /* MTGMediationManager.m */; };
 		CAAD3D3721F71E0E007EF61B /* MTGRewardVideoCustomEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = CAAD3D2E21F71E0E007EF61B /* MTGRewardVideoCustomEvent.m */; };
 		CAAD3D3821F71E0E007EF61B /* MTGAdServerCommunicator.m in Sources */ = {isa = PBXBuildFile; fileRef = CAAD3D3121F71E0E007EF61B /* MTGAdServerCommunicator.m */; };
 		CAAD3D3921F71E0E007EF61B /* MTGRewardVideo.m in Sources */ = {isa = PBXBuildFile; fileRef = CAAD3D3221F71E0E007EF61B /* MTGRewardVideo.m */; };
+		CAAD3D3C21F722AA007EF61B /* MTGMediationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CAAD3D3B21F722AA007EF61B /* MTGMediationManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,17 +69,17 @@
 		CAAD3D2121F71E06007EF61B /* MTGIronSourceRewardVideoAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTGIronSourceRewardVideoAdapter.h; sourceTree = "<group>"; };
 		CAAD3D2221F71E06007EF61B /* MTGMintegralRewardVideoAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTGMintegralRewardVideoAdapter.h; sourceTree = "<group>"; };
 		CAAD3D2721F71E0E007EF61B /* MTGRewardVideoAdManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTGRewardVideoAdManager.m; sourceTree = "<group>"; };
-		CAAD3D2821F71E0E007EF61B /* MTGMediationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTGMediationManager.h; sourceTree = "<group>"; };
 		CAAD3D2921F71E0E007EF61B /* MTGRewardVideoCustomEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTGRewardVideoCustomEvent.h; sourceTree = "<group>"; };
 		CAAD3D2A21F71E0E007EF61B /* MTGRewardVideoAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTGRewardVideoAdapter.m; sourceTree = "<group>"; };
 		CAAD3D2B21F71E0E007EF61B /* MTGAdServerCommunicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTGAdServerCommunicator.h; sourceTree = "<group>"; };
 		CAAD3D2C21F71E0E007EF61B /* MTGRewardVideo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTGRewardVideo.h; sourceTree = "<group>"; };
-		CAAD3D2D21F71E0E007EF61B /* MTGMediationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTGMediationManager.m; sourceTree = "<group>"; };
 		CAAD3D2E21F71E0E007EF61B /* MTGRewardVideoCustomEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTGRewardVideoCustomEvent.m; sourceTree = "<group>"; };
 		CAAD3D2F21F71E0E007EF61B /* MTGRewardVideoAdManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTGRewardVideoAdManager.h; sourceTree = "<group>"; };
 		CAAD3D3021F71E0E007EF61B /* MTGRewardVideoAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTGRewardVideoAdapter.h; sourceTree = "<group>"; };
 		CAAD3D3121F71E0E007EF61B /* MTGAdServerCommunicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTGAdServerCommunicator.m; sourceTree = "<group>"; };
 		CAAD3D3221F71E0E007EF61B /* MTGRewardVideo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTGRewardVideo.m; sourceTree = "<group>"; };
+		CAAD3D3A21F722A9007EF61B /* MTGMediationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTGMediationManager.h; sourceTree = "<group>"; };
+		CAAD3D3B21F722AA007EF61B /* MTGMediationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTGMediationManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,6 +167,8 @@
 		CA83AFE121F0711A00655A95 /* Mediation */ = {
 			isa = PBXGroup;
 			children = (
+				CAAD3D3A21F722A9007EF61B /* MTGMediationManager.h */,
+				CAAD3D3B21F722AA007EF61B /* MTGMediationManager.m */,
 				CAAD3D3321F71E0E007EF61B /* Interstitials */,
 				CAAD3D2621F71E0E007EF61B /* RewardVideo */,
 			);
@@ -214,12 +216,10 @@
 			isa = PBXGroup;
 			children = (
 				CAAD3D2721F71E0E007EF61B /* MTGRewardVideoAdManager.m */,
-				CAAD3D2821F71E0E007EF61B /* MTGMediationManager.h */,
 				CAAD3D2921F71E0E007EF61B /* MTGRewardVideoCustomEvent.h */,
 				CAAD3D2A21F71E0E007EF61B /* MTGRewardVideoAdapter.m */,
 				CAAD3D2B21F71E0E007EF61B /* MTGAdServerCommunicator.h */,
 				CAAD3D2C21F71E0E007EF61B /* MTGRewardVideo.h */,
-				CAAD3D2D21F71E0E007EF61B /* MTGMediationManager.m */,
 				CAAD3D2E21F71E0E007EF61B /* MTGRewardVideoCustomEvent.m */,
 				CAAD3D2F21F71E0E007EF61B /* MTGRewardVideoAdManager.h */,
 				CAAD3D3021F71E0E007EF61B /* MTGRewardVideoAdapter.h */,
@@ -368,6 +368,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CAAD3D2421F71E06007EF61B /* MTGMintegralRewardVideoAdapter.m in Sources */,
+				CAAD3D3C21F722AA007EF61B /* MTGMediationManager.m in Sources */,
 				CAAD3D3421F71E0E007EF61B /* MTGRewardVideoAdManager.m in Sources */,
 				CA83AFB421F064C700655A95 /* ViewController.m in Sources */,
 				CA83AFBF21F064C700655A95 /* main.m in Sources */,
@@ -375,7 +376,6 @@
 				CAAD3D3721F71E0E007EF61B /* MTGRewardVideoCustomEvent.m in Sources */,
 				CAAD3D2521F71E06007EF61B /* MTGIronSourceRewardVideoAdapter.m in Sources */,
 				CAAD3D1B21F598E5007EF61B /* MTGAdInfo.m in Sources */,
-				CAAD3D3621F71E0E007EF61B /* MTGMediationManager.m in Sources */,
 				CAAD3D3521F71E0E007EF61B /* MTGRewardVideoAdapter.m in Sources */,
 				CAAD3D3821F71E0E007EF61B /* MTGAdServerCommunicator.m in Sources */,
 				CAAD3D3921F71E0E007EF61B /* MTGRewardVideo.m in Sources */,
