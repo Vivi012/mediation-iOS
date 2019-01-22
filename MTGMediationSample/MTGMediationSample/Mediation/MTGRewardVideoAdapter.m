@@ -29,6 +29,7 @@
 
 - (void)getAdWithInfo:(NSDictionary *)adInfo completionHandler:(void (^ __nullable)(BOOL success,NSError *error))completion{
 
+    
 }
 
 - (BOOL)hasAdAvailable{

@@ -10,4 +10,19 @@
 
 @implementation MTGMintegralRewardVideoAdapter
 
+- (void)requestRewardedVideoWithCustomEventInfo:(NSDictionary *)info{
+    
+    
+}
+
+- (BOOL)hasAdAvailable{
+    
+    return YES;
+}
+
+- (void)presentRewardedVideoFromViewController:(UIViewController *)viewController{
+    
+    
+}
+
 @end
