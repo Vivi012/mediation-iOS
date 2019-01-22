@@ -10,9 +10,8 @@
 
 @implementation MTGAdInfo
 
++ (NSArray *)rewardVideoInfosWithAdUnitId:(NSString *)adUnitId{
 
-+ (NSArray *)networkItemsWithAdUnitId:(NSString *)adUnitId{
-    
     NSString *path = [[NSBundle mainBundle] pathForResource:@"AdUnitInfoArray" ofType:@"plist"];
     
     return nil;
