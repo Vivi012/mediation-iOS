@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		CA83AFB121F064C700655A95 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CA83AFB021F064C700655A95 /* AppDelegate.m */; };
-		CA83AFB421F064C700655A95 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA83AFB321F064C700655A95 /* ViewController.m */; };
-		CA83AFB721F064C700655A95 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA83AFB521F064C700655A95 /* Main.storyboard */; };
 		CA83AFB921F064C700655A95 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CA83AFB821F064C700655A95 /* Assets.xcassets */; };
 		CA83AFBC21F064C700655A95 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA83AFBA21F064C700655A95 /* LaunchScreen.storyboard */; };
 		CA83AFBF21F064C700655A95 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CA83AFBE21F064C700655A95 /* main.m */; };
@@ -25,6 +23,11 @@
 		CAAD3D3821F71E0E007EF61B /* MTGAdServerCommunicator.m in Sources */ = {isa = PBXBuildFile; fileRef = CAAD3D3121F71E0E007EF61B /* MTGAdServerCommunicator.m */; };
 		CAAD3D3921F71E0E007EF61B /* MTGRewardVideo.m in Sources */ = {isa = PBXBuildFile; fileRef = CAAD3D3221F71E0E007EF61B /* MTGRewardVideo.m */; };
 		CAAD3D3C21F722AA007EF61B /* MTGMediationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CAAD3D3B21F722AA007EF61B /* MTGMediationManager.m */; };
+		CAAD3D5821F96577007EF61B /* MTGAdTableTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAAD3D5721F96577007EF61B /* MTGAdTableTableViewController.m */; };
+		CAAD3D5C21F9682E007EF61B /* MTGRewardVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAAD3D5B21F9682E007EF61B /* MTGRewardVideoViewController.m */; };
+		CAAD3D5F21F9687B007EF61B /* MTGInterstitialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAAD3D5E21F9687B007EF61B /* MTGInterstitialViewController.m */; };
+		CAAD3D6121F989DF007EF61B /* MTGRewardVideoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CAAD3D6021F989DF007EF61B /* MTGRewardVideoViewController.xib */; };
+		CAAD3D6321F989F6007EF61B /* MTGInterstitialViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CAAD3D6221F989F6007EF61B /* MTGInterstitialViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,9 +51,6 @@
 		CA83AFAC21F064C700655A95 /* MTGMediationSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MTGMediationSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA83AFAF21F064C700655A95 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		CA83AFB021F064C700655A95 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		CA83AFB221F064C700655A95 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		CA83AFB321F064C700655A95 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		CA83AFB621F064C700655A95 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CA83AFB821F064C700655A95 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CA83AFBB21F064C700655A95 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CA83AFBD21F064C700655A95 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -80,6 +80,14 @@
 		CAAD3D3221F71E0E007EF61B /* MTGRewardVideo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTGRewardVideo.m; sourceTree = "<group>"; };
 		CAAD3D3A21F722A9007EF61B /* MTGMediationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTGMediationManager.h; sourceTree = "<group>"; };
 		CAAD3D3B21F722AA007EF61B /* MTGMediationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTGMediationManager.m; sourceTree = "<group>"; };
+		CAAD3D5621F96577007EF61B /* MTGAdTableTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MTGAdTableTableViewController.h; sourceTree = "<group>"; };
+		CAAD3D5721F96577007EF61B /* MTGAdTableTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MTGAdTableTableViewController.m; sourceTree = "<group>"; };
+		CAAD3D5A21F9682E007EF61B /* MTGRewardVideoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MTGRewardVideoViewController.h; sourceTree = "<group>"; };
+		CAAD3D5B21F9682E007EF61B /* MTGRewardVideoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MTGRewardVideoViewController.m; sourceTree = "<group>"; };
+		CAAD3D5D21F9687B007EF61B /* MTGInterstitialViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MTGInterstitialViewController.h; sourceTree = "<group>"; };
+		CAAD3D5E21F9687B007EF61B /* MTGInterstitialViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MTGInterstitialViewController.m; sourceTree = "<group>"; };
+		CAAD3D6021F989DF007EF61B /* MTGRewardVideoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MTGRewardVideoViewController.xib; sourceTree = "<group>"; };
+		CAAD3D6221F989F6007EF61B /* MTGInterstitialViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MTGInterstitialViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,9 +143,14 @@
 				CA83AFE121F0711A00655A95 /* Mediation */,
 				CA83AFAF21F064C700655A95 /* AppDelegate.h */,
 				CA83AFB021F064C700655A95 /* AppDelegate.m */,
-				CA83AFB221F064C700655A95 /* ViewController.h */,
-				CA83AFB321F064C700655A95 /* ViewController.m */,
-				CA83AFB521F064C700655A95 /* Main.storyboard */,
+				CAAD3D5621F96577007EF61B /* MTGAdTableTableViewController.h */,
+				CAAD3D5721F96577007EF61B /* MTGAdTableTableViewController.m */,
+				CAAD3D5A21F9682E007EF61B /* MTGRewardVideoViewController.h */,
+				CAAD3D5B21F9682E007EF61B /* MTGRewardVideoViewController.m */,
+				CAAD3D6021F989DF007EF61B /* MTGRewardVideoViewController.xib */,
+				CAAD3D5D21F9687B007EF61B /* MTGInterstitialViewController.h */,
+				CAAD3D5E21F9687B007EF61B /* MTGInterstitialViewController.m */,
+				CAAD3D6221F989F6007EF61B /* MTGInterstitialViewController.xib */,
 				CA83AFB821F064C700655A95 /* Assets.xcassets */,
 				CA83AFBA21F064C700655A95 /* LaunchScreen.storyboard */,
 				CA83AFBD21F064C700655A95 /* Info.plist */,
@@ -215,16 +228,16 @@
 		CAAD3D2621F71E0E007EF61B /* RewardVideo */ = {
 			isa = PBXGroup;
 			children = (
+				CAAD3D2C21F71E0E007EF61B /* MTGRewardVideo.h */,
+				CAAD3D3221F71E0E007EF61B /* MTGRewardVideo.m */,
+				CAAD3D2F21F71E0E007EF61B /* MTGRewardVideoAdManager.h */,
 				CAAD3D2721F71E0E007EF61B /* MTGRewardVideoAdManager.m */,
-				CAAD3D2921F71E0E007EF61B /* MTGRewardVideoCustomEvent.h */,
+				CAAD3D3021F71E0E007EF61B /* MTGRewardVideoAdapter.h */,
 				CAAD3D2A21F71E0E007EF61B /* MTGRewardVideoAdapter.m */,
 				CAAD3D2B21F71E0E007EF61B /* MTGAdServerCommunicator.h */,
-				CAAD3D2C21F71E0E007EF61B /* MTGRewardVideo.h */,
-				CAAD3D2E21F71E0E007EF61B /* MTGRewardVideoCustomEvent.m */,
-				CAAD3D2F21F71E0E007EF61B /* MTGRewardVideoAdManager.h */,
-				CAAD3D3021F71E0E007EF61B /* MTGRewardVideoAdapter.h */,
 				CAAD3D3121F71E0E007EF61B /* MTGAdServerCommunicator.m */,
-				CAAD3D3221F71E0E007EF61B /* MTGRewardVideo.m */,
+				CAAD3D2921F71E0E007EF61B /* MTGRewardVideoCustomEvent.h */,
+				CAAD3D2E21F71E0E007EF61B /* MTGRewardVideoCustomEvent.m */,
 			);
 			path = RewardVideo;
 			sourceTree = "<group>";
@@ -340,8 +353,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				CA83AFBC21F064C700655A95 /* LaunchScreen.storyboard in Resources */,
+				CAAD3D6321F989F6007EF61B /* MTGInterstitialViewController.xib in Resources */,
 				CA83AFB921F064C700655A95 /* Assets.xcassets in Resources */,
-				CA83AFB721F064C700655A95 /* Main.storyboard in Resources */,
+				CAAD3D6121F989DF007EF61B /* MTGRewardVideoViewController.xib in Resources */,
 				CAAD3D1221F5978C007EF61B /* AdUnitInfoArray.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -369,13 +383,15 @@
 			files = (
 				CAAD3D2421F71E06007EF61B /* MTGMintegralRewardVideoAdapter.m in Sources */,
 				CAAD3D3C21F722AA007EF61B /* MTGMediationManager.m in Sources */,
+				CAAD3D5C21F9682E007EF61B /* MTGRewardVideoViewController.m in Sources */,
 				CAAD3D3421F71E0E007EF61B /* MTGRewardVideoAdManager.m in Sources */,
-				CA83AFB421F064C700655A95 /* ViewController.m in Sources */,
+				CAAD3D5F21F9687B007EF61B /* MTGInterstitialViewController.m in Sources */,
 				CA83AFBF21F064C700655A95 /* main.m in Sources */,
 				CA83AFB121F064C700655A95 /* AppDelegate.m in Sources */,
 				CAAD3D3721F71E0E007EF61B /* MTGRewardVideoCustomEvent.m in Sources */,
 				CAAD3D2521F71E06007EF61B /* MTGIronSourceRewardVideoAdapter.m in Sources */,
 				CAAD3D1B21F598E5007EF61B /* MTGAdInfo.m in Sources */,
+				CAAD3D5821F96577007EF61B /* MTGAdTableTableViewController.m in Sources */,
 				CAAD3D3521F71E0E007EF61B /* MTGRewardVideoAdapter.m in Sources */,
 				CAAD3D3821F71E0E007EF61B /* MTGAdServerCommunicator.m in Sources */,
 				CAAD3D3921F71E0E007EF61B /* MTGRewardVideo.m in Sources */,
@@ -414,14 +430,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		CA83AFB521F064C700655A95 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CA83AFB621F064C700655A95 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		CA83AFBA21F064C700655A95 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -552,6 +560,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = DJRJZKDWWH;
 				INFOPLIST_FILE = MTGMediationSample/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -569,6 +578,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = DJRJZKDWWH;
 				INFOPLIST_FILE = MTGMediationSample/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
