@@ -13,7 +13,7 @@
 		CA83AFBF21F064C700655A95 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CA83AFBE21F064C700655A95 /* main.m */; };
 		CA83AFC921F064C700655A95 /* MTGMediationSampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CA83AFC821F064C700655A95 /* MTGMediationSampleTests.m */; };
 		CA83AFD421F064C700655A95 /* MTGMediationSampleUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = CA83AFD321F064C700655A95 /* MTGMediationSampleUITests.m */; };
-		CAAD3D1221F5978C007EF61B /* AdUnitInfoArray.plist in Resources */ = {isa = PBXBuildFile; fileRef = CAAD3D1121F5978B007EF61B /* AdUnitInfoArray.plist */; };
+		CAAD3D1221F5978C007EF61B /* RewardVideoAdInfosData.plist in Resources */ = {isa = PBXBuildFile; fileRef = CAAD3D1121F5978B007EF61B /* RewardVideoAdInfosData.plist */; };
 		CAAD3D1B21F598E5007EF61B /* MTGAdInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = CAAD3D1A21F598E5007EF61B /* MTGAdInfo.m */; };
 		CAAD3D2421F71E06007EF61B /* MTGMintegralRewardVideoAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = CAAD3D1F21F71E06007EF61B /* MTGMintegralRewardVideoAdapter.m */; };
 		CAAD3D2521F71E06007EF61B /* MTGIronSourceRewardVideoAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = CAAD3D2021F71E06007EF61B /* MTGIronSourceRewardVideoAdapter.m */; };
@@ -61,7 +61,7 @@
 		CA83AFCF21F064C700655A95 /* MTGMediationSampleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MTGMediationSampleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA83AFD321F064C700655A95 /* MTGMediationSampleUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MTGMediationSampleUITests.m; sourceTree = "<group>"; };
 		CA83AFD521F064C700655A95 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		CAAD3D1121F5978B007EF61B /* AdUnitInfoArray.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AdUnitInfoArray.plist; sourceTree = "<group>"; };
+		CAAD3D1121F5978B007EF61B /* RewardVideoAdInfosData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = RewardVideoAdInfosData.plist; sourceTree = "<group>"; };
 		CAAD3D1921F598E5007EF61B /* MTGAdInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTGAdInfo.h; sourceTree = "<group>"; };
 		CAAD3D1A21F598E5007EF61B /* MTGAdInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTGAdInfo.m; sourceTree = "<group>"; };
 		CAAD3D1F21F71E06007EF61B /* MTGMintegralRewardVideoAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTGMintegralRewardVideoAdapter.m; sourceTree = "<group>"; };
@@ -202,7 +202,7 @@
 			children = (
 				CAAD3D1921F598E5007EF61B /* MTGAdInfo.h */,
 				CAAD3D1A21F598E5007EF61B /* MTGAdInfo.m */,
-				CAAD3D1121F5978B007EF61B /* AdUnitInfoArray.plist */,
+				CAAD3D1121F5978B007EF61B /* RewardVideoAdInfosData.plist */,
 			);
 			path = LocalConfiguration;
 			sourceTree = "<group>";
@@ -210,10 +210,10 @@
 		CAAD3D1E21F71E06007EF61B /* RewardVideo */ = {
 			isa = PBXGroup;
 			children = (
-				CAAD3D1F21F71E06007EF61B /* MTGMintegralRewardVideoAdapter.m */,
-				CAAD3D2021F71E06007EF61B /* MTGIronSourceRewardVideoAdapter.m */,
 				CAAD3D2121F71E06007EF61B /* MTGIronSourceRewardVideoAdapter.h */,
+				CAAD3D2021F71E06007EF61B /* MTGIronSourceRewardVideoAdapter.m */,
 				CAAD3D2221F71E06007EF61B /* MTGMintegralRewardVideoAdapter.h */,
+				CAAD3D1F21F71E06007EF61B /* MTGMintegralRewardVideoAdapter.m */,
 			);
 			path = RewardVideo;
 			sourceTree = "<group>";
@@ -356,7 +356,7 @@
 				CAAD3D6321F989F6007EF61B /* MTGInterstitialViewController.xib in Resources */,
 				CA83AFB921F064C700655A95 /* Assets.xcassets in Resources */,
 				CAAD3D6121F989DF007EF61B /* MTGRewardVideoViewController.xib in Resources */,
-				CAAD3D1221F5978C007EF61B /* AdUnitInfoArray.plist in Resources */,
+				CAAD3D1221F5978C007EF61B /* RewardVideoAdInfosData.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

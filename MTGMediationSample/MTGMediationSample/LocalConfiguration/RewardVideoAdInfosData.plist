@@ -2,7 +2,7 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>mtg_unitId1_tobeReplace</key>
+	<key>rewardVideo_unit1</key>
 	<array>
 		<dict>
 			<key>apikey</key>
@@ -11,6 +11,8 @@
 			<string>appid_mtg</string>
 			<key>classname</key>
 			<string>MTGMintegralAdapter</string>
+			<key>timeout</key>
+			<integer>10</integer>
 			<key>network</key>
 			<string>mobvista</string>
 			<key>unitid</key>
@@ -19,13 +21,15 @@
 		<dict>
 			<key>classname</key>
 			<string>IronSourceAdapter</string>
+			<key>timeout</key>
+			<integer>10</integer>
 			<key>network</key>
 			<string>ironsource</string>
 			<key>unitid</key>
 			<string>is_unitid1</string>
 		</dict>
 	</array>
-	<key>mtg_unitId2_tobeReplace</key>
+	<key>rewardVideo_unit2</key>
 	<array>
 		<dict>
 			<key>apikey</key>
@@ -34,6 +38,8 @@
 			<string>appid_mtg</string>
 			<key>classname</key>
 			<string>MTGMintegralAdapter</string>
+			<key>timeout</key>
+			<integer>10</integer>
 			<key>network</key>
 			<string>mobvista</string>
 			<key>unitid</key>
@@ -44,6 +50,8 @@
 			<string>IronSourceAdapter</string>
 			<key>network</key>
 			<string>ironsource</string>
+			<key>timeout</key>
+			<integer>10</integer>
 			<key>unitid</key>
 			<string>is_unitid2</string>
 		</dict>

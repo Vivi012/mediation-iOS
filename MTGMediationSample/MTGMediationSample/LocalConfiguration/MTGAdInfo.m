@@ -12,7 +12,7 @@
 
 + (NSArray *)rewardVideoInfosWithAdUnitId:(NSString *)adUnitId{
 
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"AdUnitInfoArray" ofType:@"plist"];
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"RewardVideoAdInfosData" ofType:@"plist"];
     
     return nil;
 }
