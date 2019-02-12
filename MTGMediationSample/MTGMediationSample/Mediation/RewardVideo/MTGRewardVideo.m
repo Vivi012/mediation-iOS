@@ -15,7 +15,7 @@ static MTGRewardVideo *gSharedInstance = nil;
 @interface MTGRewardVideo()<MTGRewardVideoAdManagerDelegate>
 
 @property (nonatomic, strong) NSMutableDictionary *rewardedVideoAdManagers;
-@property (nonatomic, weak) id<MTGRewardVideoDelegate> delegate;
+@property (nonatomic, strong) NSLock *lock;
 
 + (MTGRewardVideo *)sharedInstance;
 
@@ -23,22 +23,17 @@ static MTGRewardVideo *gSharedInstance = nil;
 
 @implementation MTGRewardVideo
 
-+ (void)initializeWithDelegate:(id<MTGRewardVideoDelegate>)delegate
-{
-    MTGRewardVideo *sharedInstance = [[self class] sharedInstance];
-    
-    // Do not allow calls to initialize twice.
-    if (sharedInstance.delegate) {
-//        MPLogWarn(@"Attempting to initialize MPRewardedVideo when it has already been initialized.");
-    } else {
+-(void)setDelegate:(id<MTGRewardVideoDelegate>)delegate{
+
+    if (_delegate != delegate) {
+        MTGRewardVideo *sharedInstance = [[self class] sharedInstance];
         sharedInstance.delegate = delegate;
+        _delegate = delegate;
     }
 }
 
-
-
 + (void)loadRewardVideoAdWithAdUnitID:(NSString *)adUnitID mediationSettings:(NSArray *)mediationSettings{
-    
+
     MTGRewardVideo *sharedInstance = [[self class] sharedInstance];
     
     if (![adUnitID length]) {
@@ -47,51 +42,59 @@ static MTGRewardVideo *gSharedInstance = nil;
 //        sharedInstance.delegate respondsToSelector:@selector(rewardvideoaddi )
         return;
     }
+    dispatch_async(dispatch_get_main_queue(), ^{
 
-    MTGRewardVideoAdManager *adManager = sharedInstance.rewardedVideoAdManagers[adUnitID];
-    
-    if (!adManager) {
-        adManager = [[MTGRewardVideoAdManager alloc] initWithAdUnitID:adUnitID delegate:sharedInstance];
-        sharedInstance.rewardedVideoAdManagers[adUnitID] = adManager;
-    }
-    
-    [adManager loadRewardedVideoAd];
+        MTGRewardVideoAdManager *adManager = sharedInstance.rewardedVideoAdManagers[adUnitID];
+        
+        if (!adManager) {
+            adManager = [[MTGRewardVideoAdManager alloc] initWithAdUnitID:adUnitID delegate:sharedInstance];
+            sharedInstance.rewardedVideoAdManagers[adUnitID] = adManager;
+        }
+        
+        [adManager loadRewardedVideoAd];
 
+    });
 }
 
 + (BOOL)hasAdAvailableForAdUnitID:(NSString *)adUnitID{
 
     MTGRewardVideo *sharedInstance = [[self class] sharedInstance];
-    
+    [sharedInstance.lock lock];
     MTGRewardVideoAdManager *adManager = sharedInstance.rewardedVideoAdManagers[adUnitID];
+    [sharedInstance.lock unlock];
+
     return [adManager hasAdAvailable];
 }
 
 + (void)presentRewardVideoAdForAdUnitID:(NSString *)adUnitID fromViewController:(UIViewController *)viewController{
     
-    MTGRewardVideo *sharedInstance = [[self class] sharedInstance];
-    
-    MTGRewardVideoAdManager *adManager = sharedInstance.rewardedVideoAdManagers[adUnitID];
+    dispatch_async(dispatch_get_main_queue(), ^{
 
-    if (!adManager) {
-//        MPLogWarn(@"The rewarded video could not be shown: "
-//                  @"no ads have been loaded for adUnitID: %@", adUnitID);
+        MTGRewardVideo *sharedInstance = [[self class] sharedInstance];
         
-        return;
-    }
-    
-    if (!viewController) {
-//        MPLogWarn(@"The rewarded video could not be shown: "
-//                  @"a nil view controller was passed to -presentRewardedVideoAdForAdUnitID:fromViewController:.");
+        MTGRewardVideoAdManager *adManager = sharedInstance.rewardedVideoAdManagers[adUnitID];
         
-        return;
-    }
-    
-    if (![viewController.view.window isKeyWindow]) {
-//        MPLogWarn(@"Attempting to present a rewarded video ad in non-key window. The ad may not render properly.");
-    }
+        if (!adManager) {
+            //        MPLogWarn(@"The rewarded video could not be shown: "
+            //                  @"no ads have been loaded for adUnitID: %@", adUnitID);
+            
+            return;
+        }
+        
+        if (!viewController) {
+            //        MPLogWarn(@"The rewarded video could not be shown: "
+            //                  @"a nil view controller was passed to -presentRewardedVideoAdForAdUnitID:fromViewController:.");
+            
+            return;
+        }
+        
+        if (![viewController.view.window isKeyWindow]) {
+            //        MPLogWarn(@"Attempting to present a rewarded video ad in non-key window. The ad may not render properly.");
+        }
+        
+        [adManager presentRewardedVideoFromViewController:viewController];
+    });
 
-    [adManager presentRewardedVideoFromViewController:viewController];
 }
 
 #pragma mark - Private
@@ -114,6 +117,14 @@ static MTGRewardVideo *gSharedInstance = nil;
     }
     
     return self;
+}
+
+-(NSLock *)lock{
+    if (_lock) {
+        return _lock;
+    }
+    _lock = [[NSLock alloc] init];
+    return _lock;
 }
 
 #pragma mark -

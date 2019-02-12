@@ -65,13 +65,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MTGRewardVideo : NSObject
 
-+ (void)initializeWithDelegate:(id<MTGRewardVideoDelegate>)delegate;
-
 + (void)loadRewardVideoAdWithAdUnitID:(NSString *)adUnitID mediationSettings:(NSArray *)mediationSettings;
 
 + (BOOL)hasAdAvailableForAdUnitID:(NSString *)adUnitID;
 
 + (void)presentRewardVideoAdForAdUnitID:(NSString *)adUnitID fromViewController:(UIViewController *)viewController;
+
+@property (nonatomic,weak) id<MTGRewardVideoDelegate> delegate;
 
 
 @end
