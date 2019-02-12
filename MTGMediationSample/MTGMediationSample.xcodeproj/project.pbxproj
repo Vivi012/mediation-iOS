@@ -13,6 +13,32 @@
 		99A24F912212AC2600318FE3 /* MTGIronSourceInterstitialAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 99A24F902212AC2600318FE3 /* MTGIronSourceInterstitialAdapter.m */; };
 		99A24F922212AC2600318FE3 /* MTGIronSourceInterstitialAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 99A24F902212AC2600318FE3 /* MTGIronSourceInterstitialAdapter.m */; };
 		99A24F932212AC2600318FE3 /* MTGIronSourceInterstitialAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 99A24F902212AC2600318FE3 /* MTGIronSourceInterstitialAdapter.m */; };
+		99A24F992212CA5A00318FE3 /* IronSource.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99A24F982212CA5900318FE3 /* IronSource.framework */; };
+		99A24F9A2212CA5A00318FE3 /* IronSource.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99A24F982212CA5900318FE3 /* IronSource.framework */; };
+		99A24F9B2212CA5A00318FE3 /* IronSource.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99A24F982212CA5900318FE3 /* IronSource.framework */; };
+		99A24F9F2212CA6400318FE3 /* MTGSDKInterstitialVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99A24F9C2212CA6400318FE3 /* MTGSDKInterstitialVideo.framework */; };
+		99A24FA02212CA6400318FE3 /* MTGSDKInterstitialVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99A24F9C2212CA6400318FE3 /* MTGSDKInterstitialVideo.framework */; };
+		99A24FA12212CA6400318FE3 /* MTGSDKInterstitialVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99A24F9C2212CA6400318FE3 /* MTGSDKInterstitialVideo.framework */; };
+		99A24FA22212CA6400318FE3 /* MTGSDKReward.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99A24F9D2212CA6400318FE3 /* MTGSDKReward.framework */; };
+		99A24FA32212CA6400318FE3 /* MTGSDKReward.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99A24F9D2212CA6400318FE3 /* MTGSDKReward.framework */; };
+		99A24FA42212CA6400318FE3 /* MTGSDKReward.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99A24F9D2212CA6400318FE3 /* MTGSDKReward.framework */; };
+		99A24FA52212CA6400318FE3 /* MTGSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99A24F9E2212CA6400318FE3 /* MTGSDK.framework */; };
+		99A24FA62212CA6400318FE3 /* MTGSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99A24F9E2212CA6400318FE3 /* MTGSDK.framework */; };
+		99A24FA72212CA6400318FE3 /* MTGSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99A24F9E2212CA6400318FE3 /* MTGSDK.framework */; };
+		99A24FAA2212CB7200318FE3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99A24FA92212CB7200318FE3 /* CoreGraphics.framework */; };
+		99A24FAC2212CB7E00318FE3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99A24FAB2212CB7E00318FE3 /* Foundation.framework */; };
+		99A24FAE2212CB8900318FE3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99A24FAD2212CB8900318FE3 /* UIKit.framework */; };
+		99A24FB02212CB9700318FE3 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 99A24FAF2212CB9700318FE3 /* libsqlite3.tbd */; };
+		99A24FB22212CBA400318FE3 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 99A24FB12212CBA400318FE3 /* libz.tbd */; };
+		99A24FB42212CBAE00318FE3 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99A24FB32212CBAE00318FE3 /* AdSupport.framework */; };
+		99A24FB62212CBBC00318FE3 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99A24FB52212CBBC00318FE3 /* StoreKit.framework */; };
+		99A24FB82212CBC400318FE3 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99A24FB72212CBC400318FE3 /* QuartzCore.framework */; };
+		99A24FBA2212CBCE00318FE3 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99A24FB92212CBCE00318FE3 /* CoreLocation.framework */; };
+		99A24FBC2212CBDA00318FE3 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99A24FBB2212CBDA00318FE3 /* CoreTelephony.framework */; };
+		99A24FBE2212CBE400318FE3 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99A24FBD2212CBE400318FE3 /* MobileCoreServices.framework */; };
+		99A24FC02212CBED00318FE3 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99A24FBF2212CBED00318FE3 /* Accelerate.framework */; };
+		99A24FC22212CBF800318FE3 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99A24FC12212CBF800318FE3 /* AVFoundation.framework */; };
+		99A24FC42212CC0200318FE3 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99A24FC32212CC0200318FE3 /* WebKit.framework */; };
 		CA2556F022129DE9005FF563 /* MTGRewardVideoReward.m in Sources */ = {isa = PBXBuildFile; fileRef = CA2556EF22129DE9005FF563 /* MTGRewardVideoReward.m */; };
 		CA83AFB121F064C700655A95 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CA83AFB021F064C700655A95 /* AppDelegate.m */; };
 		CA83AFB921F064C700655A95 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CA83AFB821F064C700655A95 /* Assets.xcassets */; };
@@ -59,6 +85,24 @@
 		99A24F8B2212AC1000318FE3 /* MTGMintegralInterstitialAdapter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MTGMintegralInterstitialAdapter.m; sourceTree = "<group>"; };
 		99A24F8F2212AC2600318FE3 /* MTGIronSourceInterstitialAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MTGIronSourceInterstitialAdapter.h; sourceTree = "<group>"; };
 		99A24F902212AC2600318FE3 /* MTGIronSourceInterstitialAdapter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MTGIronSourceInterstitialAdapter.m; sourceTree = "<group>"; };
+		99A24F982212CA5900318FE3 /* IronSource.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = IronSource.framework; sourceTree = "<group>"; };
+		99A24F9C2212CA6400318FE3 /* MTGSDKInterstitialVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MTGSDKInterstitialVideo.framework; sourceTree = "<group>"; };
+		99A24F9D2212CA6400318FE3 /* MTGSDKReward.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MTGSDKReward.framework; sourceTree = "<group>"; };
+		99A24F9E2212CA6400318FE3 /* MTGSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MTGSDK.framework; sourceTree = "<group>"; };
+		99A24FA92212CB7200318FE3 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		99A24FAB2212CB7E00318FE3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		99A24FAD2212CB8900318FE3 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		99A24FAF2212CB9700318FE3 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		99A24FB12212CBA400318FE3 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		99A24FB32212CBAE00318FE3 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		99A24FB52212CBBC00318FE3 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		99A24FB72212CBC400318FE3 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		99A24FB92212CBCE00318FE3 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		99A24FBB2212CBDA00318FE3 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		99A24FBD2212CBE400318FE3 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		99A24FBF2212CBED00318FE3 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		99A24FC12212CBF800318FE3 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		99A24FC32212CC0200318FE3 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		CA2556EE22129DE9005FF563 /* MTGRewardVideoReward.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MTGRewardVideoReward.h; sourceTree = "<group>"; };
 		CA2556EF22129DE9005FF563 /* MTGRewardVideoReward.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MTGRewardVideoReward.m; sourceTree = "<group>"; };
 		CA83AFAC21F064C700655A95 /* MTGMediationSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MTGMediationSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -108,6 +152,24 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				99A24FC42212CC0200318FE3 /* WebKit.framework in Frameworks */,
+				99A24FC22212CBF800318FE3 /* AVFoundation.framework in Frameworks */,
+				99A24FC02212CBED00318FE3 /* Accelerate.framework in Frameworks */,
+				99A24FBE2212CBE400318FE3 /* MobileCoreServices.framework in Frameworks */,
+				99A24FBC2212CBDA00318FE3 /* CoreTelephony.framework in Frameworks */,
+				99A24FBA2212CBCE00318FE3 /* CoreLocation.framework in Frameworks */,
+				99A24FB82212CBC400318FE3 /* QuartzCore.framework in Frameworks */,
+				99A24FB62212CBBC00318FE3 /* StoreKit.framework in Frameworks */,
+				99A24FB42212CBAE00318FE3 /* AdSupport.framework in Frameworks */,
+				99A24FB22212CBA400318FE3 /* libz.tbd in Frameworks */,
+				99A24FB02212CB9700318FE3 /* libsqlite3.tbd in Frameworks */,
+				99A24FAE2212CB8900318FE3 /* UIKit.framework in Frameworks */,
+				99A24FAC2212CB7E00318FE3 /* Foundation.framework in Frameworks */,
+				99A24FAA2212CB7200318FE3 /* CoreGraphics.framework in Frameworks */,
+				99A24F9F2212CA6400318FE3 /* MTGSDKInterstitialVideo.framework in Frameworks */,
+				99A24FA22212CA6400318FE3 /* MTGSDKReward.framework in Frameworks */,
+				99A24FA52212CA6400318FE3 /* MTGSDK.framework in Frameworks */,
+				99A24F992212CA5A00318FE3 /* IronSource.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -115,6 +177,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				99A24FA02212CA6400318FE3 /* MTGSDKInterstitialVideo.framework in Frameworks */,
+				99A24FA32212CA6400318FE3 /* MTGSDKReward.framework in Frameworks */,
+				99A24FA62212CA6400318FE3 /* MTGSDK.framework in Frameworks */,
+				99A24F9A2212CA5A00318FE3 /* IronSource.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -122,6 +188,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				99A24FA12212CA6400318FE3 /* MTGSDKInterstitialVideo.framework in Frameworks */,
+				99A24FA42212CA6400318FE3 /* MTGSDKReward.framework in Frameworks */,
+				99A24FA72212CA6400318FE3 /* MTGSDK.framework in Frameworks */,
+				99A24F9B2212CA5A00318FE3 /* IronSource.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -139,6 +209,54 @@
 			path = Interstitials;
 			sourceTree = "<group>";
 		};
+		99A24F952212C72600318FE3 /* Sdk */ = {
+			isa = PBXGroup;
+			children = (
+				99A24F972212C77800318FE3 /* Mintegral */,
+				99A24F962212C77200318FE3 /* IronSource */,
+			);
+			path = Sdk;
+			sourceTree = "<group>";
+		};
+		99A24F962212C77200318FE3 /* IronSource */ = {
+			isa = PBXGroup;
+			children = (
+				99A24F982212CA5900318FE3 /* IronSource.framework */,
+			);
+			path = IronSource;
+			sourceTree = "<group>";
+		};
+		99A24F972212C77800318FE3 /* Mintegral */ = {
+			isa = PBXGroup;
+			children = (
+				99A24F9E2212CA6400318FE3 /* MTGSDK.framework */,
+				99A24F9C2212CA6400318FE3 /* MTGSDKInterstitialVideo.framework */,
+				99A24F9D2212CA6400318FE3 /* MTGSDKReward.framework */,
+			);
+			path = Mintegral;
+			sourceTree = "<group>";
+		};
+		99A24FA82212CB7200318FE3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				99A24FC32212CC0200318FE3 /* WebKit.framework */,
+				99A24FC12212CBF800318FE3 /* AVFoundation.framework */,
+				99A24FBF2212CBED00318FE3 /* Accelerate.framework */,
+				99A24FBD2212CBE400318FE3 /* MobileCoreServices.framework */,
+				99A24FBB2212CBDA00318FE3 /* CoreTelephony.framework */,
+				99A24FB92212CBCE00318FE3 /* CoreLocation.framework */,
+				99A24FB72212CBC400318FE3 /* QuartzCore.framework */,
+				99A24FB52212CBBC00318FE3 /* StoreKit.framework */,
+				99A24FB32212CBAE00318FE3 /* AdSupport.framework */,
+				99A24FB12212CBA400318FE3 /* libz.tbd */,
+				99A24FAF2212CB9700318FE3 /* libsqlite3.tbd */,
+				99A24FAD2212CB8900318FE3 /* UIKit.framework */,
+				99A24FAB2212CB7E00318FE3 /* Foundation.framework */,
+				99A24FA92212CB7200318FE3 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		CA83AFA321F064C600655A95 = {
 			isa = PBXGroup;
 			children = (
@@ -146,6 +264,7 @@
 				CA83AFC721F064C700655A95 /* MTGMediationSampleTests */,
 				CA83AFD221F064C700655A95 /* MTGMediationSampleUITests */,
 				CA83AFAD21F064C700655A95 /* Products */,
+				99A24FA82212CB7200318FE3 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -215,6 +334,7 @@
 		CAAD3D0F21F5978B007EF61B /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				99A24F952212C72600318FE3 /* Sdk */,
 				99A24F892212ABEC00318FE3 /* Interstitials */,
 				CAAD3D1E21F71E06007EF61B /* RewardVideo */,
 			);
@@ -585,12 +705,18 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = DJRJZKDWWH;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/MTGMediationSample/Network/Sdk/IronSource",
+					"$(PROJECT_DIR)/MTGMediationSample/Network/Sdk/Mintegral",
+				);
 				INFOPLIST_FILE = MTGMediationSample/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mintegral.MTGMediationSample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -603,12 +729,18 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = DJRJZKDWWH;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/MTGMediationSample/Network/Sdk/IronSource",
+					"$(PROJECT_DIR)/MTGMediationSample/Network/Sdk/Mintegral",
+				);
 				INFOPLIST_FILE = MTGMediationSample/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mintegral.MTGMediationSample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -621,6 +753,11 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = DJRJZKDWWH;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/MTGMediationSample/Network/Sdk/IronSource",
+					"$(PROJECT_DIR)/MTGMediationSample/Network/Sdk/Mintegral",
+				);
 				INFOPLIST_FILE = MTGMediationSampleTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -640,6 +777,11 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = DJRJZKDWWH;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/MTGMediationSample/Network/Sdk/IronSource",
+					"$(PROJECT_DIR)/MTGMediationSample/Network/Sdk/Mintegral",
+				);
 				INFOPLIST_FILE = MTGMediationSampleTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -658,6 +800,11 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = DJRJZKDWWH;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/MTGMediationSample/Network/Sdk/IronSource",
+					"$(PROJECT_DIR)/MTGMediationSample/Network/Sdk/Mintegral",
+				);
 				INFOPLIST_FILE = MTGMediationSampleUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -676,6 +823,11 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = DJRJZKDWWH;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/MTGMediationSample/Network/Sdk/IronSource",
+					"$(PROJECT_DIR)/MTGMediationSample/Network/Sdk/Mintegral",
+				);
 				INFOPLIST_FILE = MTGMediationSampleUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
