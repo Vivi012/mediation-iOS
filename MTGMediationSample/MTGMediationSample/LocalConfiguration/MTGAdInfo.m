@@ -10,11 +10,21 @@
 
 @implementation MTGAdInfo
 
++ (NSArray *)rewardVideoAdUnitIds{
+    
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"RewardVideoAdInfosData" ofType:@"plist"];
+    NSDictionary *adUnitIdInfos = [NSDictionary dictionaryWithContentsOfFile:path];
+    NSArray *adUnitIds = adUnitIdInfos.allKeys;
+    return adUnitIds;
+}
+
 + (NSArray *)rewardVideoInfosWithAdUnitId:(NSString *)adUnitId{
 
     NSString *path = [[NSBundle mainBundle] pathForResource:@"RewardVideoAdInfosData" ofType:@"plist"];
-    
-    return nil;
+    NSDictionary *adUnitIdInfos = [NSDictionary dictionaryWithContentsOfFile:path];
+
+    NSArray *networkInfos = [adUnitIdInfos objectForKey:adUnitId];
+    return networkInfos;
 }
 
 

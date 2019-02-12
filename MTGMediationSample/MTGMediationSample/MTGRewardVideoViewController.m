@@ -9,10 +9,14 @@
 #import "MTGRewardVideoViewController.h"
 #import "MTGRewardVideo.h"
 
-@interface MTGRewardVideoViewController ()
+#import "MTGAdInfo.h"
+
+
+@interface MTGRewardVideoViewController ()<MTGRewardVideoDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *loadButton;
 @property (weak, nonatomic) IBOutlet UIButton *showButton;
 
+@property (nonatomic,copy)  NSString *adUnitId;
 @end
 
 @implementation MTGRewardVideoViewController
@@ -22,19 +26,77 @@
     // Do any additional setup after loading the view.
     self.title = @"RewardVideo";
     self.showButton.userInteractionEnabled = NO;
+    
+    NSArray *adUnitInfos = [MTGAdInfo rewardVideoAdUnitIds];
+    self.adUnitId = (adUnitInfos.count > 0)?adUnitInfos[0]: nil;
 }
 
 - (IBAction)loadRewardVideoAction:(id)sender {
-    
-    self.showButton.userInteractionEnabled = YES;
 
-    return;
-    [MTGRewardVideo loadRewardVideoAdWithAdUnitID:nil mediationSettings:nil];
+    if (!self.adUnitId) {
+        NSString *msg = @"Your adUnitId is nil";
+        [self showMsg:msg];
+        return;
+    }
+    [MTGRewardVideo loadRewardVideoAdWithAdUnitID:self.adUnitId mediationSettings:nil];
 }
 
 - (IBAction)showRewardVideoAction:(id)sender {
-    [MTGRewardVideo presentRewardVideoAdForAdUnitID:nil fromViewController:self];
+//    MTGRewardVideoDelegate
+
+    if ([MTGRewardVideo hasAdAvailableForAdUnitID:self.adUnitId]) {
+        [MTGRewardVideo presentRewardVideoAdForAdUnitID:self.adUnitId fromViewController:self];
+    }else{
+        NSString *msg = @"video still not ready";
+        [self showMsg:msg];
+    }
 }
 
+- (void)showMsg:(NSString *)content{
+
+    UIAlertController *vc = [UIAlertController alertControllerWithTitle:nil message:content preferredStyle:(UIAlertControllerStyleAlert)];
+    UIAlertAction *action = [UIAlertAction actionWithTitle:@"Got it" style:(UIAlertActionStyleDefault) handler:NULL];
+    [vc addAction:action];
+
+    [self presentViewController:vc animated:YES completion:NULL];
+}
+
+#pragma mark - MTGRewardVideoDelegate
+
+- (void)rewardVideoAdDidLoadForAdUnitID:(NSString *)adUnitID{
+    
+    self.showButton.userInteractionEnabled = YES;
+    NSString *msg = [NSString stringWithFormat:@"%@ : %@",NSStringFromSelector(_cmd),adUnitID];
+    [self showMsg:msg];
+}
+
+
+- (void)rewardVideoAdDidFailToLoadForAdUnitID:(NSString *)adUnitID
+                                        error:(NSError *)error{
+    self.showButton.userInteractionEnabled = NO;
+    NSString *msg = NSStringFromSelector(_cmd);
+    [self showMsg:msg];
+}
+
+- (void)rewardVideoAdDidFailToPlayForAdUnitID:(NSString *)adUnitID
+                                        error:(NSError *)error{
+    
+}
+
+- (void)rewardVideoAdWillDisappearForAdUnitID:(NSString *)adUnitID{
+    
+}
+
+
+#warning  Chark TODO  replace dict with specified class
+- (void)rewardVideoAdShouldRewardForAdUnitID:(NSString *)adUnitID
+                                      reward:(NSDictionary *)reward{
+    
+}
+
+
+- (void)rewardVideoAdDidReceiveTapEventForAdUnitID:(NSString *)adUnitID{
+    
+}
 
 @end
