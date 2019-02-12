@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CA2556F022129DE9005FF563 /* MTGRewardVideoReward.m in Sources */ = {isa = PBXBuildFile; fileRef = CA2556EF22129DE9005FF563 /* MTGRewardVideoReward.m */; };
 		CA83AFB121F064C700655A95 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CA83AFB021F064C700655A95 /* AppDelegate.m */; };
 		CA83AFB921F064C700655A95 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CA83AFB821F064C700655A95 /* Assets.xcassets */; };
 		CA83AFBC21F064C700655A95 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA83AFBA21F064C700655A95 /* LaunchScreen.storyboard */; };
@@ -48,6 +49,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CA2556EE22129DE9005FF563 /* MTGRewardVideoReward.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MTGRewardVideoReward.h; sourceTree = "<group>"; };
+		CA2556EF22129DE9005FF563 /* MTGRewardVideoReward.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MTGRewardVideoReward.m; sourceTree = "<group>"; };
 		CA83AFAC21F064C700655A95 /* MTGMediationSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MTGMediationSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA83AFAF21F064C700655A95 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		CA83AFB021F064C700655A95 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -238,6 +241,8 @@
 				CAAD3D3121F71E0E007EF61B /* MTGAdServerCommunicator.m */,
 				CAAD3D2921F71E0E007EF61B /* MTGRewardVideoCustomEvent.h */,
 				CAAD3D2E21F71E0E007EF61B /* MTGRewardVideoCustomEvent.m */,
+				CA2556EE22129DE9005FF563 /* MTGRewardVideoReward.h */,
+				CA2556EF22129DE9005FF563 /* MTGRewardVideoReward.m */,
 			);
 			path = RewardVideo;
 			sourceTree = "<group>";
@@ -394,6 +399,7 @@
 				CAAD3D5821F96577007EF61B /* MTGAdTableTableViewController.m in Sources */,
 				CAAD3D3521F71E0E007EF61B /* MTGRewardVideoAdapter.m in Sources */,
 				CAAD3D3821F71E0E007EF61B /* MTGAdServerCommunicator.m in Sources */,
+				CA2556F022129DE9005FF563 /* MTGRewardVideoReward.m in Sources */,
 				CAAD3D3921F71E0E007EF61B /* MTGRewardVideo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

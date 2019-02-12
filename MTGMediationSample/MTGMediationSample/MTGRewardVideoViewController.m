@@ -38,7 +38,7 @@
         [self showMsg:msg];
         return;
     }
-    [MTGRewardVideo loadRewardVideoAdWithAdUnitID:self.adUnitId mediationSettings:nil];
+    [MTGRewardVideo loadRewardVideoAdWithAdUnitID:self.adUnitId mediationSettings:[NSArray new]];
 }
 
 - (IBAction)showRewardVideoAction:(id)sender {
@@ -87,10 +87,8 @@
     
 }
 
-
-#warning  Chark TODO  replace dict with specified class
 - (void)rewardVideoAdShouldRewardForAdUnitID:(NSString *)adUnitID
-                                      reward:(NSDictionary *)reward{
+                                      reward:(MTGRewardVideoReward *)reward{
     
 }
 

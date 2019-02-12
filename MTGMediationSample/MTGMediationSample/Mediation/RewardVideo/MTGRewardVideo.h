@@ -11,14 +11,61 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-
+@class MTGRewardVideoReward;
 @protocol MTGRewardVideoDelegate <NSObject>
+
+@optional
+/**
+ * This method is called after an ad loads successfully.
+ *
+ * @param adUnitID The ad unit ID of the ad associated with the event.
+ */
+- (void)rewardVideoAdDidLoadForAdUnitID:(NSString *)adUnitID;
+
+/**
+ * This method is called after an ad fails to load.
+ *
+ * @param adUnitID The ad unit ID of the ad associated with the event.
+ * @param error An error indicating why the ad failed to load.
+ */
+- (void)rewardVideoAdDidFailToLoadForAdUnitID:(NSString *)adUnitID error:(NSError *)error;
+
+/**
+ * This method is called when an attempt to play a rewarded video fails.
+ *
+ * @param adUnitID The ad unit ID of the ad associated with the event.
+ * @param error An error describing why the video couldn't play.
+ */
+- (void)rewardVideoAdDidFailToPlayForAdUnitID:(NSString *)adUnitID error:(NSError *)error;
+
+/**
+ * This method is called when a rewarded video ad will be dismissed.
+ *
+ * @param adUnitID The ad unit ID of the ad associated with the event.
+ */
+- (void)rewardVideoAdWillDisappearForAdUnitID:(NSString *)adUnitID;
+
+/**
+ * This method is called when the user should be rewarded for watching a rewarded video ad.
+ *
+ * @param adUnitID The ad unit ID of the ad associated with the event.
+ * @param reward The object that contains all the information regarding how much you should reward the user.
+ */
+- (void)rewardVideoAdShouldRewardForAdUnitID:(NSString *)adUnitID reward:(MTGRewardVideoReward *)reward;
+
+/**
+ * This method is called when the user taps on the ad.
+ *
+ * @param adUnitID The ad unit ID of the ad associated with the event.
+ */
+- (void)rewardVideoAdDidReceiveTapEventForAdUnitID:(NSString *)adUnitID;
 
 
 @end
 
 @interface MTGRewardVideo : NSObject
 
++ (void)initializeWithDelegate:(id<MTGRewardVideoDelegate>)delegate;
 
 + (void)loadRewardVideoAdWithAdUnitID:(NSString *)adUnitID mediationSettings:(NSArray *)mediationSettings;
 
