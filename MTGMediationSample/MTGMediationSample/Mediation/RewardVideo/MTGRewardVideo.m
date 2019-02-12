@@ -8,6 +8,7 @@
 
 #import "MTGRewardVideo.h"
 #import "MTGRewardVideoAdManager.h"
+#import "MTGRewardVideoReward.h"
 
 static MTGRewardVideo *gSharedInstance = nil;
 
@@ -22,6 +23,20 @@ static MTGRewardVideo *gSharedInstance = nil;
 
 @implementation MTGRewardVideo
 
++ (void)initializeWithDelegate:(id<MTGRewardVideoDelegate>)delegate
+{
+    MTGRewardVideo *sharedInstance = [[self class] sharedInstance];
+    
+    // Do not allow calls to initialize twice.
+    if (sharedInstance.delegate) {
+//        MPLogWarn(@"Attempting to initialize MPRewardedVideo when it has already been initialized.");
+    } else {
+        sharedInstance.delegate = delegate;
+    }
+}
+
+
+
 + (void)loadRewardVideoAdWithAdUnitID:(NSString *)adUnitID mediationSettings:(NSArray *)mediationSettings{
     
     MTGRewardVideo *sharedInstance = [[self class] sharedInstance];
@@ -29,6 +44,7 @@ static MTGRewardVideo *gSharedInstance = nil;
     if (![adUnitID length]) {
 //        NSError *error = [NSError errorWithDomain:MoPubRewardedVideoAdsSDKDomain code:MPRewardedVideoAdErrorInvalidAdUnitID userInfo:nil];
 //        [sharedInstance.delegate rewardedVideoAdDidFailToLoadForAdUnitID:adUnitID error:error];
+//        sharedInstance.delegate respondsToSelector:@selector(rewardvideoaddi )
         return;
     }
 
@@ -100,8 +116,21 @@ static MTGRewardVideo *gSharedInstance = nil;
     return self;
 }
 
-#pragma mark - MTGRewardVideoAdManagerDelegate
+#pragma mark -
 
+- (void)loadFailedWithAdUnit:(NSString *)adUnitId error:(NSError *)error{
+    
+    if (_delegate && [_delegate respondsToSelector:@selector(rewardVideoAdDidFailToLoadForAdUnitID:error:)]) {
+        [_delegate rewardVideoAdDidFailToLoadForAdUnitID:adUnitId error:error];
+    }
+}
+
+- (void)showFailedWithAdUnit:(NSString *)adUnitId error:(NSError *)error{
+
+    if (_delegate && [_delegate respondsToSelector:@selector(rewardVideoAdDidFailToPlayForAdUnitID:error:)]) {
+        [_delegate rewardVideoAdDidFailToPlayForAdUnitID:adUnitId error:error];
+    }
+}
 
 
 

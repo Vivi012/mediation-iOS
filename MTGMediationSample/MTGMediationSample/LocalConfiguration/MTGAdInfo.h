@@ -12,8 +12,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MTGAdInfo : NSObject
 
-
++ (NSArray *)rewardVideoAdUnitIds;
 + (NSArray *)rewardVideoInfosWithAdUnitId:(NSString *)adUnitId;
+
+
 
 @end
 
