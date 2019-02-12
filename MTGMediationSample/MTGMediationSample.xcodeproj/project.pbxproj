@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		99A24F8C2212AC1000318FE3 /* MTGMintegralInterstitialAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 99A24F8B2212AC1000318FE3 /* MTGMintegralInterstitialAdapter.m */; };
+		99A24F8D2212AC1000318FE3 /* MTGMintegralInterstitialAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 99A24F8B2212AC1000318FE3 /* MTGMintegralInterstitialAdapter.m */; };
+		99A24F8E2212AC1000318FE3 /* MTGMintegralInterstitialAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 99A24F8B2212AC1000318FE3 /* MTGMintegralInterstitialAdapter.m */; };
+		99A24F912212AC2600318FE3 /* MTGIronSourceInterstitialAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 99A24F902212AC2600318FE3 /* MTGIronSourceInterstitialAdapter.m */; };
+		99A24F922212AC2600318FE3 /* MTGIronSourceInterstitialAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 99A24F902212AC2600318FE3 /* MTGIronSourceInterstitialAdapter.m */; };
+		99A24F932212AC2600318FE3 /* MTGIronSourceInterstitialAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 99A24F902212AC2600318FE3 /* MTGIronSourceInterstitialAdapter.m */; };
 		CA2556F022129DE9005FF563 /* MTGRewardVideoReward.m in Sources */ = {isa = PBXBuildFile; fileRef = CA2556EF22129DE9005FF563 /* MTGRewardVideoReward.m */; };
 		CA83AFB121F064C700655A95 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CA83AFB021F064C700655A95 /* AppDelegate.m */; };
 		CA83AFB921F064C700655A95 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CA83AFB821F064C700655A95 /* Assets.xcassets */; };
@@ -49,6 +55,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		99A24F8A2212AC1000318FE3 /* MTGMintegralInterstitialAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MTGMintegralInterstitialAdapter.h; sourceTree = "<group>"; };
+		99A24F8B2212AC1000318FE3 /* MTGMintegralInterstitialAdapter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MTGMintegralInterstitialAdapter.m; sourceTree = "<group>"; };
+		99A24F8F2212AC2600318FE3 /* MTGIronSourceInterstitialAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MTGIronSourceInterstitialAdapter.h; sourceTree = "<group>"; };
+		99A24F902212AC2600318FE3 /* MTGIronSourceInterstitialAdapter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MTGIronSourceInterstitialAdapter.m; sourceTree = "<group>"; };
 		CA2556EE22129DE9005FF563 /* MTGRewardVideoReward.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MTGRewardVideoReward.h; sourceTree = "<group>"; };
 		CA2556EF22129DE9005FF563 /* MTGRewardVideoReward.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MTGRewardVideoReward.m; sourceTree = "<group>"; };
 		CA83AFAC21F064C700655A95 /* MTGMediationSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MTGMediationSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -118,6 +128,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		99A24F892212ABEC00318FE3 /* Interstitials */ = {
+			isa = PBXGroup;
+			children = (
+				99A24F8A2212AC1000318FE3 /* MTGMintegralInterstitialAdapter.h */,
+				99A24F8B2212AC1000318FE3 /* MTGMintegralInterstitialAdapter.m */,
+				99A24F8F2212AC2600318FE3 /* MTGIronSourceInterstitialAdapter.h */,
+				99A24F902212AC2600318FE3 /* MTGIronSourceInterstitialAdapter.m */,
+			);
+			path = Interstitials;
+			sourceTree = "<group>";
+		};
 		CA83AFA321F064C600655A95 = {
 			isa = PBXGroup;
 			children = (
@@ -194,7 +215,7 @@
 		CAAD3D0F21F5978B007EF61B /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				CAAD3D2321F71E06007EF61B /* Interstitials */,
+				99A24F892212ABEC00318FE3 /* Interstitials */,
 				CAAD3D1E21F71E06007EF61B /* RewardVideo */,
 			);
 			path = Network;
@@ -219,13 +240,6 @@
 				CAAD3D1F21F71E06007EF61B /* MTGMintegralRewardVideoAdapter.m */,
 			);
 			path = RewardVideo;
-			sourceTree = "<group>";
-		};
-		CAAD3D2321F71E06007EF61B /* Interstitials */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Interstitials;
 			sourceTree = "<group>";
 		};
 		CAAD3D2621F71E0E007EF61B /* RewardVideo */ = {
@@ -387,6 +401,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CAAD3D2421F71E06007EF61B /* MTGMintegralRewardVideoAdapter.m in Sources */,
+				99A24F912212AC2600318FE3 /* MTGIronSourceInterstitialAdapter.m in Sources */,
 				CAAD3D3C21F722AA007EF61B /* MTGMediationManager.m in Sources */,
 				CAAD3D5C21F9682E007EF61B /* MTGRewardVideoViewController.m in Sources */,
 				CAAD3D3421F71E0E007EF61B /* MTGRewardVideoAdManager.m in Sources */,
@@ -398,6 +413,7 @@
 				CAAD3D1B21F598E5007EF61B /* MTGAdInfo.m in Sources */,
 				CAAD3D5821F96577007EF61B /* MTGAdTableTableViewController.m in Sources */,
 				CAAD3D3521F71E0E007EF61B /* MTGRewardVideoAdapter.m in Sources */,
+				99A24F8C2212AC1000318FE3 /* MTGMintegralInterstitialAdapter.m in Sources */,
 				CAAD3D3821F71E0E007EF61B /* MTGAdServerCommunicator.m in Sources */,
 				CA2556F022129DE9005FF563 /* MTGRewardVideoReward.m in Sources */,
 				CAAD3D3921F71E0E007EF61B /* MTGRewardVideo.m in Sources */,
@@ -408,6 +424,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				99A24F922212AC2600318FE3 /* MTGIronSourceInterstitialAdapter.m in Sources */,
+				99A24F8D2212AC1000318FE3 /* MTGMintegralInterstitialAdapter.m in Sources */,
 				CA83AFC921F064C700655A95 /* MTGMediationSampleTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -416,6 +434,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				99A24F932212AC2600318FE3 /* MTGIronSourceInterstitialAdapter.m in Sources */,
+				99A24F8E2212AC1000318FE3 /* MTGMintegralInterstitialAdapter.m in Sources */,
 				CA83AFD421F064C700655A95 /* MTGMediationSampleUITests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
