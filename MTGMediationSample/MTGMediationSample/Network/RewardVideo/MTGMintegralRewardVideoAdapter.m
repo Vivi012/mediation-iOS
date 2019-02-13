@@ -34,10 +34,9 @@
     if (!unitId) errorMsg = @"Invalid MTG unitId";
     
     if (errorMsg) {
-        /*
-        NSError *error = [NSError errorWithDomain:kMintegralErrorDomain code:MPRewardedVideoAdErrorInvalidAdUnitID userInfo:@{NSLocalizedDescriptionKey : errorMsg}];
+        NSError *error = [NSError errorWithDomain:@"com.mintegral" code:-1 userInfo:@{NSLocalizedDescriptionKey : errorMsg}];
         [self.delegate rewardedVideoDidFailToLoadAdForCustomEvent:self error:error];
-         */
+         
         return;
     }
     
@@ -69,10 +68,8 @@
         }
         
     } else {
-        /*
-        NSError *error = [NSError errorWithDomain:MoPubRewardedVideoAdsSDKDomain code:MPRewardedVideoAdErrorNoAdsAvailable userInfo:nil];
-        [self.delegate rewardedVideoDidFailToPlayForCustomEvent:self error:error];
-         */
+        NSError *error = [NSError errorWithDomain:@"com.mintegral" code:-1 userInfo:@{NSLocalizedDescriptionKey : @"loadFail"}];
+        [self.delegate rewardedVideoDidFailToLoadAdForCustomEvent:self error:error];
     }
 }
 
