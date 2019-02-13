@@ -86,11 +86,11 @@
  */
 - (void)onVideoAdLoadSuccess:(nullable NSString *)unitId{
     
-    /*
+    
     if ([self hasAdAvailable]) {
         [self.delegate rewardedVideoDidLoadAdForCustomEvent:self];
     }
-    */
+    
 }
 
 /**
@@ -101,9 +101,8 @@
  */
 - (void)onVideoAdLoadFailed:(nullable NSString *)unitId error:(nonnull NSError *)error{
     
-    /*
+    
     [self.delegate rewardedVideoDidFailToLoadAdForCustomEvent:self error:error];
-     */
 }
 
 /**
