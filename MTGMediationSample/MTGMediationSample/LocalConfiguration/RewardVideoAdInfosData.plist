@@ -10,17 +10,17 @@
 			<key>appid</key>
 			<string>appid_mtg</string>
 			<key>classname</key>
-			<string>MTGMintegralAdapter</string>
+			<string>MTGMintegralRewardVideoAdapter</string>
 			<key>timeout</key>
 			<integer>10</integer>
 			<key>network</key>
-			<string>mobvista</string>
+			<string>mintegral</string>
 			<key>unitid</key>
 			<string>unitid1</string>
 		</dict>
 		<dict>
 			<key>classname</key>
-			<string>IronSourceAdapter</string>
+			<string>MTGIronSourceRewardVideoAdapter</string>
 			<key>timeout</key>
 			<integer>10</integer>
 			<key>network</key>
@@ -37,17 +37,17 @@
 			<key>appid</key>
 			<string>appid_mtg</string>
 			<key>classname</key>
-			<string>MTGMintegralAdapter</string>
+			<string>MTGMintegralRewardVideoAdapter</string>
 			<key>timeout</key>
 			<integer>10</integer>
 			<key>network</key>
-			<string>mobvista</string>
+			<string>mintegral</string>
 			<key>unitid</key>
 			<string>unitid2</string>
 		</dict>
 		<dict>
 			<key>classname</key>
-			<string>IronSourceAdapter</string>
+			<string>MTGIronSourceRewardVideoAdapter</string>
 			<key>network</key>
 			<string>ironsource</string>
 			<key>timeout</key>

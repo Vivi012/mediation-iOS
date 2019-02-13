@@ -30,6 +30,14 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)rewardVideoAdDidFailToLoadForAdUnitID:(NSString *)adUnitID error:(NSError *)error;
 
+
+/**
+ * This method is called when an attempt to play a rewarded video success.
+ *
+ * @param adUnitID The ad unit ID of the ad associated with the event.
+ */
+- (void)rewardVideoAdDidPlayForAdUnitID:(NSString *)adUnitID;
+
 /**
  * This method is called when an attempt to play a rewarded video fails.
  *
@@ -65,13 +73,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MTGRewardVideo : NSObject
 
-+ (void)initializeWithDelegate:(id<MTGRewardVideoDelegate>)delegate;
-
 + (void)loadRewardVideoAdWithAdUnitID:(NSString *)adUnitID mediationSettings:(NSArray *)mediationSettings;
 
 + (BOOL)hasAdAvailableForAdUnitID:(NSString *)adUnitID;
 
 + (void)presentRewardVideoAdForAdUnitID:(NSString *)adUnitID fromViewController:(UIViewController *)viewController;
+
+@property (nonatomic,weak) id<MTGRewardVideoDelegate> delegate;
 
 
 @end

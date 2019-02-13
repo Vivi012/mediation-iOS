@@ -10,8 +10,22 @@
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
+@class MTGRewardVideoReward;
 @protocol MTGRewardVideoAdapterDelegate <NSObject>
 
+- (void)rewardVideoAdDidLoadForAdUnitID:(NSString *)adUnitID;
+
+- (void)rewardVideoAdDidFailToLoadForAdUnitID:(NSString *)adUnitID error:(NSError *)error;
+
+- (void)rewardVideoAdDidShowForAdUnitID:(NSString *)adUnitID;
+
+- (void)rewardVideoAdDidFailToPlayForAdUnitID:(NSString *)adUnitID error:(NSError *)error;
+
+- (void)rewardVideoAdWillDisappearForAdUnitID:(NSString *)adUnitID;
+
+- (void)rewardVideoAdShouldRewardForAdUnitID:(NSString *)adUnitID reward:(MTGRewardVideoReward *)reward;
+
+- (void)rewardVideoAdDidReceiveTapEventForAdUnitID:(NSString *)adUnitID;
 
 @end
 

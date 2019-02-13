@@ -9,6 +9,7 @@
 #import "MTGRewardVideoAdManager.h"
 #import "MTGAdServerCommunicator.h"
 #import "MTGRewardVideoAdapter.h"
+#import "MTGRewardVideoReward.h"
 
 
 @interface MTGRewardVideoAdManager ()<MTGAdServerCommunicatorDelegate,MTGRewardVideoAdapterDelegate>
@@ -18,7 +19,7 @@
 
 @property (nonatomic, assign) BOOL loading;
 @property (nonatomic, assign) BOOL playedAd;
-@property (nonatomic, assign) BOOL ready;
+
 
 
 @end
@@ -37,25 +38,35 @@
 
 - (void)loadRewardedVideoAd{
     
-    if (self.ready && !self.playedAd) {
-     
-//        [self.delegate rewardedVideoDidLoadForAdManager:self];
-    } else {
-        
-        [self.communicator requestAdUnitInfosWithAdUnit:_adUnitID];
+    if (self.loading) {
+        NSError *error = nil;
+        [self sendLoadFailedWithError:error];
+        return;
     }
+    
+    self.loading = YES;
+
+    [self.communicator requestAdUnitInfosWithAdUnit:_adUnitID];
+
 }
 
 - (BOOL)hasAdAvailable{
     
-    if (self.playedAd) {
+    if (self.loading) {
         return NO;
     }
+
     return [self.adapter hasAdAvailable];
 }
 
 - (void)presentRewardedVideoFromViewController:(UIViewController *)viewController{
     // If we've already played an ad, don't allow playing of another since we allow one play per load.
+    if (self.loading) {
+        NSError *error = nil;
+        [self sendLoadFailedWithError:error];
+        return;
+    }
+    
     if (self.playedAd) {
 //        NSError *error = [NSError errorWithDomain:MoPubRewardedVideoAdsSDKDomain code:MPRewardedVideoAdErrorAdAlreadyPlayed userInfo:nil];
 //        [self.delegate rewardedVideoDidFailToPlayForAdManager:self error:error];
@@ -65,14 +76,36 @@
     [self.adapter presentRewardedVideoFromViewController:viewController];
 }
 
-#pragma Private
+#pragma Private Methods -
 - (void)dealloc
 {
     [_communicator cancel];
 }
 
+- (void)sendLoadFailedWithError:(NSError *)error{
+    
+    if (_delegate && [_delegate respondsToSelector:@selector(rewardVideoAdDidFailToLoadForAdUnitID:error:)]) {
+        [_delegate rewardVideoAdDidFailToLoadForAdUnitID:self.adUnitID error:error];
+    }
+}
+
+- (void)sendLoadSuccess{
+    
+    if (_delegate && [_delegate respondsToSelector:@selector(rewardVideoAdDidLoadForAdUnitID:)]) {
+        [_delegate rewardVideoAdDidLoadForAdUnitID:self.adUnitID];
+    }
+}
+
+- (void)sendShowFailedWithError:(NSError *)error{
+    
+    if (_delegate && [_delegate respondsToSelector:@selector(rewardVideoAdDidFailToLoadForAdUnitID:error:)]) {
+        [_delegate rewardVideoAdDidFailToLoadForAdUnitID:self.adUnitID error:error];
+    }
+    
+}
 /*
-- (void)startTimeoutTimer
+// for remote request
+- (void)startTimeoutTimer:(NSTimeInterval)duration
 {
 
 }
@@ -99,8 +132,10 @@
             MTGRewardVideoAdapter *adapter = [[MTGRewardVideoAdapter alloc] initWithDelegate:self];
             
             if (!adapter) {
-//                NSError *error = nil;
-                //        [self rewardedVideoDidFailToLoadForAdapter:nil error:error];
+                NSError *error = nil;
+                [self sendLoadFailedWithError:error];
+                
+                dispatch_group_leave(group);
                 return;
             }
             
@@ -108,26 +143,82 @@
 
             [self.adapter getAdWithInfo:adInfo completionHandler:^(BOOL success, NSError * _Nonnull error) {
                 if (success) {
-#warning  Chark TODO
+                    [self sendLoadSuccess];
                     *stop = YES;
                 }else{
                     //if the last loop failed
                     if (idx == (infos.count - 1)) {
-                        #warning  Chark TODO
-                        //send failed callback
-                    }
+                        [self sendLoadFailedWithError:error];
+                    }//else: continue next request loop
                 }
                 
                 dispatch_group_leave(group);
-
             }];
         });
     }];
 
+    self.loading = NO;
 }
 
 - (void)communicatorDidFailWithError:(NSError *)error{
-    
+
+    [self sendLoadFailedWithError:error];
+
+    self.loading = NO;
 }
+
+
+#pragma mark MTGRewardVideoAdapterDelegate -
+
+- (void)rewardVideoAdDidLoadForAdUnitID:(NSString *)adUnitID{
+    
+    if (_delegate && [_delegate respondsToSelector:@selector(rewardVideoAdDidLoadForAdUnitID:)]) {
+        [_delegate rewardVideoAdDidLoadForAdUnitID:adUnitID];
+    }
+}
+
+- (void)rewardVideoAdDidFailToLoadForAdUnitID:(NSString *)adUnitID error:(NSError *)error{
+    
+    if (_delegate && [_delegate respondsToSelector:@selector(rewardVideoAdDidFailToLoadForAdUnitID:error:)]) {
+        [_delegate rewardVideoAdDidFailToLoadForAdUnitID:adUnitID error:error];
+    }
+}
+
+- (void)rewardVideoAdDidShowForAdUnitID:(NSString *)adUnitID{
+ 
+    if (_delegate && [_delegate respondsToSelector:@selector(rewardVideoAdDidShowForAdUnitID:)]) {
+        [_delegate rewardVideoAdDidShowForAdUnitID:adUnitID];
+    }
+}
+
+- (void)rewardVideoAdDidFailToPlayForAdUnitID:(NSString *)adUnitID error:(NSError *)error{
+    
+    if (_delegate && [_delegate respondsToSelector:@selector(rewardVideoAdDidFailToPlayForAdUnitID:error:)]) {
+        [_delegate rewardVideoAdDidFailToPlayForAdUnitID:adUnitID error:error];
+    }
+}
+
+- (void)rewardVideoAdWillDisappearForAdUnitID:(NSString *)adUnitID{
+    
+    if (_delegate && [_delegate respondsToSelector:@selector(rewardVideoAdWillDisappearForAdUnitID:)]) {
+        [_delegate rewardVideoAdWillDisappearForAdUnitID:adUnitID];
+    }
+}
+
+- (void)rewardVideoAdShouldRewardForAdUnitID:(NSString *)adUnitID reward:(MTGRewardVideoReward *)reward{
+    
+    if (_delegate && [_delegate respondsToSelector:@selector(rewardVideoAdShouldRewardForAdUnitID:reward:)]) {
+        [_delegate rewardVideoAdShouldRewardForAdUnitID:adUnitID reward:reward];
+    }
+}
+
+- (void)rewardVideoAdDidReceiveTapEventForAdUnitID:(NSString *)adUnitID{
+    
+    if (_delegate && [_delegate respondsToSelector:@selector(rewardVideoAdDidReceiveTapEventForAdUnitID:)]) {
+        [_delegate rewardVideoAdDidReceiveTapEventForAdUnitID:adUnitID];
+    }
+}
+
+
 
 @end

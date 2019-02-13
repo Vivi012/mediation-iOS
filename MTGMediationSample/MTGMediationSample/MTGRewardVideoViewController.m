@@ -38,7 +38,7 @@
         [self showMsg:msg];
         return;
     }
-    [MTGRewardVideo loadRewardVideoAdWithAdUnitID:self.adUnitId mediationSettings:[NSArray new]];
+    [MTGRewardVideo loadRewardVideoAdWithAdUnitID:self.adUnitId mediationSettings:@[]];
 }
 
 - (IBAction)showRewardVideoAction:(id)sender {

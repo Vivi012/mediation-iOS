@@ -19,6 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (id)initWithDelegate:(id<MTGAdServerCommunicatorDelegate>)delegate;
 
 - (void)requestAdUnitInfosWithAdUnit:(NSString *)adUnitId;
+
 - (void)cancel;
 
 
