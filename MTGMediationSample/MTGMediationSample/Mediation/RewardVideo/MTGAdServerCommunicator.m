@@ -8,6 +8,7 @@
 
 #import "MTGAdServerCommunicator.h"
 #import "MTGAdInfo.h"
+#import "MTGRewardVideoError.h"
 
 @interface MTGAdServerCommunicator()
 
@@ -31,7 +32,7 @@
     // request local configuration for ad infos
     NSArray *rewardVideoInfos = [MTGAdInfo rewardVideoInfosWithAdUnitId:adUnitId];
     if (rewardVideoInfos.count) {
-        #warning  Chark TODO  校验开发者配置的数据
+//        #warning  Chark TODO  校验开发者配置的数据
         if (_delegate && [_delegate respondsToSelector:@selector(communicatorDidReceiveAdUnitInfos:)]) {
             [_delegate communicatorDidReceiveAdUnitInfos:rewardVideoInfos];
         }
@@ -39,8 +40,7 @@
     }
     // we will support send request for remote ad infos later
     if (_delegate && [_delegate respondsToSelector:@selector(communicatorDidFailWithError:)]) {
-        NSError *error = nil;
-        #warning  Chark TODO
+        NSError *error = [NSError errorWithDomain:MTGRewardVideoAdsSDKDomain code:MTGRewardVideoAdErrorAdDataInValid userInfo:nil];
         [_delegate communicatorDidFailWithError:error];
     }
 }

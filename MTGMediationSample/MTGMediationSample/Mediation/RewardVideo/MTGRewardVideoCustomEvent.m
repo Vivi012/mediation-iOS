@@ -7,6 +7,7 @@
 //
 
 #import "MTGRewardVideoCustomEvent.h"
+#import "MTGRewardVideoReward.h"
 
 @implementation MTGRewardVideoCustomEvent
 
@@ -19,7 +20,7 @@
 - (BOOL)hasAdAvailable{
     
     //to override in subclass
-    return YES;
+    return NO;
 }
 
 - (void)presentRewardedVideoFromViewController:(UIViewController *)viewController{

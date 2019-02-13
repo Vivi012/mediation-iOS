@@ -129,10 +129,24 @@ static MTGRewardVideo *gSharedInstance = nil;
 
 #pragma mark -
 
+- (void)rewardVideoAdDidLoadForAdUnitID:(nonnull NSString *)adUnitID {
+    
+    if (_delegate && [_delegate respondsToSelector:@selector(rewardVideoAdDidLoadForAdUnitID:)]) {
+        [_delegate rewardVideoAdDidLoadForAdUnitID:adUnitID];
+    }
+}
+
 - (void)loadFailedWithAdUnit:(NSString *)adUnitId error:(NSError *)error{
     
     if (_delegate && [_delegate respondsToSelector:@selector(rewardVideoAdDidFailToLoadForAdUnitID:error:)]) {
         [_delegate rewardVideoAdDidFailToLoadForAdUnitID:adUnitId error:error];
+    }
+}
+
+- (void)rewardVideoAdDidShowForAdUnitID:(nonnull NSString *)adUnitID {
+    
+    if (_delegate && [_delegate respondsToSelector:@selector(rewardVideoAdDidPlayForAdUnitID:)]) {
+        [_delegate rewardVideoAdDidPlayForAdUnitID:adUnitID];
     }
 }
 
@@ -144,5 +158,26 @@ static MTGRewardVideo *gSharedInstance = nil;
 }
 
 
+- (void)rewardVideoAdDidReceiveTapEventForAdUnitID:(nonnull NSString *)adUnitID {
+    
+    if (_delegate && [_delegate respondsToSelector:@selector(rewardVideoAdDidReceiveTapEventForAdUnitID:)]) {
+        [_delegate rewardVideoAdDidReceiveTapEventForAdUnitID:adUnitID];
+    }
+}
+
+
+- (void)rewardVideoAdShouldRewardForAdUnitID:(nonnull NSString *)adUnitID reward:(nonnull MTGRewardVideoReward *)reward {
+
+    if (_delegate && [_delegate respondsToSelector:@selector(rewardVideoAdShouldRewardForAdUnitID:reward:)]) {
+        [_delegate rewardVideoAdShouldRewardForAdUnitID:adUnitID reward:reward];
+    }
+}
+
+- (void)rewardVideoAdWillDisappearForAdUnitID:(nonnull NSString *)adUnitID {
+
+    if (_delegate && [_delegate respondsToSelector:@selector(rewardVideoAdWillDisappearForAdUnitID:)]) {
+        [_delegate rewardVideoAdWillDisappearForAdUnitID:adUnitID];
+    }
+}
 
 @end

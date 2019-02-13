@@ -30,6 +30,14 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)rewardVideoAdDidFailToLoadForAdUnitID:(NSString *)adUnitID error:(NSError *)error;
 
+
+/**
+ * This method is called when an attempt to play a rewarded video success.
+ *
+ * @param adUnitID The ad unit ID of the ad associated with the event.
+ */
+- (void)rewardVideoAdDidPlayForAdUnitID:(NSString *)adUnitID;
+
 /**
  * This method is called when an attempt to play a rewarded video fails.
  *
