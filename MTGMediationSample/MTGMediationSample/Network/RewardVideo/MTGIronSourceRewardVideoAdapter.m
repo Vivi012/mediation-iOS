@@ -15,14 +15,11 @@
 
 @interface MTGIronSourceRewardVideoAdapter () <ISRewardedVideoDelegate>
 @property (nonatomic, strong) ISPlacementInfo   *rvPlacementInfo;
-@property (nonatomic, assign) BOOL  rvIsReady;
 @end
 
 @implementation MTGIronSourceRewardVideoAdapter
 
 - (void)requestRewardedVideoWithCustomEventInfo:(NSDictionary *)info{
-    
-    self.rvIsReady = NO;
     
     NSString *appKey = [info objectForKey:@"apikey"];
     NSString *unitId = [info objectForKey:@"unitid"];
@@ -63,7 +60,7 @@
 
 - (BOOL)hasAdAvailable{
     
-    return self.rvIsReady;
+    return [IronSource hasRewardedVideo];
 }
 
 - (void)presentRewardedVideoFromViewController:(UIViewController *)viewController{
@@ -78,9 +75,13 @@
 // with 'hasAvailableAds' set to 'YES' that you can should 'showRV'.
 - (void)rewardedVideoHasChangedAvailability:(BOOL)available {
     NSLog(@"%s", __PRETTY_FUNCTION__);
-    self.rvIsReady = YES;
 
-    [self.delegate rewardedVideoDidLoadAdForCustomEvent:self];
+    if(available){
+        [self.delegate rewardedVideoDidLoadAdForCustomEvent:self];
+    }else{
+        NSError *error = [NSError errorWithDomain:@"com.ironsource" code:-1 userInfo:@{NSLocalizedDescriptionKey : @"rewardvideo load fail"}];
+        [self.delegate rewardedVideoDidFailToLoadAdForCustomEvent:self error:error];
+    }
 }
 
 // This method gets invoked after the user has been rewarded.
