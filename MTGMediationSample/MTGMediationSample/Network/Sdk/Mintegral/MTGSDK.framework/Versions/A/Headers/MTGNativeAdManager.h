@@ -323,19 +323,13 @@ typedef NS_ENUM(NSInteger, MTGAdCategory) {
 /*!
  @method
  
- @abstract
-
  This is a method to clean the cache nativeAd .
- 
- @param
  
  */
 - (void)cleanAdsCache;
 
 /*!
  @method
- 
- @abstract
 
  Set the video display area size.
  
@@ -351,7 +345,7 @@ typedef NS_ENUM(NSInteger, MTGAdCategory) {
  Set the video display area size.
  
  @param width The display area width.
- @param width The display area height.
+ @param height The display area height.
  */
 -(void)setVideoViewSizeWithWidth:(CGFloat)width height:(CGFloat)height;
 
