@@ -10,7 +10,7 @@
 #import "MTGAdServerCommunicator.h"
 #import "MTGRewardVideoAdapter.h"
 #import "MTGRewardVideoReward.h"
-
+#import "MTGRewardVideoError.h"
 
 @interface MTGRewardVideoAdManager ()<MTGAdServerCommunicatorDelegate,MTGRewardVideoAdapterDelegate>
 
@@ -18,9 +18,6 @@
 @property (nonatomic, strong) MTGAdServerCommunicator *communicator;
 
 @property (nonatomic, assign) BOOL loading;
-@property (nonatomic, assign) BOOL playedAd;
-
-
 
 @end
 
@@ -39,7 +36,7 @@
 - (void)loadRewardedVideoAd{
     
     if (self.loading) {
-        NSError *error = nil;
+        NSError *error = [NSError errorWithDomain:MTGRewardVideoAdsSDKDomain code:MTGRewardVideoAdErrorCurrentUnitIsLoading userInfo:nil];
         [self sendLoadFailedWithError:error];
         return;
     }
@@ -47,7 +44,6 @@
     self.loading = YES;
 
     [self.communicator requestAdUnitInfosWithAdUnit:_adUnitID];
-
 }
 
 - (BOOL)hasAdAvailable{
@@ -62,17 +58,15 @@
 - (void)presentRewardedVideoFromViewController:(UIViewController *)viewController{
     // If we've already played an ad, don't allow playing of another since we allow one play per load.
     if (self.loading) {
-        NSError *error = nil;
-        [self sendLoadFailedWithError:error];
+        NSError *error = [NSError errorWithDomain:MTGRewardVideoAdsSDKDomain code:MTGRewardVideoAdErrorCurrentUnitIsLoading userInfo:nil];
+        [self sendShowFailedWithError:error];
         return;
     }
-    
-    if (self.playedAd) {
-//        NSError *error = [NSError errorWithDomain:MoPubRewardedVideoAdsSDKDomain code:MPRewardedVideoAdErrorAdAlreadyPlayed userInfo:nil];
-//        [self.delegate rewardedVideoDidFailToPlayForAdManager:self error:error];
+    if (![self hasAdAvailable]) {
+        NSError *error = [NSError errorWithDomain:MTGRewardVideoAdsSDKDomain code:MTGRewardVideoAdErrorNoAdsAvailable userInfo:nil];
+        [self sendShowFailedWithError:error];
         return;
     }
-
     [self.adapter presentRewardedVideoFromViewController:viewController];
 }
 
@@ -129,15 +123,7 @@
 
             dispatch_group_enter(group);
 
-            MTGRewardVideoAdapter *adapter = [[MTGRewardVideoAdapter alloc] initWithDelegate:self];
-            
-            if (!adapter) {
-                NSError *error = nil;
-                [self sendLoadFailedWithError:error];
-                
-                dispatch_group_leave(group);
-                return;
-            }
+            MTGRewardVideoAdapter *adapter = [[MTGRewardVideoAdapter alloc] initWithDelegate:self mediationSettings:self.mediationSettings];
             
             self.adapter = adapter;
 

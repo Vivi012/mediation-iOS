@@ -10,11 +10,8 @@
 #import "MTGRewardVideoCustomEvent.h"
 #import "MTGRewardVideoReward.h"
 #import "MTGRewardVideoError.h"
+#import "MTGRewardVideoConstants.h"
 
-
-#define MTG_REWARDVIDEO_UNITID @"unitid"
-#define MTG_REWARDVIDEO_CLASSNAME @"classname"
-#define MTG_REWARDVIDEO_TIMEOUT @"timeout"
 
 @interface MTGRewardVideoAdapter ()<MTGRewardVideoCustomEventDelegate>
 
@@ -22,27 +19,36 @@
 @property (nonatomic, strong) MTGRewardVideoCustomEvent *rewardedVideoCustomEvent;
 
 @property (nonatomic, weak) id<MTGRewardVideoAdapterDelegate> delegate;
-@property (nonatomic,copy) void(^completionHandler)(BOOL success,NSError *error);
+@property (nonatomic, copy) void(^completionHandler)(BOOL success,NSError *error);
 
-@property (nonatomic,copy)  NSString *adUnitID;
+@property (nonatomic, copy)  NSString *adUnitID;
+@property (nonatomic, copy)  NSString *networkName;
+@property (nonatomic, strong) NSDictionary *mediationSettings;
+@property (nonatomic, assign)  BOOL hasExpired;
+
 @end
 
 @implementation MTGRewardVideoAdapter
 
 #pragma mark - public
-- (id)initWithDelegate:(id<MTGRewardVideoAdapterDelegate>)delegate{
+- (id)initWithDelegate:(id<MTGRewardVideoAdapterDelegate>)delegate mediationSettings:(NSDictionary *)mediationSettings{
 
     if (self = [super init]) {
         _delegate = delegate;
+        _mediationSettings = mediationSettings;
     }
     return self;
 }
 
 - (void)getAdWithInfo:(NSDictionary *)adInfo completionHandler:(void (^ __nullable)(BOOL success,NSError *error))completion{
 
-    self.adUnitID = [adInfo objectForKey:MTG_REWARDVIDEO_UNITID];
+    NSMutableDictionary *adInfoWithMediationSetting = [NSMutableDictionary dictionaryWithDictionary:adInfo];
+    [adInfoWithMediationSetting addEntriesFromDictionary:_mediationSettings];
 
+    self.adUnitID = [adInfo objectForKey:MTG_REWARDVIDEO_UNITID];
+    self.networkName = [adInfo objectForKey:MTG_REWARDVIDEO_NETWORKNAME];
     NSString *customEventClassName = [adInfo objectForKey:MTG_REWARDVIDEO_CLASSNAME];
+
     self.rewardedVideoCustomEvent = [self buildRewardedVideoCustomEventFromCustomClass:NSClassFromString(customEventClassName)];
     
     if (self.rewardedVideoCustomEvent) {
@@ -74,12 +80,18 @@
 -(void)dealloc{
 
     [NSObject cancelPreviousPerformRequestsWithTarget:self];
-//    [_rewardedVideoCustomEvent handleCustomEventInvalidated];
     // Make sure the custom event isn't released synchronously as objects owned by the custom event
-    // may do additional work after a callback that results in dealloc being called
-//    [[MPCoreInstanceProvider sharedProvider] keepObjectAliveForCurrentRunLoopIteration:_rewardedVideoCustomEvent];
-    
+    [self keepObjectAliveForCurrentRunLoopIteration:_rewardedVideoCustomEvent];
+}
 
+- (void)keepObjectAliveForCurrentRunLoopIteration:(id)anObject
+{
+    [self performSelector:@selector(performNoOp:) withObject:anObject afterDelay:0];
+}
+
+- (void)performNoOp:(id)anObject
+{
+    ; // noop
 }
 
 - (MTGRewardVideoCustomEvent *)buildRewardedVideoCustomEventFromCustomClass:(Class)customClass
@@ -105,6 +117,7 @@
 
 - (void)timeout
 {
+    self.hasExpired = YES;
     NSError *error = [NSError errorWithDomain:MTGRewardVideoAdsSDKDomain code:MTGRewardVideoAdErrorTimeout userInfo:nil];
     [self sendLoadFailedWithError:error];
 }
@@ -116,6 +129,7 @@
 
 - (void)sendLoadFailedWithError:(NSError *)error{
     
+    [self didStopLoading];
     if (_delegate && [_delegate respondsToSelector:@selector(rewardVideoAdDidFailToLoadForAdUnitID:error:)]) {
         [_delegate rewardVideoAdDidFailToLoadForAdUnitID:self.adUnitID error:error];
     }
@@ -123,13 +137,25 @@
 
 - (void)sendLoadSuccess{
     
+    if (_hasExpired) {
+        return;
+    }
+
+    [self didStopLoading];
     if (_delegate && [_delegate respondsToSelector:@selector(rewardVideoAdDidLoadForAdUnitID:)]) {
+        NSLog([NSString stringWithFormat: @"current unit%@ loadSuccess,   ",self.adUnitID],
+              [NSString stringWithFormat: @"ad network is:%@",self.networkName]
+              );
         [_delegate rewardVideoAdDidLoadForAdUnitID:self.adUnitID];
     }
 }
 
 - (void)sendShowFailedWithError:(NSError *)error{
-    
+
+    if (_hasExpired) {
+        return;
+    }
+
     if (_delegate && [_delegate respondsToSelector:@selector(rewardVideoAdDidFailToLoadForAdUnitID:error:)]) {
         [_delegate rewardVideoAdDidFailToLoadForAdUnitID:self.adUnitID error:error];
     }

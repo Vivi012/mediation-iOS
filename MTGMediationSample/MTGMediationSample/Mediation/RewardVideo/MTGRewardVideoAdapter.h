@@ -32,7 +32,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MTGRewardVideoAdapter : NSObject
 
-- (id)initWithDelegate:(id<MTGRewardVideoAdapterDelegate>)delegate;
+- (id)initWithDelegate:(id<MTGRewardVideoAdapterDelegate>)delegate mediationSettings:(NSArray *)mediationSettings;
 
 - (void)getAdWithInfo:(NSDictionary *)adInfo completionHandler:(void (^ __nullable)(BOOL success,NSError *error))completion;
 

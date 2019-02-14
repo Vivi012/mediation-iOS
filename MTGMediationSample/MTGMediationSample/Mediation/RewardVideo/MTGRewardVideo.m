@@ -9,6 +9,7 @@
 #import "MTGRewardVideo.h"
 #import "MTGRewardVideoAdManager.h"
 #import "MTGRewardVideoReward.h"
+#import "MTGRewardVideoError.h"
 
 static MTGRewardVideo *gSharedInstance = nil;
 
@@ -37,9 +38,8 @@ static MTGRewardVideo *gSharedInstance = nil;
     MTGRewardVideo *sharedInstance = [[self class] sharedInstance];
     
     if (![adUnitID length]) {
-//        NSError *error = [NSError errorWithDomain:MoPubRewardedVideoAdsSDKDomain code:MPRewardedVideoAdErrorInvalidAdUnitID userInfo:nil];
-//        [sharedInstance.delegate rewardedVideoAdDidFailToLoadForAdUnitID:adUnitID error:error];
-//        sharedInstance.delegate respondsToSelector:@selector(rewardvideoaddi )
+        NSError *error = [NSError errorWithDomain:MTGRewardVideoAdsSDKDomain code:MTGRewardVideoAdErrorInvalidAdUnitID userInfo:nil];
+        [sharedInstance rewardVideoAdDidFailToLoadForAdUnitID:adUnitID error:error];
         return;
     }
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -50,7 +50,7 @@ static MTGRewardVideo *gSharedInstance = nil;
             adManager = [[MTGRewardVideoAdManager alloc] initWithAdUnitID:adUnitID delegate:sharedInstance];
             sharedInstance.rewardedVideoAdManagers[adUnitID] = adManager;
         }
-        
+        adManager.mediationSettings = mediationSettings;
         [adManager loadRewardedVideoAd];
 
     });
@@ -58,6 +58,9 @@ static MTGRewardVideo *gSharedInstance = nil;
 
 + (BOOL)hasAdAvailableForAdUnitID:(NSString *)adUnitID{
 
+    if (![adUnitID length]) {
+        return NO;
+    }
     MTGRewardVideo *sharedInstance = [[self class] sharedInstance];
     [sharedInstance.lock lock];
     MTGRewardVideoAdManager *adManager = sharedInstance.rewardedVideoAdManagers[adUnitID];
@@ -68,6 +71,11 @@ static MTGRewardVideo *gSharedInstance = nil;
 
 + (void)presentRewardVideoAdForAdUnitID:(NSString *)adUnitID fromViewController:(UIViewController *)viewController{
     
+    if (![adUnitID length]) {
+        NSError *error = [NSError errorWithDomain:MTGRewardVideoAdsSDKDomain code:MTGRewardVideoAdErrorInvalidAdUnitID userInfo:nil];
+        [[[self class] sharedInstance] rewardVideoAdDidFailToLoadForAdUnitID:adUnitID error:error];
+        return;
+    }
     dispatch_async(dispatch_get_main_queue(), ^{
 
         MTGRewardVideo *sharedInstance = [[self class] sharedInstance];
@@ -75,21 +83,21 @@ static MTGRewardVideo *gSharedInstance = nil;
         MTGRewardVideoAdManager *adManager = sharedInstance.rewardedVideoAdManagers[adUnitID];
         
         if (!adManager) {
-            //        MPLogWarn(@"The rewarded video could not be shown: "
-            //                  @"no ads have been loaded for adUnitID: %@", adUnitID);
+            NSLog(@"The reward video could not be shown: "
+                  @"no ads have been loaded for adUnitID: %@", adUnitID);
             
             return;
         }
         
         if (!viewController) {
-            //        MPLogWarn(@"The rewarded video could not be shown: "
-            //                  @"a nil view controller was passed to -presentRewardedVideoAdForAdUnitID:fromViewController:.");
+            NSLog(@"The reward video could not be shown: "
+                              @"a nil view controller was passed to -presentRewardedVideoAdForAdUnitID:fromViewController:.");
             
             return;
         }
         
         if (![viewController.view.window isKeyWindow]) {
-            //        MPLogWarn(@"Attempting to present a rewarded video ad in non-key window. The ad may not render properly.");
+            NSLog(@"Attempting to present a rewarded video ad in non-key window. The ad may not render properly.");
         }
         
         [adManager presentRewardedVideoFromViewController:viewController];
@@ -136,10 +144,10 @@ static MTGRewardVideo *gSharedInstance = nil;
     }
 }
 
-- (void)loadFailedWithAdUnit:(NSString *)adUnitId error:(NSError *)error{
-    
+- (void)rewardVideoAdDidFailToLoadForAdUnitID:(nonnull NSString *)adUnitID error:(nonnull NSError *)error {
+
     if (_delegate && [_delegate respondsToSelector:@selector(rewardVideoAdDidFailToLoadForAdUnitID:error:)]) {
-        [_delegate rewardVideoAdDidFailToLoadForAdUnitID:adUnitId error:error];
+        [_delegate rewardVideoAdDidFailToLoadForAdUnitID:adUnitID error:error];
     }
 }
 
@@ -150,10 +158,10 @@ static MTGRewardVideo *gSharedInstance = nil;
     }
 }
 
-- (void)showFailedWithAdUnit:(NSString *)adUnitId error:(NSError *)error{
+- (void)rewardVideoAdDidFailToPlayForAdUnitID:(nonnull NSString *)adUnitID error:(nonnull NSError *)error {
 
     if (_delegate && [_delegate respondsToSelector:@selector(rewardVideoAdDidFailToPlayForAdUnitID:error:)]) {
-        [_delegate rewardVideoAdDidFailToPlayForAdUnitID:adUnitId error:error];
+        [_delegate rewardVideoAdDidFailToPlayForAdUnitID:adUnitID error:error];
     }
 }
 

@@ -35,8 +35,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, weak) id<MTGRewardVideoAdManagerDelegate> delegate;
 @property (nonatomic, readonly) NSString *adUnitID;
-@property (nonatomic, strong) NSArray *mediationSettings;
-@property (nonatomic, copy) NSString *customerId;
+@property (nonatomic, strong) NSDictionary *mediationSettings;
 
 
 - (instancetype)initWithAdUnitID:(NSString *)adUnitID delegate:(id<MTGRewardVideoAdManagerDelegate>)delegate;

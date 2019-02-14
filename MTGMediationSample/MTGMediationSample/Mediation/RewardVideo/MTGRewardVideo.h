@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "MTGRewardVideoConstants.h"
+
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -73,7 +75,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MTGRewardVideo : NSObject
 
-+ (void)loadRewardVideoAdWithAdUnitID:(NSString *)adUnitID mediationSettings:(NSArray *)mediationSettings;
++ (void)loadRewardVideoAdWithAdUnitID:(NSString *)adUnitID mediationSettings:(NSDictionary *)mediationSettings;
 
 + (BOOL)hasAdAvailableForAdUnitID:(NSString *)adUnitID;
 
