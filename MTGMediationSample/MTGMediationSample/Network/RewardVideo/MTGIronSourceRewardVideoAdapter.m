@@ -7,6 +7,8 @@
 //
 
 #import "MTGIronSourceRewardVideoAdapter.h"
+#import "MTGRewardVideoReward.h"
+
 #import <IronSource/IronSource.h>
 
 #define USERID @"demoapp"
@@ -52,7 +54,11 @@
     // After setting the delegates you can go ahead and initialize the SDK.
     [IronSource setUserId:userId];
     
-    [IronSource initWithAppKey:appKey adUnits:@[unitId]];  //这个就相当于，一勺烩了吧，呵呵哒；
+    if([unitId length] == 0){
+        [IronSource initWithAppKey:appKey];
+    }else{
+        [IronSource initWithAppKey:appKey adUnits:@[unitId]];
+    }
 }
 
 - (BOOL)hasAdAvailable{
@@ -88,6 +94,8 @@
 // our knowledge center for help.
 - (void)rewardedVideoDidFailToShowWithError:(NSError *)error {
     NSLog(@"%s", __PRETTY_FUNCTION__);
+    
+    [self.delegate rewardVideoAdDidFailToPlayForCustomEvent:self error:error];
 }
 
 // This method gets invoked when we take control, but before
@@ -101,13 +109,15 @@
 // This is because reward can occur in the middle of the video.
 - (void)rewardedVideoDidClose {
     NSLog(@"%s", __PRETTY_FUNCTION__);
+    
+    [self.delegate rewardVideoAdWillDisappearForCustomEvent:self];
+    
     if (self.rvPlacementInfo) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Video Reward"
-                                                        message:[NSString stringWithFormat:@"You have been rewarded %d %@", [self.rvPlacementInfo.rewardAmount intValue], self.rvPlacementInfo.rewardName]
-                                                       delegate:nil
-                                              cancelButtonTitle:@"OK"
-                                              otherButtonTitles:nil];
-        [alert show];
+     
+        MTGRewardVideoReward *reward = [[MTGRewardVideoReward alloc] initWithCurrencyType:self.rvPlacementInfo.rewardName amount:self.rvPlacementInfo.rewardAmount];
+    
+        [self.delegate rewardVideoAdShouldRewardForCustomEvent:self reward:reward];
+        
         self.rvPlacementInfo = nil;
     }
 }
@@ -115,6 +125,8 @@
 // This method gets invoked when the video has started playing.
 - (void)rewardedVideoDidStart {
     NSLog(@"%s", __PRETTY_FUNCTION__);
+    
+    [self.delegate rewardVideoAdDidShowForCustomEvent:self];
 }
 
 // This method gets invoked when the video has stopped playing.
@@ -124,6 +136,8 @@
 
 - (void)didClickRewardedVideo:(ISPlacementInfo *)placementInfo {
     NSLog(@"%s", __PRETTY_FUNCTION__);
+    
+    [self.delegate rewardVideoAdDidReceiveTapEventForCustomEvent:self];
 }
 
 
