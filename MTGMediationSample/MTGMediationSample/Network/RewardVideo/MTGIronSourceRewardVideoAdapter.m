@@ -78,9 +78,14 @@
 // with 'hasAvailableAds' set to 'YES' that you can should 'showRV'.
 - (void)rewardedVideoHasChangedAvailability:(BOOL)available {
     NSLog(@"%s", __PRETTY_FUNCTION__);
-    self.rvIsReady = YES;
+    self.rvIsReady = available;
 
-    [self.delegate rewardedVideoDidLoadAdForCustomEvent:self];
+    if(self.rvIsReady){
+        [self.delegate rewardedVideoDidLoadAdForCustomEvent:self];
+    }else{
+        NSError *error = [NSError errorWithDomain:@"com.ironsource" code:-1 userInfo:@{NSLocalizedDescriptionKey : @"rewardvideo load fail"}];
+        [self.delegate rewardedVideoDidFailToLoadAdForCustomEvent:self error:error];
+    }
 }
 
 // This method gets invoked after the user has been rewarded.
