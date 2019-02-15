@@ -5,30 +5,30 @@
 	<key>rewardVideo_unit1</key>
 	<array>
 		<dict>
+			<key>appkey</key>
+			<string>8545d445</string>
+			<key>classname</key>
+			<string>MTGIronSourceRewardVideoAdapter</string>
+			<key>network</key>
+			<string>ironsource</string>
+			<key>timeout</key>
+			<integer>15</integer>
+			<key>placementname</key>
+			<string>placementname2</string>
+		</dict>
+		<dict>
 			<key>apikey</key>
 			<string>936dcbdd57fe235fd7cf61c2e93da3c4</string>
 			<key>appid</key>
 			<string>92763</string>
 			<key>classname</key>
 			<string>MTGMintegralRewardVideoAdapter</string>
-			<key>timeout</key>
-			<integer>3</integer>
 			<key>network</key>
 			<string>mintegral</string>
+			<key>timeout</key>
+			<integer>15</integer>
 			<key>unitid</key>
 			<string>21319</string>
-		</dict>
-		<dict>
-			<key>classname</key>
-			<string>MTGIronSourceRewardVideoAdapter</string>
-			<key>timeout</key>
-			<integer>3</integer>
-			<key>network</key>
-			<string>ironsource</string>
-			<key>placementname</key>
-			<string>placementname1</string>
-			<key>appkey</key>
-			<string>8545d445</string>
 		</dict>
 	</array>
 </dict>
