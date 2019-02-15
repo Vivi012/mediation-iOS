@@ -15,6 +15,8 @@
 
 @interface MTGIronSourceRewardVideoAdapter () <ISRewardedVideoDelegate>
 @property (nonatomic, strong) ISPlacementInfo   *rvPlacementInfo;
+@property (nonatomic, assign) NSString *placementName;
+@property (nonatomic, copy) NSString *instanceId;
 @end
 
 @implementation MTGIronSourceRewardVideoAdapter
@@ -22,11 +24,9 @@
 - (void)requestRewardedVideoWithCustomEventInfo:(NSDictionary *)info{
     
     NSString *appKey = [info objectForKey:@"appkey"];
-    NSString *unitId = [info objectForKey:@"unitid"];
     
     NSString *errorMsg = nil;
     if (!appKey) errorMsg = @"Invalid IRON appKey";
-    if (!unitId) errorMsg = @"Invalid IRON unitId";
     
     if (errorMsg) {
         NSError *error = [NSError errorWithDomain:@"com.ironsource" code:-1 userInfo:@{NSLocalizedDescriptionKey : errorMsg}];
@@ -35,12 +35,24 @@
         return;
     }
     
+
+    NSString *unitId = [info objectForKey:@"unitid"];
+    self.placementName = [info objectForKey:@"placementname"];
+ 
+    self.instanceId = @"0";
+    if (![[info objectForKey:@"instanceid"] isEqualToString:@""] && [info objectForKey:@"instanceid"] != nil )
+    {
+        self.instanceId = [info objectForKey:@"instanceid"];
+    }
+    
     //The integrationHelper is used to validate the integration. Remove the integrationHelper before going live!
     [ISIntegrationHelper validateIntegration];
     
     [ISSupersonicAdsConfiguration configurations].useClientSideCallbacks = @(YES);
     
     [IronSource setRewardedVideoDelegate:self];
+    
+    
     
     NSString *userId = [IronSource advertiserId];
     if([userId length] == 0){
@@ -60,12 +72,16 @@
 
 - (BOOL)hasAdAvailable{
     
-    return [IronSource hasRewardedVideo];
+    return [IronSource hasISDemandOnlyRewardedVideo:self.instanceId];
 }
 
 - (void)presentRewardedVideoFromViewController:(UIViewController *)viewController{
     
-   [IronSource showRewardedVideoWithViewController:viewController];
+    if ([self.placementName length] == 0) {
+        [IronSource showISDemandOnlyRewardedVideo:viewController instanceId:self.instanceId];
+    } else {
+        [IronSource showISDemandOnlyRewardedVideo:viewController placement:self.placementName instanceId:self.instanceId];
+    }
 }
 
 #pragma mark - Rewarded Video Delegate Functions
