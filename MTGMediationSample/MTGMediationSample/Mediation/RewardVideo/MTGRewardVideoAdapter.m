@@ -60,7 +60,7 @@
         [self startTimeoutTimer:duration];
         
         self.completionHandler = completion;
-//        [self.rewardedVideoCustomEvent requestRewardedVideoWithCustomEventInfo:adInfo];
+        [self.rewardedVideoCustomEvent requestRewardedVideoWithCustomEventInfo:adInfo];
     } else {
         
         NSError *error = [NSError errorWithDomain:MTGRewardVideoAdsSDKDomain code:MTGRewardVideoAdErrorInvalidCustomEvent userInfo:nil];
