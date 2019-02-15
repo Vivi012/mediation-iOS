@@ -56,7 +56,7 @@ the media source, can be set again to reuse this view.
  @abstract
  Sent just before an MTGMediaView will enter the fullscreen layout.
  
- @param nativeAd: An mediaView object sending the message.
+ @param mediaView An mediaView object sending the message.
  */
 - (void)MTGMediaViewWillEnterFullscreen:(MTGMediaView *)mediaView;
 
@@ -66,7 +66,7 @@ the media source, can be set again to reuse this view.
  @abstract
  Sent after an FBMediaView has exited the fullscreen layout.
  
- @param nativeAd: An mediaView object sending the message.
+ @param mediaView An mediaView object sending the message.
  */
 - (void)MTGMediaViewDidExitFullscreen:(MTGMediaView *)mediaView;
 

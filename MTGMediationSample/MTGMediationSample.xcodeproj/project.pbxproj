@@ -108,6 +108,7 @@
 		CA2556EF22129DE9005FF563 /* MTGRewardVideoReward.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MTGRewardVideoReward.m; sourceTree = "<group>"; };
 		CA2556F522142124005FF563 /* MTGRewardVideoError.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MTGRewardVideoError.h; sourceTree = "<group>"; };
 		CA2556F622142124005FF563 /* MTGRewardVideoError.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MTGRewardVideoError.m; sourceTree = "<group>"; };
+		CA2556FF2215545B005FF563 /* MTGRewardVideoConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MTGRewardVideoConstants.h; sourceTree = "<group>"; };
 		CA83AFAC21F064C700655A95 /* MTGMediationSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MTGMediationSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA83AFAF21F064C700655A95 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		CA83AFB021F064C700655A95 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -368,6 +369,7 @@
 		CAAD3D2621F71E0E007EF61B /* RewardVideo */ = {
 			isa = PBXGroup;
 			children = (
+				CA2556FF2215545B005FF563 /* MTGRewardVideoConstants.h */,
 				CAAD3D2C21F71E0E007EF61B /* MTGRewardVideo.h */,
 				CAAD3D3221F71E0E007EF61B /* MTGRewardVideo.m */,
 				CAAD3D2F21F71E0E007EF61B /* MTGRewardVideoAdManager.h */,

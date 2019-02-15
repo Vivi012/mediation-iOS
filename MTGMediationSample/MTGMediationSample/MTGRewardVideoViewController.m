@@ -38,7 +38,9 @@
         [self showMsg:msg];
         return;
     }
-    [MTGRewardVideo loadRewardVideoAdWithAdUnitID:self.adUnitId mediationSettings:@[]];
+    NSDictionary *mediationSettings = @{MTG_REWARDVIDEO_USER:@"Your userId"};
+    [MTGRewardVideo registerRewardVideoDelegate:self];
+    [MTGRewardVideo loadRewardVideoAdWithAdUnitID:self.adUnitId mediationSettings:mediationSettings];
 }
 
 - (IBAction)showRewardVideoAction:(id)sender {
@@ -66,7 +68,7 @@
 - (void)rewardVideoAdDidLoadForAdUnitID:(NSString *)adUnitID{
     
     self.showButton.userInteractionEnabled = YES;
-    NSString *msg = [NSString stringWithFormat:@"%@ : %@",NSStringFromSelector(_cmd),adUnitID];
+    NSString *msg = [NSString stringWithFormat:@"unit %@ loadSuccess",adUnitID];
     [self showMsg:msg];
 }
 
@@ -74,7 +76,7 @@
 - (void)rewardVideoAdDidFailToLoadForAdUnitID:(NSString *)adUnitID
                                         error:(NSError *)error{
     self.showButton.userInteractionEnabled = NO;
-    NSString *msg = NSStringFromSelector(_cmd);
+    NSString *msg = [NSString stringWithFormat:@"error: %@",error.description];
     [self showMsg:msg];
 }
 

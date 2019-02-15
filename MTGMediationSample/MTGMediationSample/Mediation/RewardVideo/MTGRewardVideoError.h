@@ -10,9 +10,10 @@
 
 typedef enum {
     MTGRewardVideoAdErrorUnknown = -1,
-    
-    MTGRewardVideoAdErrorTimeout = -1000,
-    MTGRewardVideoAdErrorAdDataInValid = -1001,
+    MTGRewardVideoAdErrorInvalidAdUnitID = -1000,
+    MTGRewardVideoAdErrorTimeout = -1001,
+    MTGRewardVideoAdErrorCurrentUnitIsLoading = -1002,
+    MTGRewardVideoAdErrorAdDataInValid = -1003,
     MTGRewardVideoAdErrorNoAdsAvailable = -1100,
     MTGRewardVideoAdErrorInvalidCustomEvent = -1200,
 
