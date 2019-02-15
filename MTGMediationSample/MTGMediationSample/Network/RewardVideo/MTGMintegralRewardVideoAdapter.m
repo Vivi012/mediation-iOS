@@ -7,6 +7,7 @@
 //
 
 #import "MTGMintegralRewardVideoAdapter.h"
+#import "MTGRewardVideoReward.h"
 
 #import <MTGSDK/MTGSDK.h>
 #import <MTGSDKReward/MTGRewardAdManager.h>
@@ -83,11 +84,9 @@
  */
 - (void)onVideoAdLoadSuccess:(nullable NSString *)unitId{
     
-    
     if ([self hasAdAvailable]) {
         [self.delegate rewardedVideoDidLoadAdForCustomEvent:self];
     }
-    
 }
 
 /**
@@ -97,7 +96,6 @@
  *  @param error       - error object that describes the exact error encountered when loading the ad.
  */
 - (void)onVideoAdLoadFailed:(nullable NSString *)unitId error:(nonnull NSError *)error{
-    
     
     [self.delegate rewardedVideoDidFailToLoadAdForCustomEvent:self error:error];
 }
@@ -109,16 +107,7 @@
  */
 - (void)onVideoAdShowSuccess:(nullable NSString *)unitId{
     
-    
-    /*
-    [self.delegate rewardedVideoWillAppearForCustomEvent:self];
-    [self.delegate rewardedVideoDidAppearForCustomEvent:self];
-    
-    
-    if ([self.delegate respondsToSelector:@selector(trackImpression)]) {
-        [self.delegate trackImpression];
-    }
-    */
+    [self.delegate rewardVideoAdDidShowForCustomEvent:self];
 }
 
 /**
@@ -129,9 +118,7 @@
  */
 - (void)onVideoAdShowFailed:(nullable NSString *)unitId withError:(nonnull NSError *)error{
     
-    /*
-    [self.delegate rewardedVideoDidFailToPlayForCustomEvent:self error:error];
-     */
+    [self.delegate rewardVideoAdDidFailToPlayForCustomEvent:self error:error];
 }
 
 /**
@@ -141,15 +128,7 @@
  */
 - (void)onVideoAdClicked:(nullable NSString *)unitId{
     
-    /*
-    [self.delegate rewardedVideoDidReceiveTapEventForCustomEvent:self];
-    
-    if ([self.delegate respondsToSelector:@selector(trackClick)]) {
-        [self.delegate trackClick];
-    } else {
-        MPLogWarn(@"Delegate does not implement click tracking callback. Clicks likely not being tracked.");
-    }
-     */
+    [self.delegate rewardVideoAdDidReceiveTapEventForCustomEvent:self];
 }
 
 /**
@@ -160,19 +139,16 @@
  *  @param rewardInfo  - the rewardInfo object containing an array of reward objects that should be given to your user.
  */
 - (void)onVideoAdDismissed:(nullable NSString *)unitId withConverted:(BOOL)converted withRewardInfo:(nullable MTGRewardAdInfo *)rewardInfo{
-    
-    /*
-    [self.delegate rewardedVideoWillDisappearForCustomEvent:self];
-    [self.delegate rewardedVideoDidDisappearForCustomEvent:self];
+     
+    [self.delegate rewardVideoAdWillDisappearForCustomEvent:self];
     
     if (!converted || !rewardInfo) {
         return;
     }
     
-    MPRewardedVideoReward *reward = [[MPRewardedVideoReward alloc] initWithCurrencyType:rewardInfo.rewardName amount:[NSNumber numberWithInteger:rewardInfo.rewardAmount]];
-    [self.delegate rewardedVideoShouldRewardUserForCustomEvent:self reward:reward];
-    */
+    MTGRewardVideoReward *reward = [[MTGRewardVideoReward alloc] initWithCurrencyType:rewardInfo.rewardName amount:[NSNumber numberWithInteger:rewardInfo.rewardAmount]];
     
+    [self.delegate rewardVideoAdShouldRewardForCustomEvent:self reward:reward];
 }
 
 
