@@ -112,39 +112,80 @@
 
 #pragma mark MTGAdServerCommunicatorDelegate -
 - (void)communicatorDidReceiveAdUnitInfos:(NSArray *)infos{
+//
+//    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+//    dispatch_group_t group = dispatch_group_create();
+//
+//    [infos enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+//
+//        NSDictionary *adInfo = (NSDictionary *)obj;
+//
+//
+////        dispatch_group_async(group, queue, ^{
+//
+//            dispatch_group_enter(group);
+//
+//            MTGRewardVideoAdapter *adapter = [[MTGRewardVideoAdapter alloc] initWithDelegate:self mediationSettings:self.mediationSettings];
+//
+//            self.adapter = adapter;
+//
+//            [self.adapter getAdWithInfo:adInfo completionHandler:^(BOOL success, NSError * _Nonnull error) {
+//                if (success) {
+//                    [self sendLoadSuccess];
+//                    *stop = YES;
+//                }else{
+//                    //if the last loop failed
+//                    if (idx == (infos.count - 1)) {
+//                        [self sendLoadFailedWithError:error];
+//                    }//else: continue next request loop
+//                }
+//
+//                dispatch_group_leave(group);
+//            }];
+////        });
+//    }];
+//
+//    self.loading = NO;
     
-    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    dispatch_group_t group = dispatch_group_create();
-    
-    [infos enumerateObjectsWithOptions:NSEnumerationReverse usingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [self createThreadhandleInfos:infos];
+    });
+}
+
+- (void)createThreadhandleInfos:(NSArray *)infos{
+
+    dispatch_semaphore_t sem = dispatch_semaphore_create(0);
+    [infos enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        
         NSDictionary *adInfo = (NSDictionary *)obj;
 
-        dispatch_group_async(group, queue, ^{
+        self.adapter = nil;
 
-            dispatch_group_enter(group);
-
-            MTGRewardVideoAdapter *adapter = [[MTGRewardVideoAdapter alloc] initWithDelegate:self mediationSettings:self.mediationSettings];
-            
-            self.adapter = adapter;
-
-            [self.adapter getAdWithInfo:adInfo completionHandler:^(BOOL success, NSError * _Nonnull error) {
-                if (success) {
-                    [self sendLoadSuccess];
-                    *stop = YES;
-                }else{
-                    //if the last loop failed
-                    if (idx == (infos.count - 1)) {
-                        [self sendLoadFailedWithError:error];
-                    }//else: continue next request loop
+        MTGRewardVideoAdapter *adapter = [[MTGRewardVideoAdapter alloc] initWithDelegate:self mediationSettings:self.mediationSettings];
+        
+        self.adapter = adapter;
+        
+        [self.adapter getAdWithInfo:adInfo completionHandler:^(BOOL success, NSError * _Nonnull error) {
+            if (success) {
+                [self sendLoadSuccess];
+                *stop = YES;
+            }else{
+                //if the last loop failed
+                if (idx == (infos.count - 1)) {
+                    [self sendLoadFailedWithError:error];
                 }
-                
-                dispatch_group_leave(group);
-            }];
-        });
+                //else: continue next request loop
+            }
+            
+            dispatch_semaphore_signal(sem);
+        }];
+        
+        dispatch_semaphore_wait(sem, DISPATCH_TIME_FOREVER);
     }];
-
+    
     self.loading = NO;
 }
+
 
 - (void)communicatorDidFailWithError:(NSError *)error{
 

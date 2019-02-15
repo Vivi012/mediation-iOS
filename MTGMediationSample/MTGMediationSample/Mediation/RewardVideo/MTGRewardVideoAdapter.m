@@ -26,6 +26,9 @@
 @property (nonatomic, strong) NSDictionary *mediationSettings;
 @property (nonatomic, assign)  BOOL hasExpired;
 
+@property (nonatomic,strong) NSPort *emptyPort;
+@property (nonatomic,assign)  BOOL shouldStopRunning;
+
 @end
 
 @implementation MTGRewardVideoAdapter
@@ -56,7 +59,8 @@
         NSTimeInterval duration = [[adInfo objectForKey:MTG_REWARDVIDEO_TIMEOUT] doubleValue];
         [self startTimeoutTimer:duration];
         
-        [self.rewardedVideoCustomEvent requestRewardedVideoWithCustomEventInfo:adInfo];
+        self.completionHandler = completion;
+//        [self.rewardedVideoCustomEvent requestRewardedVideoWithCustomEventInfo:adInfo];
     } else {
         
         NSError *error = [NSError errorWithDomain:MTGRewardVideoAdsSDKDomain code:MTGRewardVideoAdErrorInvalidCustomEvent userInfo:nil];
@@ -80,22 +84,23 @@
 -(void)dealloc{
 
     [NSObject cancelPreviousPerformRequestsWithTarget:self];
+    
+    _completionHandler = nil;
     // Make sure the custom event isn't released synchronously as objects owned by the custom event
     [self keepObjectAliveForCurrentRunLoopIteration:_rewardedVideoCustomEvent];
 }
 
-- (void)keepObjectAliveForCurrentRunLoopIteration:(id)anObject
-{
+- (void)keepObjectAliveForCurrentRunLoopIteration:(id)anObject{
+
     [self performSelector:@selector(performNoOp:) withObject:anObject afterDelay:0];
 }
 
-- (void)performNoOp:(id)anObject
-{
+- (void)performNoOp:(id)anObject{
     ; // noop
 }
 
-- (MTGRewardVideoCustomEvent *)buildRewardedVideoCustomEventFromCustomClass:(Class)customClass
-{
+- (MTGRewardVideoCustomEvent *)buildRewardedVideoCustomEventFromCustomClass:(Class)customClass{
+
     MTGRewardVideoCustomEvent *customEvent = [[customClass alloc] init];
     
     if (![customEvent isKindOfClass:[MTGRewardVideoCustomEvent class]]) {
@@ -106,33 +111,60 @@
 }
 
 
-- (void)startTimeoutTimer:(NSTimeInterval)duration
-{
+- (void)startTimeoutTimer:(NSTimeInterval)duration{
+
     if (duration < 1) {
         duration = 10;
     }
+
     
-    [self performSelector:@selector(timeout) withObject:nil afterDelay:duration];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(duration * NSEC_PER_SEC)), dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [self timeout];
+    });
+    
+    
+//    NSRunLoop *runLoop = [NSRunLoop currentRunLoop];
+//
+//    if (!_emptyPort) {
+//        _emptyPort = [NSMachPort port];
+//    }
+//    [runLoop addPort:_emptyPort forMode:NSDefaultRunLoopMode];
+//    [runLoop runMode:NSRunLoopCommonModes beforeDate:[NSDate distantFuture]];
+////    [runLoop run];
+//    [self performSelector:@selector(timeout) withObject:nil afterDelay:duration];
+
+    
+//    [self performSelector:@selector(timeout) withObject:nil afterDelay:duration];
+//
+//    NSRunLoop *theRL = [NSRunLoop currentRunLoop];
+//    while (!self.shouldStopRunning ){
+//        NSLog(@"--------------%@",[NSThread currentThread]);
+//        [theRL runMode:NSRunLoopCommonModes beforeDate:[NSDate distantFuture]];
+//    }
 }
 
-- (void)timeout
-{
+- (void)timeout{
+    
+    CFRunLoopStop(CFRunLoopGetCurrent());
+
     self.hasExpired = YES;
     NSError *error = [NSError errorWithDomain:MTGRewardVideoAdsSDKDomain code:MTGRewardVideoAdErrorTimeout userInfo:nil];
     [self sendLoadFailedWithError:error];
+    self.shouldStopRunning = YES;
 }
 
-- (void)didStopLoading
-{
+- (void)didStopLoading{
+
     [NSObject cancelPreviousPerformRequestsWithTarget:self];
 }
 
 - (void)sendLoadFailedWithError:(NSError *)error{
-    
+
     [self didStopLoading];
-    if (_delegate && [_delegate respondsToSelector:@selector(rewardVideoAdDidFailToLoadForAdUnitID:error:)]) {
-        [_delegate rewardVideoAdDidFailToLoadForAdUnitID:self.adUnitID error:error];
+    if (self.completionHandler) {
+        self.completionHandler(NO, error);
     }
+    self.completionHandler = nil;
 }
 
 - (void)sendLoadSuccess{
@@ -142,19 +174,17 @@
     }
 
     [self didStopLoading];
-    if (_delegate && [_delegate respondsToSelector:@selector(rewardVideoAdDidLoadForAdUnitID:)]) {
+    if (self.completionHandler) {
         NSLog([NSString stringWithFormat: @"current unit%@ loadSuccess,   ",self.adUnitID],
-              [NSString stringWithFormat: @"ad network is:%@",self.networkName]
+              [NSString stringWithFormat: @"and ad network is:%@",self.networkName]
               );
-        [_delegate rewardVideoAdDidLoadForAdUnitID:self.adUnitID];
+        self.completionHandler(YES, nil);
     }
+    self.completionHandler = nil;
+
 }
 
 - (void)sendShowFailedWithError:(NSError *)error{
-
-    if (_hasExpired) {
-        return;
-    }
 
     if (_delegate && [_delegate respondsToSelector:@selector(rewardVideoAdDidFailToLoadForAdUnitID:error:)]) {
         [_delegate rewardVideoAdDidFailToLoadForAdUnitID:self.adUnitID error:error];

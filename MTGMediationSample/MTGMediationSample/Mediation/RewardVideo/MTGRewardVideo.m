@@ -11,6 +11,15 @@
 #import "MTGRewardVideoReward.h"
 #import "MTGRewardVideoError.h"
 
+#define INVOKE_IN_MAINTHREAD(code) \
+if ([NSThread isMainThread]) {  \
+    code    \
+}else{  \
+    dispatch_async(dispatch_get_main_queue(), ^{    \
+        code    \
+    }); \
+}
+
 static MTGRewardVideo *gSharedInstance = nil;
 
 @interface MTGRewardVideo()<MTGRewardVideoAdManagerDelegate>
@@ -24,16 +33,19 @@ static MTGRewardVideo *gSharedInstance = nil;
 
 @implementation MTGRewardVideo
 
--(void)setDelegate:(id<MTGRewardVideoDelegate>)delegate{
++ (void)registerRewardVideoDelegate:(id<MTGRewardVideoDelegate>)delegate{
 
-    if (_delegate != delegate) {
-        MTGRewardVideo *sharedInstance = [[self class] sharedInstance];
-        sharedInstance.delegate = delegate;
-        _delegate = delegate;
-    }
+    MTGRewardVideo *sharedInstance = [[self class] sharedInstance];
+    sharedInstance.delegate = delegate;
 }
 
-+ (void)loadRewardVideoAdWithAdUnitID:(NSString *)adUnitID mediationSettings:(NSArray *)mediationSettings{
++ (void)loadRewardVideoAdWithAdUnitID:(NSString *)adUnitID mediationSettings:(NSDictionary *)mediationSettings{
+    INVOKE_IN_MAINTHREAD(
+         [MTGRewardVideo _loadRewardVideoAdWithAdUnitID:adUnitID mediationSettings:mediationSettings];
+     );
+}
+
++ (void)_loadRewardVideoAdWithAdUnitID:(NSString *)adUnitID mediationSettings:(NSDictionary *)mediationSettings{
 
     MTGRewardVideo *sharedInstance = [[self class] sharedInstance];
     
@@ -42,22 +54,25 @@ static MTGRewardVideo *gSharedInstance = nil;
         [sharedInstance rewardVideoAdDidFailToLoadForAdUnitID:adUnitID error:error];
         return;
     }
-    dispatch_async(dispatch_get_main_queue(), ^{
 
-        MTGRewardVideoAdManager *adManager = sharedInstance.rewardedVideoAdManagers[adUnitID];
-        
-        if (!adManager) {
-            adManager = [[MTGRewardVideoAdManager alloc] initWithAdUnitID:adUnitID delegate:sharedInstance];
-            sharedInstance.rewardedVideoAdManagers[adUnitID] = adManager;
-        }
-        adManager.mediationSettings = mediationSettings;
-        [adManager loadRewardedVideoAd];
-
-    });
+    MTGRewardVideoAdManager *adManager = sharedInstance.rewardedVideoAdManagers[adUnitID];
+    
+    if (!adManager) {
+        adManager = [[MTGRewardVideoAdManager alloc] initWithAdUnitID:adUnitID delegate:sharedInstance];
+        sharedInstance.rewardedVideoAdManagers[adUnitID] = adManager;
+    }
+    adManager.mediationSettings = mediationSettings;
+    [adManager loadRewardedVideoAd];
 }
+
 
 + (BOOL)hasAdAvailableForAdUnitID:(NSString *)adUnitID{
 
+    return [MTGRewardVideo _hasAdAvailableForAdUnitID:adUnitID];
+}
+
++ (BOOL)_hasAdAvailableForAdUnitID:(NSString *)adUnitID{
+    
     if (![adUnitID length]) {
         return NO;
     }
@@ -65,44 +80,48 @@ static MTGRewardVideo *gSharedInstance = nil;
     [sharedInstance.lock lock];
     MTGRewardVideoAdManager *adManager = sharedInstance.rewardedVideoAdManagers[adUnitID];
     [sharedInstance.lock unlock];
-
+    
     return [adManager hasAdAvailable];
 }
 
 + (void)presentRewardVideoAdForAdUnitID:(NSString *)adUnitID fromViewController:(UIViewController *)viewController{
     
+    INVOKE_IN_MAINTHREAD(
+         [MTGRewardVideo _presentRewardVideoAdForAdUnitID:adUnitID fromViewController:viewController];
+    );
+
+}
++ (void)_presentRewardVideoAdForAdUnitID:(NSString *)adUnitID fromViewController:(UIViewController *)viewController{
+
     if (![adUnitID length]) {
         NSError *error = [NSError errorWithDomain:MTGRewardVideoAdsSDKDomain code:MTGRewardVideoAdErrorInvalidAdUnitID userInfo:nil];
         [[[self class] sharedInstance] rewardVideoAdDidFailToLoadForAdUnitID:adUnitID error:error];
         return;
     }
-    dispatch_async(dispatch_get_main_queue(), ^{
 
-        MTGRewardVideo *sharedInstance = [[self class] sharedInstance];
+    MTGRewardVideo *sharedInstance = [[self class] sharedInstance];
+    
+    MTGRewardVideoAdManager *adManager = sharedInstance.rewardedVideoAdManagers[adUnitID];
+    
+    if (!adManager) {
+        NSLog(@"The reward video could not be shown: "
+              @"no ads have been loaded for adUnitID: %@", adUnitID);
         
-        MTGRewardVideoAdManager *adManager = sharedInstance.rewardedVideoAdManagers[adUnitID];
+        return;
+    }
+    
+    if (!viewController) {
+        NSLog(@"The reward video could not be shown: "
+                          @"a nil view controller was passed to -presentRewardedVideoAdForAdUnitID:fromViewController:.");
         
-        if (!adManager) {
-            NSLog(@"The reward video could not be shown: "
-                  @"no ads have been loaded for adUnitID: %@", adUnitID);
-            
-            return;
-        }
-        
-        if (!viewController) {
-            NSLog(@"The reward video could not be shown: "
-                              @"a nil view controller was passed to -presentRewardedVideoAdForAdUnitID:fromViewController:.");
-            
-            return;
-        }
-        
-        if (![viewController.view.window isKeyWindow]) {
-            NSLog(@"Attempting to present a rewarded video ad in non-key window. The ad may not render properly.");
-        }
-        
-        [adManager presentRewardedVideoFromViewController:viewController];
-    });
-
+        return;
+    }
+    
+    if (![viewController.view.window isKeyWindow]) {
+        NSLog(@"Attempting to present a rewarded video ad in non-key window. The ad may not render properly.");
+    }
+    
+    [adManager presentRewardedVideoFromViewController:viewController];
 }
 
 #pragma mark - Private
@@ -137,55 +156,84 @@ static MTGRewardVideo *gSharedInstance = nil;
 
 #pragma mark -
 
+
 - (void)rewardVideoAdDidLoadForAdUnitID:(nonnull NSString *)adUnitID {
     
-    if (_delegate && [_delegate respondsToSelector:@selector(rewardVideoAdDidLoadForAdUnitID:)]) {
-        [_delegate rewardVideoAdDidLoadForAdUnitID:adUnitID];
-    }
+    INVOKE_IN_MAINTHREAD(
+         MTGRewardVideo *sharedInstance = [[self class] sharedInstance];
+
+         if (sharedInstance.delegate && [sharedInstance.delegate respondsToSelector:@selector(rewardVideoAdDidLoadForAdUnitID:)]) {
+             [sharedInstance.delegate rewardVideoAdDidLoadForAdUnitID:adUnitID];
+         }
+    );
 }
 
 - (void)rewardVideoAdDidFailToLoadForAdUnitID:(nonnull NSString *)adUnitID error:(nonnull NSError *)error {
 
-    if (_delegate && [_delegate respondsToSelector:@selector(rewardVideoAdDidFailToLoadForAdUnitID:error:)]) {
-        [_delegate rewardVideoAdDidFailToLoadForAdUnitID:adUnitID error:error];
-    }
+    INVOKE_IN_MAINTHREAD(
+         MTGRewardVideo *sharedInstance = [[self class] sharedInstance];
+         
+         if (sharedInstance.delegate && [sharedInstance.delegate respondsToSelector:@selector(rewardVideoAdDidFailToLoadForAdUnitID:error:)]) {
+             [sharedInstance.delegate rewardVideoAdDidFailToLoadForAdUnitID:adUnitID error:error];
+         }
+    );
 }
 
 - (void)rewardVideoAdDidShowForAdUnitID:(nonnull NSString *)adUnitID {
     
-    if (_delegate && [_delegate respondsToSelector:@selector(rewardVideoAdDidPlayForAdUnitID:)]) {
-        [_delegate rewardVideoAdDidPlayForAdUnitID:adUnitID];
-    }
+    INVOKE_IN_MAINTHREAD(
+         MTGRewardVideo *sharedInstance = [[self class] sharedInstance];
+         
+         if (sharedInstance.delegate && [sharedInstance.delegate respondsToSelector:@selector(rewardVideoAdDidPlayForAdUnitID:)]) {
+             [sharedInstance.delegate rewardVideoAdDidPlayForAdUnitID:adUnitID];
+         }
+    );
 }
 
 - (void)rewardVideoAdDidFailToPlayForAdUnitID:(nonnull NSString *)adUnitID error:(nonnull NSError *)error {
 
-    if (_delegate && [_delegate respondsToSelector:@selector(rewardVideoAdDidFailToPlayForAdUnitID:error:)]) {
-        [_delegate rewardVideoAdDidFailToPlayForAdUnitID:adUnitID error:error];
-    }
+    INVOKE_IN_MAINTHREAD(
+         MTGRewardVideo *sharedInstance = [[self class] sharedInstance];
+         
+         if (sharedInstance.delegate && [sharedInstance.delegate respondsToSelector:@selector(rewardVideoAdDidFailToPlayForAdUnitID:error:)]) {
+             [sharedInstance.delegate rewardVideoAdDidFailToPlayForAdUnitID:adUnitID error:error];
+         }
+    );
 }
 
 
 - (void)rewardVideoAdDidReceiveTapEventForAdUnitID:(nonnull NSString *)adUnitID {
     
-    if (_delegate && [_delegate respondsToSelector:@selector(rewardVideoAdDidReceiveTapEventForAdUnitID:)]) {
-        [_delegate rewardVideoAdDidReceiveTapEventForAdUnitID:adUnitID];
-    }
+    INVOKE_IN_MAINTHREAD(
+         MTGRewardVideo *sharedInstance = [[self class] sharedInstance];
+         
+         if (sharedInstance.delegate && [sharedInstance.delegate respondsToSelector:@selector(rewardVideoAdDidReceiveTapEventForAdUnitID:)]) {
+             [sharedInstance.delegate rewardVideoAdDidReceiveTapEventForAdUnitID:adUnitID];
+         }
+    );
 }
 
 
 - (void)rewardVideoAdShouldRewardForAdUnitID:(nonnull NSString *)adUnitID reward:(nonnull MTGRewardVideoReward *)reward {
 
-    if (_delegate && [_delegate respondsToSelector:@selector(rewardVideoAdShouldRewardForAdUnitID:reward:)]) {
-        [_delegate rewardVideoAdShouldRewardForAdUnitID:adUnitID reward:reward];
-    }
+    INVOKE_IN_MAINTHREAD(
+         MTGRewardVideo *sharedInstance = [[self class] sharedInstance];
+         
+         if (sharedInstance.delegate && [sharedInstance.delegate respondsToSelector:@selector(rewardVideoAdShouldRewardForAdUnitID:reward:)]) {
+             [sharedInstance.delegate rewardVideoAdShouldRewardForAdUnitID:adUnitID reward:reward];
+         }
+    );
 }
 
 - (void)rewardVideoAdWillDisappearForAdUnitID:(nonnull NSString *)adUnitID {
 
-    if (_delegate && [_delegate respondsToSelector:@selector(rewardVideoAdWillDisappearForAdUnitID:)]) {
-        [_delegate rewardVideoAdWillDisappearForAdUnitID:adUnitID];
-    }
+    INVOKE_IN_MAINTHREAD(
+         MTGRewardVideo *sharedInstance = [[self class] sharedInstance];
+         
+         if (sharedInstance.delegate && [sharedInstance.delegate respondsToSelector:@selector(rewardVideoAdWillDisappearForAdUnitID:)]) {
+             [sharedInstance.delegate rewardVideoAdWillDisappearForAdUnitID:adUnitID];
+         }
+    );
 }
 
 @end
