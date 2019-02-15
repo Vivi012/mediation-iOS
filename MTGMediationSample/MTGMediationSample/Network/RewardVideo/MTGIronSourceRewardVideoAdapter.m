@@ -21,7 +21,7 @@
 
 - (void)requestRewardedVideoWithCustomEventInfo:(NSDictionary *)info{
     
-    NSString *appKey = [info objectForKey:@"apikey"];
+    NSString *appKey = [info objectForKey:@"appkey"];
     NSString *unitId = [info objectForKey:@"unitid"];
     
     NSString *errorMsg = nil;
@@ -51,7 +51,7 @@
     // After setting the delegates you can go ahead and initialize the SDK.
     [IronSource setUserId:userId];
     
-    if([unitId length] == 0){
+    if([unitId length] == 0 || [unitId isEqualToString:@"is_unitid1"]){
         [IronSource initWithAppKey:appKey];
     }else{
         [IronSource initWithAppKey:appKey adUnits:@[unitId]];
