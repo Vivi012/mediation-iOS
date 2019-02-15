@@ -60,7 +60,9 @@
         [self startTimeoutTimer:duration];
         
         self.completionHandler = completion;
-        [self.rewardedVideoCustomEvent requestRewardedVideoWithCustomEventInfo:adInfo];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.rewardedVideoCustomEvent requestRewardedVideoWithCustomEventInfo:adInfo];
+        });
     } else {
         
         NSError *error = [NSError errorWithDomain:MTGRewardVideoAdsSDKDomain code:MTGRewardVideoAdErrorInvalidCustomEvent userInfo:nil];
@@ -116,6 +118,8 @@
     if (duration < 1) {
         duration = 10;
     }
+    
+    [self performSelector:@selector(timeout) withObject:nil afterDelay:duration];
 
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(duration * NSEC_PER_SEC)), dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -129,38 +133,57 @@
 //        _emptyPort = [NSMachPort port];
 //    }
 //    [runLoop addPort:_emptyPort forMode:NSDefaultRunLoopMode];
-//    [runLoop runMode:NSRunLoopCommonModes beforeDate:[NSDate distantFuture]];
-////    [runLoop run];
+//    [runLoop runMode:NSRunLoopCommonModes beforeDate:[NSDate distantFuture]];//[runLoop run];
 //    [self performSelector:@selector(timeout) withObject:nil afterDelay:duration];
 
     
 //    [self performSelector:@selector(timeout) withObject:nil afterDelay:duration];
-//
 //    NSRunLoop *theRL = [NSRunLoop currentRunLoop];
 //    while (!self.shouldStopRunning ){
 //        NSLog(@"--------------%@",[NSThread currentThread]);
 //        [theRL runMode:NSRunLoopCommonModes beforeDate:[NSDate distantFuture]];
 //    }
+    
+    
+//    NSThread *thread = [[NSThread alloc] initWithTarget:self selector:@selector(runLoop) object:nil];
+//    [thread start];
+//    [self performSelector:@selector(timeout) onThread:thread withObject:nil waitUntilDone:YES];
 }
+
+//- (void)runLoop {
+//
+//        NSLog(@"current thread = %@", [NSThread currentThread]);
+//        NSRunLoop *runLoop = [NSRunLoop currentRunLoop];
+//        if (!self.emptyPort) {
+//            self.emptyPort = [NSMachPort port];
+//        }
+//        [runLoop addPort:self.emptyPort forMode:NSDefaultRunLoopMode];
+//        [runLoop runMode:NSRunLoopCommonModes beforeDate:[NSDate distantFuture]];
+//}
 
 - (void)timeout{
     
-    CFRunLoopStop(CFRunLoopGetCurrent());
-
+//    CFRunLoopStop(CFRunLoopGetCurrent());
+    
     self.hasExpired = YES;
     NSError *error = [NSError errorWithDomain:MTGRewardVideoAdsSDKDomain code:MTGRewardVideoAdErrorTimeout userInfo:nil];
     [self sendLoadFailedWithError:error];
-    self.shouldStopRunning = YES;
+//    self.shouldStopRunning = YES;
+    
+//    CFRunLoopStop(CFRunLoopGetCurrent());
+//    NSThread *thread = [NSThread currentThread];
+//    [thread cancel];
 }
 
 - (void)didStopLoading{
 
-    [NSObject cancelPreviousPerformRequestsWithTarget:self];
+    if (!_hasExpired) {
+        [NSObject cancelPreviousPerformRequestsWithTarget:self];
+    }
 }
 
 - (void)sendLoadFailedWithError:(NSError *)error{
 
-    [self didStopLoading];
     if (self.completionHandler) {
         self.completionHandler(NO, error);
     }
@@ -173,7 +196,6 @@
         return;
     }
 
-    [self didStopLoading];
     if (self.completionHandler) {
         NSLog([NSString stringWithFormat: @"current unit%@ loadSuccess,   ",self.adUnitID],
               [NSString stringWithFormat: @"and ad network is:%@",self.networkName]
@@ -196,10 +218,13 @@
 
 - (void)rewardedVideoDidLoadAdForCustomEvent:(MTGRewardVideoCustomEvent *)customEvent{
     
+    [self didStopLoading];
     [self sendLoadSuccess];
 }
 
 - (void)rewardedVideoDidFailToLoadAdForCustomEvent:(MTGRewardVideoCustomEvent *)customEvent error:(NSError *)error{
+    
+    [self didStopLoading];
     [self sendLoadFailedWithError:error];
 }
 
