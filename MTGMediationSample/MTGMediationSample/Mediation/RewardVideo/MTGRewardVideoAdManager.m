@@ -170,6 +170,9 @@
                 [self sendLoadSuccess];
                 *stop = YES;
             }else{
+                
+                self.adapter = nil;
+
                 //if the last loop failed
                 if (idx == (infos.count - 1)) {
                     [self sendLoadFailedWithError:error];

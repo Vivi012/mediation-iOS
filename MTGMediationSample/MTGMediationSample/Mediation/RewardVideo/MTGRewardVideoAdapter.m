@@ -85,21 +85,21 @@
 
 -(void)dealloc{
 
-    [NSObject cancelPreviousPerformRequestsWithTarget:self];
+//    [NSObject cancelPreviousPerformRequestsWithTarget:self];
     
     _completionHandler = nil;
     // Make sure the custom event isn't released synchronously as objects owned by the custom event
-    [self keepObjectAliveForCurrentRunLoopIteration:_rewardedVideoCustomEvent];
+//    [self keepObjectAliveForCurrentRunLoopIteration:_rewardedVideoCustomEvent];
 }
 
-- (void)keepObjectAliveForCurrentRunLoopIteration:(id)anObject{
-
-    [self performSelector:@selector(performNoOp:) withObject:anObject afterDelay:0];
-}
-
-- (void)performNoOp:(id)anObject{
-    ; // noop
-}
+//- (void)keepObjectAliveForCurrentRunLoopIteration:(id)anObject{
+//
+//    [self performSelector:@selector(performNoOp:) withObject:anObject afterDelay:0];
+//}
+//
+//- (void)performNoOp:(id)anObject{
+//    ; // noop
+//}
 
 - (MTGRewardVideoCustomEvent *)buildRewardedVideoCustomEventFromCustomClass:(Class)customClass{
 
@@ -177,9 +177,9 @@
 
 - (void)didStopLoading{
 
-    if (!_hasExpired) {
-        [NSObject cancelPreviousPerformRequestsWithTarget:self];
-    }
+//    if (!_hasExpired) {
+//        [NSObject cancelPreviousPerformRequestsWithTarget:self];
+//    }
 }
 
 - (void)sendLoadFailedWithError:(NSError *)error{
@@ -196,7 +196,8 @@
         return;
     }
 
-    if (self.completionHandler) {
+    if (self.completionHandler && ![self.completionHandler isEqual:[NSNull null]]) {
+
         NSLog([NSString stringWithFormat: @"current unit%@ loadSuccess,   ",self.adUnitID],
               [NSString stringWithFormat: @"and ad network is:%@",self.networkName]
               );
