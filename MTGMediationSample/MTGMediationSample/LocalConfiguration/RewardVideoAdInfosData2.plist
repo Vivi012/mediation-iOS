@@ -14,7 +14,7 @@
 			<key>timeout</key>
 			<integer>15</integer>
 			<key>placementname</key>
-			<string>placementname2</string>
+			<string>test1</string>
 		</dict>
 		<dict>
 			<key>apikey</key>
