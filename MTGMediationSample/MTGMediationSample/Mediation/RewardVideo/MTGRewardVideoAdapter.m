@@ -27,7 +27,7 @@
 @property (nonatomic, assign)  BOOL hasExpired;
 
 @property (nonatomic,strong) NSPort *emptyPort;
-@property (nonatomic,assign)  BOOL shouldStopRunning;
+
 
 @end
 
@@ -119,9 +119,6 @@
         duration = 10;
     }
     
-    [self performSelector:@selector(timeout) withObject:nil afterDelay:duration];
-
-    
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(duration * NSEC_PER_SEC)), dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [self timeout];
     });
@@ -136,45 +133,24 @@
 //    [runLoop runMode:NSRunLoopCommonModes beforeDate:[NSDate distantFuture]];//[runLoop run];
 //    [self performSelector:@selector(timeout) withObject:nil afterDelay:duration];
 
-    
-//    [self performSelector:@selector(timeout) withObject:nil afterDelay:duration];
-//    NSRunLoop *theRL = [NSRunLoop currentRunLoop];
-//    while (!self.shouldStopRunning ){
-//        NSLog(@"--------------%@",[NSThread currentThread]);
-//        [theRL runMode:NSRunLoopCommonModes beforeDate:[NSDate distantFuture]];
-//    }
-    
-    
-//    NSThread *thread = [[NSThread alloc] initWithTarget:self selector:@selector(runLoop) object:nil];
-//    [thread start];
-//    [self performSelector:@selector(timeout) onThread:thread withObject:nil waitUntilDone:YES];
 }
 
-//- (void)runLoop {
-//
-//        NSLog(@"current thread = %@", [NSThread currentThread]);
-//        NSRunLoop *runLoop = [NSRunLoop currentRunLoop];
-//        if (!self.emptyPort) {
-//            self.emptyPort = [NSMachPort port];
-//        }
-//        [runLoop addPort:self.emptyPort forMode:NSDefaultRunLoopMode];
-//        [runLoop runMode:NSRunLoopCommonModes beforeDate:[NSDate distantFuture]];
-//}
-
 - (void)timeout{
-    
-//    CFRunLoopStop(CFRunLoopGetCurrent());
     
     self.hasExpired = YES;
     NSError *error = [NSError errorWithDomain:MTGRewardVideoAdsSDKDomain code:MTGRewardVideoAdErrorTimeout userInfo:nil];
     [self sendLoadFailedWithError:error];
-//    self.shouldStopRunning = YES;
+}
+
+- (void)cancelPerformSelect{
     
+//    CFRunLoopStop(CFRunLoopGetCurrent());
+
 //    CFRunLoopStop(CFRunLoopGetCurrent());
 //    NSThread *thread = [NSThread currentThread];
 //    [thread cancel];
-}
 
+}
 - (void)didStopLoading{
 
 //    if (!_hasExpired) {
