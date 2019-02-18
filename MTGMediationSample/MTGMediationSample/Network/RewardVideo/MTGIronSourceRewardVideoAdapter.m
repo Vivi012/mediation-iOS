@@ -13,7 +13,7 @@
 
 #define USERID @"demoapp"
 
-@interface MTGIronSourceRewardVideoAdapter () <ISRewardedVideoDelegate>
+@interface MTGIronSourceRewardVideoAdapter () <ISDemandOnlyRewardedVideoDelegate>
 @property (nonatomic, strong) ISPlacementInfo   *rvPlacementInfo;
 @property (nonatomic, assign) NSString *placementName;
 @property (nonatomic, copy) NSString *instanceId;
@@ -50,8 +50,7 @@
     
     [ISSupersonicAdsConfiguration configurations].useClientSideCallbacks = @(YES);
     
-    [IronSource setRewardedVideoDelegate:self];
-    
+    [IronSource setISDemandOnlyRewardedVideoDelegate:self];
     
     
     NSString *userId = [IronSource advertiserId];
@@ -66,7 +65,7 @@
     if([unitId length] == 0 || [unitId isEqualToString:@"is_unitid1"]){
         [IronSource initWithAppKey:appKey];
     }else{
-        [IronSource initWithAppKey:appKey adUnits:@[unitId]];
+        [IronSource initISDemandOnly:appKey adUnits:@[unitId]];
     }
 }
 
@@ -89,8 +88,11 @@
 // This method lets you know whether or not there is a video
 // ready to be presented. It is only after this method is invoked
 // with 'hasAvailableAds' set to 'YES' that you can should 'showRV'.
-- (void)rewardedVideoHasChangedAvailability:(BOOL)available {
+- (void)rewardedVideoHasChangedAvailability:(BOOL)available instanceId:(NSString *)instanceId {
     NSLog(@"%s", __PRETTY_FUNCTION__);
+    
+    //if(![self.instanceId isEqualToString:instanceId])
+    //    return;
 
     if(available){
         [self.delegate rewardedVideoDidLoadAdForCustomEvent:self];
@@ -101,7 +103,7 @@
 }
 
 // This method gets invoked after the user has been rewarded.
-- (void)didReceiveRewardForPlacement:(ISPlacementInfo *)placementInfo {
+- (void)didReceiveRewardForPlacement:(ISPlacementInfo *)placementInfo  instanceId:(NSString *)instanceId {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     self.rvPlacementInfo = placementInfo;
 }
@@ -109,22 +111,23 @@
 // This method gets invoked when there is a problem playing the video.
 // If it does happen, check out 'error' for more information and consult
 // our knowledge center for help.
-- (void)rewardedVideoDidFailToShowWithError:(NSError *)error {
+- (void)rewardedVideoDidFailToShowWithError:(NSError *)error  instanceId:(NSString *)instanceId {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
     [self.delegate rewardVideoAdDidFailToPlayForCustomEvent:self error:error];
 }
 
+
 // This method gets invoked when we take control, but before
 // the video has started playing.
-- (void)rewardedVideoDidOpen {
+- (void)rewardedVideoDidOpen:(NSString *)instanceId  {
     NSLog(@"%s", __PRETTY_FUNCTION__);
 }
 
 // This method gets invoked when we return controlback to your hands.
 // We chose to notify you about rewards here and not in 'didReceiveRewardForPlacement'.
 // This is because reward can occur in the middle of the video.
-- (void)rewardedVideoDidClose {
+- (void)rewardedVideoDidClose:(NSString *)instanceId {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
     [self.delegate rewardVideoAdWillDisappearForCustomEvent:self];
@@ -151,7 +154,7 @@
     NSLog(@"%s", __PRETTY_FUNCTION__);
 }
 
-- (void)didClickRewardedVideo:(ISPlacementInfo *)placementInfo {
+- (void)didClickRewardedVideo:(ISPlacementInfo *)placementInfo  instanceId:(NSString *)instanceId {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
     [self.delegate rewardVideoAdDidReceiveTapEventForCustomEvent:self];
