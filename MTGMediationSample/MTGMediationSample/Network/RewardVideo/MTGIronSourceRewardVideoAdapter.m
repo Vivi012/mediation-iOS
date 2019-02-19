@@ -8,6 +8,7 @@
 
 #import "MTGIronSourceRewardVideoAdapter.h"
 #import "MTGRewardVideoReward.h"
+#import "MTGRewardVideoConstants.h"
 
 #import <IronSource/IronSource.h>
 
@@ -16,15 +17,17 @@
 @interface MTGIronSourceRewardVideoAdapter () <ISRewardedVideoDelegate>
 @property (nonatomic, strong) ISPlacementInfo   *rvPlacementInfo;
 @property (nonatomic, copy) NSString *placementName;
-@property (nonatomic, assign) BOOL isLoadSuccess;
 @end
+
+static BOOL initRewardedVideoSuccessfully = NO;
 
 @implementation MTGIronSourceRewardVideoAdapter
 
 - (void)requestRewardedVideoWithCustomEventInfo:(NSDictionary *)info{
-    self.isLoadSuccess = NO;
+    if (initRewardedVideoSuccessfully)
+        return;
     
-    NSString *appKey = [info objectForKey:@"appkey"];
+    NSString *appKey = [NSString stringWithFormat:@"%@",[info objectForKey:MTG_APPKEY]];
     
     NSString *errorMsg = nil;
     if (!appKey) errorMsg = @"Invalid IRON appKey";
@@ -38,12 +41,10 @@
     }
     
 
-    NSString *unitId = [info objectForKey:@"unitid"];
-    self.placementName = [info objectForKey:@"placementname"];
- 
-    
+    NSString *unitId = [NSString stringWithFormat:@"%@",[info objectForKey:MTG_REWARDVIDEO_UNITID]];
+    self.placementName = [NSString stringWithFormat:@"%@",[info objectForKey:MTG_REWARDVIDEO_PLACEMENTNAME]];
+  
     [IronSource setRewardedVideoDelegate:self];
-    
     
     NSString *userId = [IronSource advertiserId];
     if([userId length] == 0){
@@ -82,19 +83,21 @@
 // ready to be presented. It is only after this method is invoked
 // with 'hasAvailableAds' set to 'YES' that you can should 'showRV'.
 - (void)rewardedVideoHasChangedAvailability:(BOOL)available {
-    if(self.isLoadSuccess)
-        return;
+    
+    if (!initRewardedVideoSuccessfully) {
 
-    if(available){
-        if (self.delegate && [self.delegate respondsToSelector:@selector(rewardedVideoDidLoadAdForCustomEvent:)]) {
-                    [self.delegate rewardedVideoDidLoadAdForCustomEvent:self];
+        if(available){
+            if (self.delegate && [self.delegate respondsToSelector:@selector(rewardedVideoDidLoadAdForCustomEvent:)]) {
+                        [self.delegate rewardedVideoDidLoadAdForCustomEvent:self];
+            }
+        }else{
+            NSError *error = [NSError errorWithDomain:@"com.ironsource" code:-1 userInfo:@{NSLocalizedDescriptionKey : @"rewardvideo load fail"}];
+            if (self.delegate && [self.delegate respondsToSelector:@selector(rewardedVideoDidFailToLoadAdForCustomEvent: error:)]) {
+                [self.delegate rewardedVideoDidFailToLoadAdForCustomEvent:self error:error];
+            }
         }
-        self.isLoadSuccess = YES;
-    }else{
-        NSError *error = [NSError errorWithDomain:@"com.ironsource" code:-1 userInfo:@{NSLocalizedDescriptionKey : @"rewardvideo load fail"}];
-        if (self.delegate && [self.delegate respondsToSelector:@selector(rewardedVideoDidFailToLoadAdForCustomEvent: error:)]) {
-            [self.delegate rewardedVideoDidFailToLoadAdForCustomEvent:self error:error];
-        }
+        
+        initRewardedVideoSuccessfully = YES;
     }
 }
 

@@ -8,6 +8,7 @@
 
 #import "MTGMintegralRewardVideoAdapter.h"
 #import "MTGRewardVideoReward.h"
+#import "MTGRewardVideoConstants.h"
 
 #import <MTGSDK/MTGSDK.h>
 #import <MTGSDKReward/MTGRewardAdManager.h>
@@ -26,9 +27,9 @@
     // The default implementation of this method does nothing. Subclasses must override this method
     // and implement code to load a rewarded video here.
     
-    NSString *appId = [info objectForKey:@"appid"];
-    NSString *appKey = [info objectForKey:@"apikey"];
-    NSString *unitId = [info objectForKey:@"unitid"];
+    NSString *appId = [NSString stringWithFormat:@"%@",[info objectForKey:MTG_APPID]];
+    NSString *appKey = [NSString stringWithFormat:@"%@",[info objectForKey:MTG_APIKEY]];
+    NSString *unitId = [NSString stringWithFormat:@"%@",[info objectForKey:MTG_REWARDVIDEO_UNITID]];
     
     NSString *errorMsg = nil;
     if (!appId) errorMsg = @"Invalid MTG appId";
@@ -46,8 +47,8 @@
     }
     
     self.adUnit = unitId;
-    self.rewardId = [info objectForKey:@"rewardid"];
-    self.userId = [info objectForKey:@"userid"];
+    self.rewardId = [NSString stringWithFormat:@"%@",[info objectForKey:MTG_REWARDVIDEO_REWARDID]];
+    self.userId = [NSString stringWithFormat:@"%@",[info objectForKey:MTG_REWARDVIDEO_USER]];
     
     [[MTGSDK sharedInstance] setAppID:appId ApiKey:appKey];
     [[MTGRewardAdManager sharedInstance] loadVideo:self.adUnit delegate:self];
