@@ -68,15 +68,14 @@ if ([NSThread isMainThread]) {  \
     [self.communicator requestAdUnitInfosWithAdUnit:_adUnitID];
 }
 
-- (BOOL)hasAdAvailable{
-    
+-(BOOL)ready{
+
     if (self.loading) {
         return NO;
     }
     if (!self.adapter) {
         return NO;
     }
-
     return [self.adapter hasAdAvailable];
 }
 
@@ -88,7 +87,7 @@ if ([NSThread isMainThread]) {  \
         [self sendShowFailedWithError:error];
         return;
     }
-    if (![self hasAdAvailable]) {
+    if (![self ready]) {
         NSError *error = [NSError errorWithDomain:MTGInterstitialAdsSDKDomain code:MTGInterstitialAdErrorCurrentUnitIsLoading userInfo:nil];
         [self sendShowFailedWithError:error];
         return;
