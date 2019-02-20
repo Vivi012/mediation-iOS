@@ -31,7 +31,7 @@
 //Interstitial
 + (NSArray *)interstitialAdUnitIds{
     
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"InterstitialAdInfosData" ofType:@"plist"];
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"InterstitialAdInfosData2" ofType:@"plist"];
     NSDictionary *adUnitIdInfos = [NSDictionary dictionaryWithContentsOfFile:path];
     NSArray *adUnitIds = adUnitIdInfos.allKeys;
     return adUnitIds;
@@ -39,7 +39,7 @@
 
 + (NSArray *)interstitialInfosWithAdUnitId:(NSString *)adUnitId{
     
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"InterstitialAdInfosData" ofType:@"plist"];
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"InterstitialAdInfosData2" ofType:@"plist"];
     NSDictionary *adUnitIdInfos = [NSDictionary dictionaryWithContentsOfFile:path];
     
     NSArray *networkInfos = [adUnitIdInfos objectForKey:adUnitId];

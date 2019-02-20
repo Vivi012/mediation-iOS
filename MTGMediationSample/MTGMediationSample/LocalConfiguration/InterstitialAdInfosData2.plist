@@ -8,7 +8,7 @@
 			<key>appkey</key>
 			<string>8545d445</string>
 			<key>classname</key>
-			<string>MTGIronSourceRewardVideoAdapter</string>
+			<string>MTGIronSourceInterstitialAdapter</string>
 			<key>network</key>
 			<string>ironsource</string>
 			<key>timeout</key>
@@ -22,7 +22,7 @@
 			<key>appid</key>
 			<string>92763</string>
 			<key>classname</key>
-			<string>MTGMintegralRewardVideoAdapter</string>
+			<string>MTGMintegralInterstitialAdapter</string>
 			<key>network</key>
 			<string>mintegral</string>
 			<key>timeout</key>

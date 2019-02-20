@@ -7,10 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "MTGInterstitialCustomEvent.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface MTGMintegralInterstitialAdapter : NSObject
+@interface MTGMintegralInterstitialAdapter : MTGInterstitialCustomEvent
 
 @end
 

@@ -59,9 +59,9 @@ static BOOL isRewardedVideoSuccess = NO;
     // After setting the delegates you can go ahead and initialize the SDK.
     [IronSource setUserId:userId];
     
-    if (![IronSourceAdapterHelper isSDKInitialized]) {
+    [IronSource setRewardedVideoDelegate:self];
     
-        [IronSource setRewardedVideoDelegate:self];
+    if (![IronSourceAdapterHelper isSDKInitialized]) { 
         
         if(unitId && [unitId length] != 0 && ![unitId isEqualToString:@"null"]){
             [IronSource initWithAppKey:appKey adUnits:@[unitId]];
