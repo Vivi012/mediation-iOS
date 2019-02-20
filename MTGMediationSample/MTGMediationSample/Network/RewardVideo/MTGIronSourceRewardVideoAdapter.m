@@ -8,6 +8,7 @@
 
 #import "MTGIronSourceRewardVideoAdapter.h"
 #import "MTGRewardVideoReward.h"
+#import "MTGRewardVideoConstants.h"
 
 #import <IronSource/IronSource.h>
 
@@ -15,43 +16,35 @@
 
 @interface MTGIronSourceRewardVideoAdapter () <ISRewardedVideoDelegate>
 @property (nonatomic, strong) ISPlacementInfo   *rvPlacementInfo;
-@property (nonatomic, assign) NSString *placementName;
-@property (nonatomic, copy) NSString *instanceId;
+@property (nonatomic, copy) NSString *placementName;
 @end
+
+static BOOL initRewardedVideoSuccessfully = NO;
 
 @implementation MTGIronSourceRewardVideoAdapter
 
 - (void)requestRewardedVideoWithCustomEventInfo:(NSDictionary *)info{
+    if (initRewardedVideoSuccessfully)
+        return;
     
-    NSString *appKey = [info objectForKey:@"appkey"];
+    NSString *appKey = [NSString stringWithFormat:@"%@",[info objectForKey:MTG_APPKEY]];
     
     NSString *errorMsg = nil;
     if (!appKey) errorMsg = @"Invalid IRON appKey";
     
     if (errorMsg) {
         NSError *error = [NSError errorWithDomain:@"com.ironsource" code:-1 userInfo:@{NSLocalizedDescriptionKey : errorMsg}];
-        [self.delegate rewardedVideoDidFailToLoadAdForCustomEvent:self error:error];
-        
+        if (self.delegate && [self.delegate respondsToSelector:@selector(rewardedVideoDidFailToLoadAdForCustomEvent: error:)]) {
+            [self.delegate rewardedVideoDidFailToLoadAdForCustomEvent:self error:error];
+        }
         return;
     }
     
 
-    NSString *unitId = [info objectForKey:@"unitid"];
-    self.placementName = [info objectForKey:@"placementname"];
- 
-//    self.instanceId = @"0";
-//    if (![[info objectForKey:@"instanceid"] isEqualToString:@""] && [info objectForKey:@"instanceid"] != nil )
-//    {
-//        self.instanceId = [info objectForKey:@"instanceid"];
-//    }
-    
-    //The integrationHelper is used to validate the integration. Remove the integrationHelper before going live!
-    [ISIntegrationHelper validateIntegration];
-    
-    [ISSupersonicAdsConfiguration configurations].useClientSideCallbacks = @(YES);
-    
+    NSString *unitId = [NSString stringWithFormat:@"%@",[info objectForKey:MTG_REWARDVIDEO_UNITID]];
+    self.placementName = [NSString stringWithFormat:@"%@",[info objectForKey:MTG_REWARDVIDEO_PLACEMENTNAME]];
+  
     [IronSource setRewardedVideoDelegate:self];
-    
     
     NSString *userId = [IronSource advertiserId];
     if([userId length] == 0){
@@ -90,19 +83,27 @@
 // ready to be presented. It is only after this method is invoked
 // with 'hasAvailableAds' set to 'YES' that you can should 'showRV'.
 - (void)rewardedVideoHasChangedAvailability:(BOOL)available {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    
+    if (!initRewardedVideoSuccessfully) {
 
-    if(available){
-        [self.delegate rewardedVideoDidLoadAdForCustomEvent:self];
-    }else{
-        NSError *error = [NSError errorWithDomain:@"com.ironsource" code:-1 userInfo:@{NSLocalizedDescriptionKey : @"rewardvideo load fail"}];
-        [self.delegate rewardedVideoDidFailToLoadAdForCustomEvent:self error:error];
+        if(available){
+            if (self.delegate && [self.delegate respondsToSelector:@selector(rewardedVideoDidLoadAdForCustomEvent:)]) {
+                        [self.delegate rewardedVideoDidLoadAdForCustomEvent:self];
+            }
+        }else{
+            NSError *error = [NSError errorWithDomain:@"com.ironsource" code:-1 userInfo:@{NSLocalizedDescriptionKey : @"rewardvideo load fail"}];
+            if (self.delegate && [self.delegate respondsToSelector:@selector(rewardedVideoDidFailToLoadAdForCustomEvent: error:)]) {
+                [self.delegate rewardedVideoDidFailToLoadAdForCustomEvent:self error:error];
+            }
+        }
+        
+        initRewardedVideoSuccessfully = YES;
     }
 }
 
 // This method gets invoked after the user has been rewarded.
 - (void)didReceiveRewardForPlacement:(ISPlacementInfo *)placementInfo {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    
     self.rvPlacementInfo = placementInfo;
 }
 
@@ -110,31 +111,34 @@
 // If it does happen, check out 'error' for more information and consult
 // our knowledge center for help.
 - (void)rewardedVideoDidFailToShowWithError:(NSError *)error {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
     
-    [self.delegate rewardVideoAdDidFailToPlayForCustomEvent:self error:error];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(rewardVideoAdDidFailToPlayForCustomEvent: error:)]) {
+        [self.delegate rewardVideoAdDidFailToPlayForCustomEvent:self error:error];
+    }
 }
 
 
 // This method gets invoked when we take control, but before
 // the video has started playing.
 - (void)rewardedVideoDidOpen{
-    NSLog(@"%s", __PRETTY_FUNCTION__);
 }
 
 // This method gets invoked when we return controlback to your hands.
 // We chose to notify you about rewards here and not in 'didReceiveRewardForPlacement'.
 // This is because reward can occur in the middle of the video.
 - (void)rewardedVideoDidClose{
-    NSLog(@"%s", __PRETTY_FUNCTION__);
     
-    [self.delegate rewardVideoAdWillDisappearForCustomEvent:self];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(rewardVideoAdWillDisappearForCustomEvent:)]) {
+        [self.delegate rewardVideoAdWillDisappearForCustomEvent:self];
+    }
     
     if (self.rvPlacementInfo) {
      
         MTGRewardVideoReward *reward = [[MTGRewardVideoReward alloc] initWithCurrencyType:self.rvPlacementInfo.rewardName amount:self.rvPlacementInfo.rewardAmount];
     
-        [self.delegate rewardVideoAdShouldRewardForCustomEvent:self reward:reward];
+        if (self.delegate && [self.delegate respondsToSelector:@selector(rewardVideoAdShouldRewardForCustomEvent: reward:)]) {
+            [self.delegate rewardVideoAdShouldRewardForCustomEvent:self reward:reward];
+        }
         
         self.rvPlacementInfo = nil;
     }
@@ -142,20 +146,21 @@
 
 // This method gets invoked when the video has started playing.
 - (void)rewardedVideoDidStart {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
     
-    [self.delegate rewardVideoAdDidShowForCustomEvent:self];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(rewardVideoAdDidShowForCustomEvent:)]) {
+        [self.delegate rewardVideoAdDidShowForCustomEvent:self];
+    }
 }
 
 // This method gets invoked when the video has stopped playing.
 - (void)rewardedVideoDidEnd {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
 }
 
 - (void)didClickRewardedVideo:(ISPlacementInfo *)placementInfo{
-    NSLog(@"%s", __PRETTY_FUNCTION__);
     
-    [self.delegate rewardVideoAdDidReceiveTapEventForCustomEvent:self];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(rewardVideoAdDidReceiveTapEventForCustomEvent:)]) {
+        [self.delegate rewardVideoAdDidReceiveTapEventForCustomEvent:self];
+    }
 }
 
 

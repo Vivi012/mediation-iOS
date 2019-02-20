@@ -8,6 +8,7 @@
 
 #import "MTGMintegralRewardVideoAdapter.h"
 #import "MTGRewardVideoReward.h"
+#import "MTGRewardVideoConstants.h"
 
 #import <MTGSDK/MTGSDK.h>
 #import <MTGSDKReward/MTGRewardAdManager.h>
@@ -16,6 +17,7 @@
 
 @property (nonatomic, copy) NSString *adUnit;
 @property (nonatomic, copy) NSString *rewardId;
+@property (nonatomic, copy) NSString *userId;
 
 @end
 
@@ -25,9 +27,9 @@
     // The default implementation of this method does nothing. Subclasses must override this method
     // and implement code to load a rewarded video here.
     
-    NSString *appId = [info objectForKey:@"appid"];
-    NSString *appKey = [info objectForKey:@"apikey"];
-    NSString *unitId = [info objectForKey:@"unitid"];
+    NSString *appId = [NSString stringWithFormat:@"%@",[info objectForKey:MTG_APPID]];
+    NSString *appKey = [NSString stringWithFormat:@"%@",[info objectForKey:MTG_APIKEY]];
+    NSString *unitId = [NSString stringWithFormat:@"%@",[info objectForKey:MTG_REWARDVIDEO_UNITID]];
     
     NSString *errorMsg = nil;
     if (!appId) errorMsg = @"Invalid MTG appId";
@@ -36,13 +38,17 @@
     
     if (errorMsg) {
         NSError *error = [NSError errorWithDomain:@"com.mintegral" code:-1 userInfo:@{NSLocalizedDescriptionKey : errorMsg}];
-        [self.delegate rewardedVideoDidFailToLoadAdForCustomEvent:self error:error];
-         
+        
+        if (self.delegate && [self.delegate respondsToSelector:@selector(rewardedVideoDidFailToLoadAdForCustomEvent: error:)]) {
+            [self.delegate rewardedVideoDidFailToLoadAdForCustomEvent:self error:error];
+        }
+        
         return;
     }
     
     self.adUnit = unitId;
-    self.rewardId = [info objectForKey:@"rewardid"]; 
+    self.rewardId = [NSString stringWithFormat:@"%@",[info objectForKey:MTG_REWARDVIDEO_REWARDID]];
+    self.userId = [NSString stringWithFormat:@"%@",[info objectForKey:MTG_REWARDVIDEO_USER]];
     
     [[MTGSDK sharedInstance] setAppID:appId ApiKey:appKey];
     [[MTGRewardAdManager sharedInstance] loadVideo:self.adUnit delegate:self];
@@ -62,15 +68,17 @@
     
     if ([self hasAdAvailable]) {
         
-        NSString *customerId = @"";
-        
         if ([[MTGRewardAdManager sharedInstance] respondsToSelector:@selector(showVideo:withRewardId:userId:delegate:viewController:)]) {
-            [[MTGRewardAdManager sharedInstance] showVideo:self.adUnit withRewardId:self.rewardId userId:customerId delegate:self viewController:viewController];
+            [[MTGRewardAdManager sharedInstance] showVideo:self.adUnit withRewardId:self.rewardId userId:self.userId delegate:self viewController:viewController];
         }
         
     } else {
         NSError *error = [NSError errorWithDomain:@"com.mintegral" code:-1 userInfo:@{NSLocalizedDescriptionKey : @"loadFail"}];
-        [self.delegate rewardedVideoDidFailToLoadAdForCustomEvent:self error:error];
+        
+            if (self.delegate && [self.delegate respondsToSelector:@selector(rewardedVideoDidFailToLoadAdForCustomEvent: error:)]) {
+                [self.delegate rewardedVideoDidFailToLoadAdForCustomEvent:self error:error];
+                
+            }
     }
 }
 
@@ -84,7 +92,7 @@
  */
 - (void)onVideoAdLoadSuccess:(nullable NSString *)unitId{
     
-    if ([self hasAdAvailable]) {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(rewardedVideoDidLoadAdForCustomEvent:)]) {
         [self.delegate rewardedVideoDidLoadAdForCustomEvent:self];
     }
 }
@@ -97,7 +105,9 @@
  */
 - (void)onVideoAdLoadFailed:(nullable NSString *)unitId error:(nonnull NSError *)error{
     
-    [self.delegate rewardedVideoDidFailToLoadAdForCustomEvent:self error:error];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(rewardedVideoDidFailToLoadAdForCustomEvent: error:)]) {
+        [self.delegate rewardedVideoDidFailToLoadAdForCustomEvent:self error:error];
+    }
 }
 
 /**
@@ -107,7 +117,9 @@
  */
 - (void)onVideoAdShowSuccess:(nullable NSString *)unitId{
     
-    [self.delegate rewardVideoAdDidShowForCustomEvent:self];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(rewardVideoAdDidShowForCustomEvent:)]) {
+        [self.delegate rewardVideoAdDidShowForCustomEvent:self];
+    }
 }
 
 /**
@@ -118,7 +130,10 @@
  */
 - (void)onVideoAdShowFailed:(nullable NSString *)unitId withError:(nonnull NSError *)error{
     
-    [self.delegate rewardVideoAdDidFailToPlayForCustomEvent:self error:error];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(rewardVideoAdDidFailToPlayForCustomEvent: error:)]) {
+        [self.delegate rewardVideoAdDidFailToPlayForCustomEvent:self error:error];
+        
+    }
 }
 
 /**
@@ -128,7 +143,9 @@
  */
 - (void)onVideoAdClicked:(nullable NSString *)unitId{
     
-    [self.delegate rewardVideoAdDidReceiveTapEventForCustomEvent:self];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(rewardVideoAdDidReceiveTapEventForCustomEvent: )]) {
+        [self.delegate rewardVideoAdDidReceiveTapEventForCustomEvent:self];
+    }
 }
 
 /**
@@ -139,8 +156,10 @@
  *  @param rewardInfo  - the rewardInfo object containing an array of reward objects that should be given to your user.
  */
 - (void)onVideoAdDismissed:(nullable NSString *)unitId withConverted:(BOOL)converted withRewardInfo:(nullable MTGRewardAdInfo *)rewardInfo{
-     
-    [self.delegate rewardVideoAdWillDisappearForCustomEvent:self];
+    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(rewardVideoAdWillDisappearForCustomEvent: )]) {
+            [self.delegate rewardVideoAdWillDisappearForCustomEvent:self];
+    }
     
     if (!converted || !rewardInfo) {
         return;
@@ -148,7 +167,9 @@
     
     MTGRewardVideoReward *reward = [[MTGRewardVideoReward alloc] initWithCurrencyType:rewardInfo.rewardName amount:[NSNumber numberWithInteger:rewardInfo.rewardAmount]];
     
-    [self.delegate rewardVideoAdShouldRewardForCustomEvent:self reward:reward];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(rewardVideoAdShouldRewardForCustomEvent: reward:)]) {
+        [self.delegate rewardVideoAdShouldRewardForCustomEvent:self reward:reward];
+    }
 }
 
 
