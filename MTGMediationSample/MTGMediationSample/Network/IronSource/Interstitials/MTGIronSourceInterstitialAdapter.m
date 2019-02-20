@@ -54,6 +54,7 @@
             [IronSource initWithAppKey:appKey];
         }
         
+        [IronSourceAdapterHelper sdkInitialized];
     }
     
     [IronSource loadInterstitial];

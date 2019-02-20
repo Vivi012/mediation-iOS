@@ -20,7 +20,7 @@
 @property (nonatomic, copy) NSString *placementName;
 @end
 
-static BOOL isRewardedVideoSuccess = NO;
+static BOOL isRewardedVideoSuccess = YES;
 
 @implementation MTGIronSourceRewardVideoAdapter
 
@@ -70,7 +70,6 @@ static BOOL isRewardedVideoSuccess = NO;
         }
         
     }else{
-        
         if(isRewardedVideoSuccess){
             if (self.delegate && [self.delegate respondsToSelector:@selector(rewardedVideoDidLoadAdForCustomEvent:)]) {
                 [self.delegate rewardedVideoDidLoadAdForCustomEvent:self];
