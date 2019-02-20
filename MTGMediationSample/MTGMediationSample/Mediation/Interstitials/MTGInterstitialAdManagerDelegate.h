@@ -8,10 +8,17 @@
 
 #import <Foundation/Foundation.h>
 
-NS_ASSUME_NONNULL_BEGIN
+@class MTGInterstitialAdManager;
+@protocol MTGInterstitialAdManagerDelegate <NSObject>
 
-@interface MTGInterstitialAdManagerDelegate : NSObject
+
+- (void)managerDidLoadInterstitial:(MTGInterstitialAdManager *)manager;
+- (void)manager:(MTGInterstitialAdManager *)manager didFailToLoadInterstitialWithError:(NSError *)error;
+- (void)managerDidPresentInterstitial:(MTGInterstitialAdManager *)manager;
+- (void)managerDidFailToPresentInterstitial:(MTGInterstitialAdManager *)manager;
+- (void)managerWillDismissInterstitial:(MTGInterstitialAdManager *)manager;
+- (void)managerDidReceiveTapEventFromInterstitial:(MTGInterstitialAdManager *)manager;
+
 
 @end
 
-NS_ASSUME_NONNULL_END

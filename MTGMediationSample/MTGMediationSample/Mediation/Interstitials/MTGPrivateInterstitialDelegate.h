@@ -10,7 +10,17 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface MTGPrivateInterstitialDelegate : NSObject
+
+@protocol MTGPrivateInnerInterstitialDelegate <NSObject>
+
+
+- (void)didLoadInterstitial;
+- (void)didFailToLoadInterstitialWithError:(NSError *)error;
+- (void)didPresentInterstitial;
+- (void)didFailToPresentInterstitialWithError:(NSError *)error;
+- (void)willDismissInterstitial;
+- (void)didReceiveTapEventFromInterstitial;
+
 
 @end
 
