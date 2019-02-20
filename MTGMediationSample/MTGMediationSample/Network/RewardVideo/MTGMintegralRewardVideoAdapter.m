@@ -27,9 +27,18 @@
     // The default implementation of this method does nothing. Subclasses must override this method
     // and implement code to load a rewarded video here.
     
-    NSString *appId = [NSString stringWithFormat:@"%@",[info objectForKey:MTG_APPID]];
-    NSString *appKey = [NSString stringWithFormat:@"%@",[info objectForKey:MTG_APIKEY]];
-    NSString *unitId = [NSString stringWithFormat:@"%@",[info objectForKey:MTG_REWARDVIDEO_UNITID]];
+    NSString *appId;
+    NSString *appKey;
+    NSString *unitId;
+    if([info objectForKey:MTG_APPID]){
+        appId = [NSString stringWithFormat:@"%@",[info objectForKey:MTG_APPID]];
+    }
+    if([info objectForKey:MTG_APIKEY]){
+        appKey = [NSString stringWithFormat:@"%@",[info objectForKey:MTG_APIKEY]];
+    }
+    if([info objectForKey:MTG_REWARDVIDEO_UNITID]){
+        unitId = [NSString stringWithFormat:@"%@",[info objectForKey:MTG_REWARDVIDEO_UNITID]];
+    }
     
     NSString *errorMsg = nil;
     if (!appId) errorMsg = @"Invalid MTG appId";
@@ -47,8 +56,13 @@
     }
     
     self.adUnit = unitId;
-    self.rewardId = [NSString stringWithFormat:@"%@",[info objectForKey:MTG_REWARDVIDEO_REWARDID]];
-    self.userId = [NSString stringWithFormat:@"%@",[info objectForKey:MTG_REWARDVIDEO_USER]];
+    if([info objectForKey:MTG_REWARDVIDEO_REWARDID]){
+        self.rewardId = [NSString stringWithFormat:@"%@",[info objectForKey:MTG_REWARDVIDEO_REWARDID]];
+    }
+    if([info objectForKey:MTG_REWARDVIDEO_USER]){
+        self.userId = [NSString stringWithFormat:@"%@",[info objectForKey:MTG_REWARDVIDEO_USER]];
+    }
+    
     
     [[MTGSDK sharedInstance] setAppID:appId ApiKey:appKey];
     [[MTGRewardAdManager sharedInstance] loadVideo:self.adUnit delegate:self];
