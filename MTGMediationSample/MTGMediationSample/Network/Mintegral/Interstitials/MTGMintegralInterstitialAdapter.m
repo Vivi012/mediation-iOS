@@ -74,9 +74,9 @@ static BOOL isInterstitialSuccess = NO;
 
 - (BOOL)hasAdAvailable{
     if(isInterstitialSuccess){
-        long curTime = [[NSDate date] timeIntervalSince1970] * 1000;
+        long curTime = [[NSDate date] timeIntervalSince1970] ;
         long tempTime = curTime - self.lastLoadTime;
-        if( tempTime > 3600 * 1000 ){
+        if( tempTime > 3600  ){
             isInterstitialSuccess = NO;
         }
     }
@@ -98,7 +98,7 @@ static BOOL isInterstitialSuccess = NO;
 - (void)onInterstitialVideoLoadSuccess:(MTGInterstitialVideoAdManager *_Nonnull)adManager
 {
     isInterstitialSuccess = YES;
-    self.lastLoadTime = [[NSDate date] timeIntervalSince1970] * 1000;
+    self.lastLoadTime = [[NSDate date] timeIntervalSince1970] ;
     if (self.delegate && [self.delegate respondsToSelector:@selector(didLoadInterstitial)]) {
         [self.delegate didLoadInterstitial];
     }
