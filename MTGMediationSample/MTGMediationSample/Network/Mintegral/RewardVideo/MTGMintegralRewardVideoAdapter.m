@@ -9,6 +9,7 @@
 #import "MTGMintegralRewardVideoAdapter.h"
 #import "MTGRewardVideoReward.h"
 #import "MTGRewardVideoConstants.h"
+#import "MintegralAdapterHelper.h"
 
 #import <MTGSDK/MTGSDK.h>
 #import <MTGSDKReward/MTGRewardAdManager.h>
@@ -63,8 +64,13 @@
         self.userId = [NSString stringWithFormat:@"%@",[info objectForKey:MTG_REWARDVIDEO_USER]];
     }
     
+    if (![MintegralAdapterHelper isSDKInitialized]) {
+        
+        [[MTGSDK sharedInstance] setAppID:appId ApiKey:appKey];
+        [MintegralAdapterHelper sdkInitialized];
+    }
     
-    [[MTGSDK sharedInstance] setAppID:appId ApiKey:appKey];
+    
     [[MTGRewardAdManager sharedInstance] loadVideo:self.adUnit delegate:self];
     
 }

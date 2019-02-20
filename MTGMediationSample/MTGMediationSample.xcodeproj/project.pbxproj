@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		996A1453221D21F400378988 /* MintegralAdapterHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 996A1452221D21F400378988 /* MintegralAdapterHelper.m */; };
+		996A1454221D21F400378988 /* MintegralAdapterHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 996A1452221D21F400378988 /* MintegralAdapterHelper.m */; };
+		996A1455221D21F400378988 /* MintegralAdapterHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 996A1452221D21F400378988 /* MintegralAdapterHelper.m */; };
+		996A1458221D221900378988 /* IronSourceAdapterHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 996A1457221D221900378988 /* IronSourceAdapterHelper.m */; };
+		996A1459221D221900378988 /* IronSourceAdapterHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 996A1457221D221900378988 /* IronSourceAdapterHelper.m */; };
+		996A145A221D221900378988 /* IronSourceAdapterHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 996A1457221D221900378988 /* IronSourceAdapterHelper.m */; };
 		99A24F8C2212AC1000318FE3 /* MTGMintegralInterstitialAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 99A24F8B2212AC1000318FE3 /* MTGMintegralInterstitialAdapter.m */; };
 		99A24F8D2212AC1000318FE3 /* MTGMintegralInterstitialAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 99A24F8B2212AC1000318FE3 /* MTGMintegralInterstitialAdapter.m */; };
 		99A24F8E2212AC1000318FE3 /* MTGMintegralInterstitialAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 99A24F8B2212AC1000318FE3 /* MTGMintegralInterstitialAdapter.m */; };
@@ -88,6 +94,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		996A1451221D21F400378988 /* MintegralAdapterHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MintegralAdapterHelper.h; sourceTree = "<group>"; };
+		996A1452221D21F400378988 /* MintegralAdapterHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MintegralAdapterHelper.m; sourceTree = "<group>"; };
+		996A1456221D221900378988 /* IronSourceAdapterHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IronSourceAdapterHelper.h; sourceTree = "<group>"; };
+		996A1457221D221900378988 /* IronSourceAdapterHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IronSourceAdapterHelper.m; sourceTree = "<group>"; };
 		99A24F8A2212AC1000318FE3 /* MTGMintegralInterstitialAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MTGMintegralInterstitialAdapter.h; sourceTree = "<group>"; };
 		99A24F8B2212AC1000318FE3 /* MTGMintegralInterstitialAdapter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MTGMintegralInterstitialAdapter.m; sourceTree = "<group>"; };
 		99A24F8F2212AC2600318FE3 /* MTGIronSourceInterstitialAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MTGIronSourceInterstitialAdapter.h; sourceTree = "<group>"; };
@@ -222,13 +232,60 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		99A24F892212ABEC00318FE3 /* Interstitials */ = {
+		996A144A221D201000378988 /* Mintegral */ = {
+			isa = PBXGroup;
+			children = (
+				996A144F221D205C00378988 /* Interstitials */,
+				996A144E221D205700378988 /* RewardVideo */,
+				996A1451221D21F400378988 /* MintegralAdapterHelper.h */,
+				996A1452221D21F400378988 /* MintegralAdapterHelper.m */,
+			);
+			path = Mintegral;
+			sourceTree = "<group>";
+		};
+		996A144B221D201F00378988 /* IronSource */ = {
+			isa = PBXGroup;
+			children = (
+				996A144D221D205000378988 /* RewardVideo */,
+				996A144C221D204500378988 /* Interstitials */,
+				996A1456221D221900378988 /* IronSourceAdapterHelper.h */,
+				996A1457221D221900378988 /* IronSourceAdapterHelper.m */,
+			);
+			path = IronSource;
+			sourceTree = "<group>";
+		};
+		996A144C221D204500378988 /* Interstitials */ = {
+			isa = PBXGroup;
+			children = (
+				99A24F8F2212AC2600318FE3 /* MTGIronSourceInterstitialAdapter.h */,
+				99A24F902212AC2600318FE3 /* MTGIronSourceInterstitialAdapter.m */,
+			);
+			path = Interstitials;
+			sourceTree = "<group>";
+		};
+		996A144D221D205000378988 /* RewardVideo */ = {
+			isa = PBXGroup;
+			children = (
+				CAAD3D2121F71E06007EF61B /* MTGIronSourceRewardVideoAdapter.h */,
+				CAAD3D2021F71E06007EF61B /* MTGIronSourceRewardVideoAdapter.m */,
+			);
+			path = RewardVideo;
+			sourceTree = "<group>";
+		};
+		996A144E221D205700378988 /* RewardVideo */ = {
+			isa = PBXGroup;
+			children = (
+				CAAD3D2221F71E06007EF61B /* MTGMintegralRewardVideoAdapter.h */,
+				CAAD3D1F21F71E06007EF61B /* MTGMintegralRewardVideoAdapter.m */,
+			);
+			path = RewardVideo;
+			sourceTree = "<group>";
+		};
+		996A144F221D205C00378988 /* Interstitials */ = {
 			isa = PBXGroup;
 			children = (
 				99A24F8A2212AC1000318FE3 /* MTGMintegralInterstitialAdapter.h */,
 				99A24F8B2212AC1000318FE3 /* MTGMintegralInterstitialAdapter.m */,
-				99A24F8F2212AC2600318FE3 /* MTGIronSourceInterstitialAdapter.h */,
-				99A24F902212AC2600318FE3 /* MTGIronSourceInterstitialAdapter.m */,
 			);
 			path = Interstitials;
 			sourceTree = "<group>";
@@ -358,9 +415,9 @@
 		CAAD3D0F21F5978B007EF61B /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				996A144B221D201F00378988 /* IronSource */,
+				996A144A221D201000378988 /* Mintegral */,
 				99A24F952212C72600318FE3 /* Sdk */,
-				99A24F892212ABEC00318FE3 /* Interstitials */,
-				CAAD3D1E21F71E06007EF61B /* RewardVideo */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -374,17 +431,6 @@
 				CAAD3D1121F5978B007EF61B /* RewardVideoAdInfosData.plist */,
 			);
 			path = LocalConfiguration;
-			sourceTree = "<group>";
-		};
-		CAAD3D1E21F71E06007EF61B /* RewardVideo */ = {
-			isa = PBXGroup;
-			children = (
-				CAAD3D2121F71E06007EF61B /* MTGIronSourceRewardVideoAdapter.h */,
-				CAAD3D2021F71E06007EF61B /* MTGIronSourceRewardVideoAdapter.m */,
-				CAAD3D2221F71E06007EF61B /* MTGMintegralRewardVideoAdapter.h */,
-				CAAD3D1F21F71E06007EF61B /* MTGMintegralRewardVideoAdapter.m */,
-			);
-			path = RewardVideo;
 			sourceTree = "<group>";
 		};
 		CAAD3D2621F71E0E007EF61B /* RewardVideo */ = {
@@ -565,6 +611,7 @@
 				CAAD3D2421F71E06007EF61B /* MTGMintegralRewardVideoAdapter.m in Sources */,
 				99A24F912212AC2600318FE3 /* MTGIronSourceInterstitialAdapter.m in Sources */,
 				CAAD3D3C21F722AA007EF61B /* MTGMediationManager.m in Sources */,
+				996A1458221D221900378988 /* IronSourceAdapterHelper.m in Sources */,
 				CAAD3D5C21F9682E007EF61B /* MTGRewardVideoViewController.m in Sources */,
 				CACE7F52221BAE070074A8BB /* MTGInterstitialAdapter.m in Sources */,
 				CA0E89ED221D09BB00F45C14 /* MTGInterstitialAdServerCommunicator.m in Sources */,
@@ -585,6 +632,7 @@
 				CACE7F59221BCD280074A8BB /* MTGInterstitialCustomEvent.m in Sources */,
 				CA2556F722142124005FF563 /* MTGRewardVideoError.m in Sources */,
 				CAAD3D3921F71E0E007EF61B /* MTGRewardVideo.m in Sources */,
+				996A1453221D21F400378988 /* MintegralAdapterHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -595,6 +643,8 @@
 				99A24F922212AC2600318FE3 /* MTGIronSourceInterstitialAdapter.m in Sources */,
 				99A24F8D2212AC1000318FE3 /* MTGMintegralInterstitialAdapter.m in Sources */,
 				CA83AFC921F064C700655A95 /* MTGMediationSampleTests.m in Sources */,
+				996A1459221D221900378988 /* IronSourceAdapterHelper.m in Sources */,
+				996A1454221D21F400378988 /* MintegralAdapterHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -605,6 +655,8 @@
 				99A24F932212AC2600318FE3 /* MTGIronSourceInterstitialAdapter.m in Sources */,
 				99A24F8E2212AC1000318FE3 /* MTGMintegralInterstitialAdapter.m in Sources */,
 				CA83AFD421F064C700655A95 /* MTGMediationSampleUITests.m in Sources */,
+				996A145A221D221900378988 /* IronSourceAdapterHelper.m in Sources */,
+				996A1455221D21F400378988 /* MintegralAdapterHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
