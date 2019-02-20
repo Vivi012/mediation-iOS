@@ -24,10 +24,17 @@ static BOOL initRewardedVideoSuccessfully = NO;
 @implementation MTGIronSourceRewardVideoAdapter
 
 - (void)requestRewardedVideoWithCustomEventInfo:(NSDictionary *)info{
-    if (initRewardedVideoSuccessfully)
+    if (initRewardedVideoSuccessfully){
+        if (self.delegate && [self.delegate respondsToSelector:@selector(rewardedVideoDidLoadAdForCustomEvent:)]) {
+            [self.delegate rewardedVideoDidLoadAdForCustomEvent:self];
+        }
         return;
+    }
     
-    NSString *appKey = [NSString stringWithFormat:@"%@",[info objectForKey:MTG_APPKEY]];
+    NSString *appKey;
+    if([info objectForKey:MTG_APPKEY]){
+       appKey = [NSString stringWithFormat:@"%@",[info objectForKey:MTG_APPKEY]];
+    } 
     
     NSString *errorMsg = nil;
     if (!appKey) errorMsg = @"Invalid IRON appKey";
@@ -40,9 +47,13 @@ static BOOL initRewardedVideoSuccessfully = NO;
         return;
     }
     
-
-    NSString *unitId = [NSString stringWithFormat:@"%@",[info objectForKey:MTG_REWARDVIDEO_UNITID]];
-    self.placementName = [NSString stringWithFormat:@"%@",[info objectForKey:MTG_REWARDVIDEO_PLACEMENTNAME]];
+    NSString *unitId;
+    if([info objectForKey:MTG_REWARDVIDEO_UNITID]){
+        unitId = [NSString stringWithFormat:@"%@",[info objectForKey:MTG_REWARDVIDEO_UNITID]];
+    }
+    if([info objectForKey:MTG_REWARDVIDEO_PLACEMENTNAME]){
+        self.placementName = [NSString stringWithFormat:@"%@",[info objectForKey:MTG_REWARDVIDEO_PLACEMENTNAME]];
+    }
   
     [IronSource setRewardedVideoDelegate:self];
     
@@ -55,10 +66,10 @@ static BOOL initRewardedVideoSuccessfully = NO;
     // After setting the delegates you can go ahead and initialize the SDK.
     [IronSource setUserId:userId];
     
-    if([unitId length] == 0){
-        [IronSource initWithAppKey:appKey];
-    }else{
+    if(unitId && [unitId length] != 0 && [unitId isEqualToString:@"null"]){
         [IronSource initWithAppKey:appKey adUnits:@[unitId]];
+    }else{
+        [IronSource initWithAppKey:appKey];
     }
 }
 
@@ -70,10 +81,10 @@ static BOOL initRewardedVideoSuccessfully = NO;
 
 - (void)presentRewardedVideoFromViewController:(UIViewController *)viewController{
     
-    if ([self.placementName length] == 0) {
-        [IronSource showRewardedVideoWithViewController:viewController];
-    } else {
+    if (self.placementName && [self.placementName length] != 0) {
         [IronSource showRewardedVideoWithViewController:viewController placement:self.placementName];
+    } else {
+        [IronSource showRewardedVideoWithViewController:viewController];
     }
 }
 
@@ -121,6 +132,9 @@ static BOOL initRewardedVideoSuccessfully = NO;
 // This method gets invoked when we take control, but before
 // the video has started playing.
 - (void)rewardedVideoDidOpen{
+    if (self.delegate && [self.delegate respondsToSelector:@selector(rewardVideoAdDidShowForCustomEvent:)]) {
+        [self.delegate rewardVideoAdDidShowForCustomEvent:self];
+    }
 }
 
 // This method gets invoked when we return controlback to your hands.
@@ -146,10 +160,6 @@ static BOOL initRewardedVideoSuccessfully = NO;
 
 // This method gets invoked when the video has started playing.
 - (void)rewardedVideoDidStart {
-    
-    if (self.delegate && [self.delegate respondsToSelector:@selector(rewardVideoAdDidShowForCustomEvent:)]) {
-        [self.delegate rewardVideoAdDidShowForCustomEvent:self];
-    }
 }
 
 // This method gets invoked when the video has stopped playing.
