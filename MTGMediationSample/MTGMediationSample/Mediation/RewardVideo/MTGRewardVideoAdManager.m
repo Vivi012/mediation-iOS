@@ -23,6 +23,10 @@
 
 @implementation MTGRewardVideoAdManager
 
+- (void)dealloc{
+    [_communicator cancel];
+}
+
 - (instancetype)initWithAdUnitID:(NSString *)adUnitID delegate:(id<MTGRewardVideoAdManagerDelegate>)delegate{
     if (self = [super init]) {
         _adUnitID = [adUnitID copy];
@@ -73,10 +77,6 @@
 }
 
 #pragma Private Methods -
-- (void)dealloc
-{
-    [_communicator cancel];
-}
 
 - (void)sendLoadFailedWithError:(NSError *)error{
     

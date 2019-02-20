@@ -35,6 +35,14 @@ if ([NSThread isMainThread]) {  \
 
 @implementation MTGInterstitialAdManager
 
+- (void)dealloc
+{
+    [_communicator cancel];
+    [_communicator setDelegate:nil];
+    
+    [self.adapter unregisterDelegate];
+    self.adapter = nil;
+}
 
 - (id)initWithAdUnitID:(NSString *)adUnitID delegate:(id<MTGInterstitialAdManagerDelegate>)delegate{
 
@@ -90,35 +98,29 @@ if ([NSThread isMainThread]) {  \
 
 
 #pragma Private Methods -
-- (void)dealloc
-{
-    [_communicator cancel];
-    [_communicator setDelegate:nil];
-    
-    [self.adapter unregisterDelegate];
-    self.adapter = nil;
-}
 
 - (void)sendLoadFailedWithError:(NSError *)error{
     
-    if (_delegate && [_delegate respondsToSelector:@selector(manager:didFailToLoadInterstitialWithError:)]) {
-        [_delegate manager:self didFailToLoadInterstitialWithError:error];
-    }
+    INVOKE_IN_MAINTHREAD(
+         if (self.delegate && [self.delegate respondsToSelector:@selector(manager:didFailToLoadInterstitialWithError:)]) {
+             [self.delegate manager:self didFailToLoadInterstitialWithError:error];
+         }
+     );
 }
 
 - (void)sendLoadSuccess{
-    
-    if (_delegate && [_delegate respondsToSelector:@selector(managerDidLoadInterstitial:)]) {
-        [_delegate managerDidLoadInterstitial:self];
-    }
+    INVOKE_IN_MAINTHREAD(
+         if (self.delegate && [self.delegate respondsToSelector:@selector(managerDidLoadInterstitial:)]) {
+             [self.delegate managerDidLoadInterstitial:self];
+         }
+    );
 }
 
 - (void)sendShowFailedWithError:(NSError *)error{
-    
+
     if (_delegate && [_delegate respondsToSelector:@selector(manager:didFailToPresentInterstitialWithError:)]) {
         [_delegate manager:self didFailToPresentInterstitialWithError:error];
     }
-    
 }
 
 

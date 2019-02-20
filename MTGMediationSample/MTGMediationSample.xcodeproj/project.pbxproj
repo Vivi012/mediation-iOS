@@ -46,6 +46,8 @@
 		99A24FC22212CBF800318FE3 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99A24FC12212CBF800318FE3 /* AVFoundation.framework */; };
 		99A24FC42212CC0200318FE3 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99A24FC32212CC0200318FE3 /* WebKit.framework */; };
 		CA0E89ED221D09BB00F45C14 /* MTGInterstitialAdServerCommunicator.m in Sources */ = {isa = PBXBuildFile; fileRef = CA0E89EC221D09BB00F45C14 /* MTGInterstitialAdServerCommunicator.m */; };
+		CA0E89F0221D393300F45C14 /* InterstitialAdInfosData2.plist in Resources */ = {isa = PBXBuildFile; fileRef = CA0E89EE221D393300F45C14 /* InterstitialAdInfosData2.plist */; };
+		CA0E89F1221D393300F45C14 /* InterstitialAdInfosData.plist in Resources */ = {isa = PBXBuildFile; fileRef = CA0E89EF221D393300F45C14 /* InterstitialAdInfosData.plist */; };
 		CA2556F022129DE9005FF563 /* MTGRewardVideoReward.m in Sources */ = {isa = PBXBuildFile; fileRef = CA2556EF22129DE9005FF563 /* MTGRewardVideoReward.m */; };
 		CA2556F722142124005FF563 /* MTGRewardVideoError.m in Sources */ = {isa = PBXBuildFile; fileRef = CA2556F622142124005FF563 /* MTGRewardVideoError.m */; };
 		CA2557082216C935005FF563 /* RewardVideoAdInfosData2.plist in Resources */ = {isa = PBXBuildFile; fileRef = CA2557072216C935005FF563 /* RewardVideoAdInfosData2.plist */; };
@@ -123,6 +125,8 @@
 		CA0E89E8221CF5EB00F45C14 /* MTGPrivateInterstitialDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MTGPrivateInterstitialDelegate.h; sourceTree = "<group>"; };
 		CA0E89EB221D09BB00F45C14 /* MTGInterstitialAdServerCommunicator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MTGInterstitialAdServerCommunicator.h; sourceTree = "<group>"; };
 		CA0E89EC221D09BB00F45C14 /* MTGInterstitialAdServerCommunicator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MTGInterstitialAdServerCommunicator.m; sourceTree = "<group>"; };
+		CA0E89EE221D393300F45C14 /* InterstitialAdInfosData2.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = InterstitialAdInfosData2.plist; sourceTree = "<group>"; };
+		CA0E89EF221D393300F45C14 /* InterstitialAdInfosData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = InterstitialAdInfosData.plist; sourceTree = "<group>"; };
 		CA2556EE22129DE9005FF563 /* MTGRewardVideoReward.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MTGRewardVideoReward.h; sourceTree = "<group>"; };
 		CA2556EF22129DE9005FF563 /* MTGRewardVideoReward.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MTGRewardVideoReward.m; sourceTree = "<group>"; };
 		CA2556F522142124005FF563 /* MTGRewardVideoError.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MTGRewardVideoError.h; sourceTree = "<group>"; };
@@ -425,10 +429,12 @@
 		CAAD3D1021F5978B007EF61B /* LocalConfiguration */ = {
 			isa = PBXGroup;
 			children = (
+				CA0E89EF221D393300F45C14 /* InterstitialAdInfosData.plist */,
+				CA0E89EE221D393300F45C14 /* InterstitialAdInfosData2.plist */,
+				CAAD3D1121F5978B007EF61B /* RewardVideoAdInfosData.plist */,
 				CA2557072216C935005FF563 /* RewardVideoAdInfosData2.plist */,
 				CAAD3D1921F598E5007EF61B /* MTGAdInfo.h */,
 				CAAD3D1A21F598E5007EF61B /* MTGAdInfo.m */,
-				CAAD3D1121F5978B007EF61B /* RewardVideoAdInfosData.plist */,
 			);
 			path = LocalConfiguration;
 			sourceTree = "<group>";
@@ -578,6 +584,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CA0E89F0221D393300F45C14 /* InterstitialAdInfosData2.plist in Resources */,
+				CA0E89F1221D393300F45C14 /* InterstitialAdInfosData.plist in Resources */,
 				CA83AFBC21F064C700655A95 /* LaunchScreen.storyboard in Resources */,
 				CAAD3D6321F989F6007EF61B /* MTGInterstitialViewController.xib in Resources */,
 				CA83AFB921F064C700655A95 /* Assets.xcassets in Resources */,
