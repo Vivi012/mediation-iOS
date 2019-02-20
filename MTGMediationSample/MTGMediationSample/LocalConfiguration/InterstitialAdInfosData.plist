@@ -10,7 +10,7 @@
 			<key>appid</key>
 			<string>92763</string>
 			<key>classname</key>
-			<string>MTGMintegralRewardVideoAdapter</string>
+			<string>MTGMintegralInterstitialAdapter</string>
 			<key>timeout</key>
 			<integer>10</integer>
 			<key>network</key>
@@ -20,7 +20,7 @@
 		</dict>
 		<dict>
 			<key>classname</key>
-			<string>MTGIronSourceRewardVideoAdapter</string>
+			<string>MTGIronSourceInterstitialAdapter</string>
 			<key>timeout</key>
 			<integer>10</integer>
 			<key>network</key>
