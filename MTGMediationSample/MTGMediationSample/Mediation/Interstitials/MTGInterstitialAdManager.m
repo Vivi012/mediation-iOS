@@ -11,7 +11,18 @@
 #import "MTGAdServerCommunicator.h"
 #import "MTGInterstitialError.h"
 
-@interface MTGInterstitialAdManager ()<MTGAdServerCommunicatorDelegate>
+
+#define INVOKE_IN_MAINTHREAD(code) \
+if ([NSThread isMainThread]) {  \
+        code    \
+    }else{  \
+    dispatch_async(dispatch_get_main_queue(), ^{    \
+        code    \
+    }); \
+}
+
+
+@interface MTGInterstitialAdManager ()<MTGAdServerCommunicatorDelegate,MTGPrivateInnerInterstitialDelegate>
 
 @property (nonatomic, readonly) NSString *adUnitID;
 
@@ -39,8 +50,8 @@
 - (void)loadInterstitial{
     
     if (self.loading) {
-//        NSError *error = [NSError errorWithDomain:MTGRewardVideoAdsSDKDomain code:MTGRewardVideoAdErrorCurrentUnitIsLoading userInfo:nil];
-//        [self sendLoadFailedWithError:error];
+        NSError *error = [NSError errorWithDomain:MTGInterstitialAdsSDKDomain code:MTGInterstitialAdErrorCurrentUnitIsLoading userInfo:nil];
+        [self sendLoadFailedWithError:error];
         return;
     }
     
@@ -57,21 +68,21 @@
     if (!self.adapter) {
         return NO;
     }
-    return NO;
-//    return [self.adapter hasAdAvailable];
+
+    return [self.adapter hasAdAvailable];
 }
 
 
 - (void)presentInterstitialFromViewController:(UIViewController *)controller{
     // If we've already played an ad, don't allow playing of another since we allow one play per load.
     if (self.loading) {
-//        NSError *error = [NSError errorWithDomain:MTGRewardVideoAdsSDKDomain code:MTGRewardVideoAdErrorCurrentUnitIsLoading userInfo:nil];
-//        [self sendShowFailedWithError:error];
+        NSError *error = [NSError errorWithDomain:MTGInterstitialAdsSDKDomain code:MTGInterstitialAdErrorCurrentUnitIsLoading userInfo:nil];
+        [self sendShowFailedWithError:error];
         return;
     }
     if (![self hasAdAvailable]) {
-//        NSError *error = [NSError errorWithDomain:MTGRewardVideoAdsSDKDomain code:MTGRewardVideoAdErrorNoAdsAvailable userInfo:nil];
-//        [self sendShowFailedWithError:error];
+        NSError *error = [NSError errorWithDomain:MTGInterstitialAdsSDKDomain code:MTGInterstitialAdErrorCurrentUnitIsLoading userInfo:nil];
+        [self sendShowFailedWithError:error];
         return;
     }
     [self.adapter presentInterstitialFromViewController:controller];
@@ -82,26 +93,30 @@
 - (void)dealloc
 {
     [_communicator cancel];
+    [_communicator setDelegate:nil];
+    
+    [self.adapter unregisterDelegate];
+    self.adapter = nil;
 }
 
 - (void)sendLoadFailedWithError:(NSError *)error{
     
-    if (_delegate && [_delegate respondsToSelector:@selector(rewardVideoAdDidFailToLoadForAdUnitID:error:)]) {
-//        [_delegate rewardVideoAdDidFailToLoadForAdUnitID:self.adUnitID error:error];
+    if (_delegate && [_delegate respondsToSelector:@selector(manager:didFailToLoadInterstitialWithError:)]) {
+        [_delegate manager:self didFailToLoadInterstitialWithError:error];
     }
 }
 
 - (void)sendLoadSuccess{
     
-    if (_delegate && [_delegate respondsToSelector:@selector(rewardVideoAdDidLoadForAdUnitID:)]) {
-//        [_delegate rewardVideoAdDidLoadForAdUnitID:self.adUnitID];
+    if (_delegate && [_delegate respondsToSelector:@selector(managerDidLoadInterstitial:)]) {
+        [_delegate managerDidLoadInterstitial:self];
     }
 }
 
 - (void)sendShowFailedWithError:(NSError *)error{
     
-    if (_delegate && [_delegate respondsToSelector:@selector(rewardVideoAdDidFailToLoadForAdUnitID:error:)]) {
-//        [_delegate rewardVideoAdDidFailToLoadForAdUnitID:self.adUnitID error:error];
+    if (_delegate && [_delegate respondsToSelector:@selector(manager:didFailToPresentInterstitialWithError:)]) {
+        [_delegate manager:self didFailToPresentInterstitialWithError:error];
     }
     
 }
@@ -122,9 +137,10 @@
         
         NSDictionary *adInfo = (NSDictionary *)obj;
         
+        [self.adapter unregisterDelegate];
         self.adapter = nil;
         
-        MTGInterstitialAdapter *adapter = [[MTGInterstitialAdapter alloc] initWithDelegate:self mediationSettings:nil];
+        MTGInterstitialAdapter *adapter = [[MTGInterstitialAdapter alloc] initWithDelegate:self mediationSettings:@{}];
         
         self.adapter = adapter;
         
@@ -134,6 +150,7 @@
                 *stop = YES;
             }else{
                 
+                [self.adapter unregisterDelegate];
                 self.adapter = nil;
                 
                 //if the last loop failed
@@ -161,5 +178,47 @@
 }
 
 
+#pragma mark - MTGPrivateInnerInterstitialDelegate
+
+- (void)didFailToLoadInterstitialWithError:(nonnull NSError *)error {
+    
+    [self sendLoadFailedWithError:error];
+}
+
+- (void)didFailToPresentInterstitialWithError:(nonnull NSError *)error {
+    [self sendShowFailedWithError:error];
+}
+
+- (void)didLoadInterstitial {
+    [self sendLoadSuccess];
+
+}
+
+- (void)didPresentInterstitial {
+
+    INVOKE_IN_MAINTHREAD(
+         if (self.delegate && [self.delegate respondsToSelector:@selector(managerDidPresentInterstitial:)]) {
+             [self.delegate managerDidPresentInterstitial:self];
+         }
+    );
+}
+
+- (void)didReceiveTapEventFromInterstitial {
+    
+    INVOKE_IN_MAINTHREAD(
+         if (self.delegate && [self.delegate respondsToSelector:@selector(managerDidReceiveTapEventFromInterstitial:)]) {
+             [self.delegate managerDidReceiveTapEventFromInterstitial:self];
+         }
+    );
+}
+
+- (void)willDismissInterstitial {
+    
+    INVOKE_IN_MAINTHREAD(
+         if (self.delegate && [self.delegate respondsToSelector:@selector(managerWillDismissInterstitial:)]) {
+             [self.delegate managerWillDismissInterstitial:self];
+         }
+     );
+}
 
 @end

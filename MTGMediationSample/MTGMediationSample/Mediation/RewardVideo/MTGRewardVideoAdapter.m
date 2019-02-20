@@ -27,10 +27,6 @@
 @property (nonatomic, assign)  BOOL hasExpired;
 @property (nonatomic, assign)  BOOL hasCancelPreviousPerform;
 
-
-@property (nonatomic,strong) NSPort *emptyPort;
-
-
 @end
 
 @implementation MTGRewardVideoAdapter

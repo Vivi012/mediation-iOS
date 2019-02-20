@@ -7,10 +7,21 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "MTGPrivateInterstitialDelegate.h"
+#import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface MTGInterstitialCustomEvent : NSObject
+
+
+@property (nonatomic, weak) id<MTGPrivateInnerInterstitialDelegate> delegate;
+
+- (void)requestInterstitialWithCustomEventInfo:(NSDictionary *)info;
+
+- (BOOL)hasAdAvailable;
+
+- (void)presentInterstitialFromViewController:(UIViewController *)viewController;
 
 @end
 

@@ -22,6 +22,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)presentInterstitialFromViewController:(UIViewController *)viewController;
 
+- (void)unregisterDelegate;
+
 
 @end
 

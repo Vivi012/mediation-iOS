@@ -10,4 +10,23 @@
 
 @implementation MTGInterstitialCustomEvent
 
+
+- (void)requestInterstitialWithCustomEventInfo:(NSDictionary *)info{
+    
+    //to override in subclass
+}
+
+- (BOOL)hasAdAvailable{
+    
+    //to override in subclass
+    return NO;
+}
+
+- (void)presentInterstitialFromViewController:(UIViewController *)viewController{
+    
+    //to override in subclass
+}
+
+
+
 @end

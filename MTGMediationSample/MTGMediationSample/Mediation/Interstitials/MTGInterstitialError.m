@@ -8,6 +8,4 @@
 
 #import "MTGInterstitialError.h"
 
-@implementation MTGInterstitialError
-
-@end
+NSString * const MTGInterstitialAdsSDKDomain = @"MTGInterstitialAdsSDKDomain";

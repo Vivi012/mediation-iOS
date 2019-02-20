@@ -1,8 +1,8 @@
 //
-//  MTGAdServerCommunicator.h
+//  MTGInterstitialAdServerCommunicator.h
 //  MTGMediationSample
 //
-//  Created by CharkZhang on 2019/1/18.
+//  Created by CharkZhang on 2019/2/20.
 //  Copyright © 2019 CharkZhang. All rights reserved.
 //
 
@@ -10,15 +10,12 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@protocol  MTGInterstitialAdServerCommunicatorDelegate;
+@interface MTGInterstitialAdServerCommunicator : NSObject
 
+@property (nonatomic,weak) id<MTGInterstitialAdServerCommunicatorDelegate> delegate;
 
-@protocol MTGAdServerCommunicatorDelegate;
-
-@interface MTGAdServerCommunicator : NSObject
-
-@property (nonatomic,weak) id<MTGAdServerCommunicatorDelegate> delegate;
-
-- (id)initWithDelegate:(id<MTGAdServerCommunicatorDelegate>)delegate;
+- (id)initWithDelegate:(id<MTGInterstitialAdServerCommunicatorDelegate>)delegate;
 
 - (void)requestAdUnitInfosWithAdUnit:(NSString *)adUnitId;
 
@@ -30,13 +27,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-@protocol MTGAdServerCommunicatorDelegate <NSObject>
+@protocol MTGInterstitialAdServerCommunicatorDelegate <NSObject>
 
 @required
 - (void)communicatorDidReceiveAdUnitInfos:(NSArray *)infos;
 - (void)communicatorDidFailWithError:(NSError *)error;
 
 @end
-
 
 NS_ASSUME_NONNULL_END

@@ -15,10 +15,10 @@
 - (void)managerDidLoadInterstitial:(MTGInterstitialAdManager *)manager;
 - (void)manager:(MTGInterstitialAdManager *)manager didFailToLoadInterstitialWithError:(NSError *)error;
 - (void)managerDidPresentInterstitial:(MTGInterstitialAdManager *)manager;
-- (void)managerDidFailToPresentInterstitial:(MTGInterstitialAdManager *)manager;
+- (void)manager:(MTGInterstitialAdManager *)manager didFailToPresentInterstitialWithError:(NSError *)error;
 - (void)managerWillDismissInterstitial:(MTGInterstitialAdManager *)manager;
 - (void)managerDidReceiveTapEventFromInterstitial:(MTGInterstitialAdManager *)manager;
-
+- (NSDictionary *)managerReceiveMediationSetting;
 
 @end
 

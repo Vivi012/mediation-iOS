@@ -14,4 +14,17 @@
 #define MTG_INTERSTITIAL_TIMEOUT      @"timeout"
 #define MTG_INTERSTITIAL_NETWORKNAME  @"network"
 
+#define MTG_INTERSTITIAL_USER            @"userid"
+
+#define MTG_INTERSTITIAL_REWARDID        @"rewardid"
+
+#define MTG_INTERSTITIAL_PLACEMENTNAME   @"placementname"
+
+#define MTG_APPID        @"appid"
+#define MTG_APIKEY       @"apikey"
+#define MTG_APPKEY       @"appkey"
+
+
+
+
 #endif /* MTGInterstitialConstants_h */

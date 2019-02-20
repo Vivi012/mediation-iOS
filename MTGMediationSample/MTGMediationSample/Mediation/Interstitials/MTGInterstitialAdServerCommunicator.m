@@ -1,23 +1,20 @@
 //
-//  MTGAdServerCommunicator.m
+//  MTGInterstitialAdServerCommunicator.m
 //  MTGMediationSample
 //
-//  Created by CharkZhang on 2019/1/18.
+//  Created by CharkZhang on 2019/2/20.
 //  Copyright © 2019 CharkZhang. All rights reserved.
 //
 
-#import "MTGAdServerCommunicator.h"
+#import "MTGInterstitialAdServerCommunicator.h"
 #import "MTGAdInfo.h"
 #import "MTGRewardVideoError.h"
 
-@interface MTGAdServerCommunicator()
+
+@implementation MTGInterstitialAdServerCommunicator
 
 
-@end
-
-@implementation MTGAdServerCommunicator
-
-- (id)initWithDelegate:(id<MTGAdServerCommunicatorDelegate>)delegate
+- (id)initWithDelegate:(id<MTGInterstitialAdServerCommunicatorDelegate>)delegate
 {
     self = [super init];
     if (self) {
@@ -29,11 +26,11 @@
 - (void)requestAdUnitInfosWithAdUnit:(NSString *)adUnitId{
     
     // request local configuration for ad infos
-    NSArray *rewardVideoInfos = [MTGAdInfo rewardVideoInfosWithAdUnitId:adUnitId];
-    if (rewardVideoInfos.count) {
+    NSArray *interstitialInfos = [MTGAdInfo interstitialInfosWithAdUnitId:adUnitId];
+    if (interstitialInfos.count) {
 
         if (_delegate && [_delegate respondsToSelector:@selector(communicatorDidReceiveAdUnitInfos:)]) {
-            [_delegate communicatorDidReceiveAdUnitInfos:rewardVideoInfos];
+            [_delegate communicatorDidReceiveAdUnitInfos:interstitialInfos];
         }
         return;
     }
@@ -51,12 +48,11 @@
 
 #pragma mark -
 /*
-- (void)communicatorDidReceiveAdUnitInfos:(NSArray *)infos{
-    
-}
-- (void)communicatorDidFailWithError:(NSError *)error{
-    
-}
-*/
-
+ - (void)communicatorDidReceiveAdUnitInfos:(NSArray *)infos{
+ 
+ }
+ - (void)communicatorDidFailWithError:(NSError *)error{
+ 
+ }
+ */
 @end
