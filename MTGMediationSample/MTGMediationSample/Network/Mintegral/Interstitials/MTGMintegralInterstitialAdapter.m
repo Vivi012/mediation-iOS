@@ -27,9 +27,9 @@ static BOOL isInterstitialSuccess = NO;
 
 - (void)requestInterstitialWithCustomEventInfo:(NSDictionary *)info{
     
-    NSString *appId;
-    NSString *appKey;
-    NSString *unitId;
+    NSString *appId = @"";
+    NSString *appKey = @"";
+    NSString *unitId = @"";
     if([info objectForKey:MTG_APPID]){
         appId = [NSString stringWithFormat:@"%@",[info objectForKey:MTG_APPID]];
     }
@@ -51,7 +51,7 @@ static BOOL isInterstitialSuccess = NO;
         if (self.delegate && [self.delegate respondsToSelector:@selector(didFailToLoadInterstitialWithError:)]) {
             [self.delegate didFailToLoadInterstitialWithError:error];
         }
-        
+
         return;
     }
     
@@ -87,6 +87,12 @@ static BOOL isInterstitialSuccess = NO;
     
     if([self hasAdAvailable]){
         [self.mtgInterstitialVideoAdManager showFromViewController:viewController];
+    }else{
+        NSString *errorMsg = @"current rewardVideo data not available";
+        NSError *error = [NSError errorWithDomain:@"com.mintegral"  code:-2 userInfo:@{NSLocalizedDescriptionKey : errorMsg}];
+        if (self.delegate && [self.delegate respondsToSelector:@selector(didFailToLoadInterstitialWithError:)]) {
+            [self.delegate didFailToLoadInterstitialWithError:error];
+        }
     }
 }
 

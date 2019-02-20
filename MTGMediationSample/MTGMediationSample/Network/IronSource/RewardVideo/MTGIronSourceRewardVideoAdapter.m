@@ -20,13 +20,15 @@
 @property (nonatomic, copy) NSString *placementName;
 @end
 
-static BOOL isRewardedVideoSuccess = YES;
+static BOOL hasSendCallBack = NO;
 
 @implementation MTGIronSourceRewardVideoAdapter
 
 - (void)requestRewardedVideoWithCustomEventInfo:(NSDictionary *)info{
  
-    NSString *appKey;
+    hasSendCallBack = NO;
+
+    NSString *appKey = @"";
     if([info objectForKey:MTG_APPKEY]){
        appKey = [NSString stringWithFormat:@"%@",[info objectForKey:MTG_APPKEY]];
     } 
@@ -39,6 +41,7 @@ static BOOL isRewardedVideoSuccess = YES;
         if (self.delegate && [self.delegate respondsToSelector:@selector(rewardedVideoDidFailToLoadAdForCustomEvent: error:)]) {
             [self.delegate rewardedVideoDidFailToLoadAdForCustomEvent:self error:error];
         }
+        hasSendCallBack = YES;
         return;
     }
     
@@ -58,9 +61,8 @@ static BOOL isRewardedVideoSuccess = YES;
     
     // After setting the delegates you can go ahead and initialize the SDK.
     [IronSource setUserId:userId];
-    
     [IronSource setRewardedVideoDelegate:self];
-    
+
     if (![IronSourceAdapterHelper isSDKInitialized]) { 
         
         if(unitId && [unitId length] != 0 && ![unitId isEqualToString:@"null"]){
@@ -68,17 +70,15 @@ static BOOL isRewardedVideoSuccess = YES;
         }else{
             [IronSource initWithAppKey:appKey];
         }
-        
+        [IronSourceAdapterHelper sdkInitialized];
     }else{
-        if(isRewardedVideoSuccess){
+
+        if ([self hasAdAvailable]) {
             if (self.delegate && [self.delegate respondsToSelector:@selector(rewardedVideoDidLoadAdForCustomEvent:)]) {
                 [self.delegate rewardedVideoDidLoadAdForCustomEvent:self];
             }
-        }else{
-            NSError *error = [NSError errorWithDomain:@"com.ironsource" code:-1 userInfo:@{NSLocalizedDescriptionKey : @"rewardvideo load fail"}];
-            if (self.delegate && [self.delegate respondsToSelector:@selector(rewardedVideoDidFailToLoadAdForCustomEvent: error:)]) {
-                [self.delegate rewardedVideoDidFailToLoadAdForCustomEvent:self error:error];
-            }
+            hasSendCallBack = YES;
+            return;
         }
     }
 }
@@ -103,12 +103,12 @@ static BOOL isRewardedVideoSuccess = YES;
 // ready to be presented. It is only after this method is invoked
 // with 'hasAvailableAds' set to 'YES' that you can should 'showRV'.
 - (void)rewardedVideoHasChangedAvailability:(BOOL)available {
-    isRewardedVideoSuccess = available;
-    if (![IronSourceAdapterHelper isSDKInitialized]) {
 
+    if (!hasSendCallBack) {
+        
         if(available){
             if (self.delegate && [self.delegate respondsToSelector:@selector(rewardedVideoDidLoadAdForCustomEvent:)]) {
-                        [self.delegate rewardedVideoDidLoadAdForCustomEvent:self];
+                [self.delegate rewardedVideoDidLoadAdForCustomEvent:self];
             }
         }else{
             NSError *error = [NSError errorWithDomain:@"com.ironsource" code:-1 userInfo:@{NSLocalizedDescriptionKey : @"rewardvideo load fail"}];
@@ -116,8 +116,7 @@ static BOOL isRewardedVideoSuccess = YES;
                 [self.delegate rewardedVideoDidFailToLoadAdForCustomEvent:self error:error];
             }
         }
-        
-         [IronSourceAdapterHelper sdkInitialized];
+        hasSendCallBack = YES;
     }
 }
 
