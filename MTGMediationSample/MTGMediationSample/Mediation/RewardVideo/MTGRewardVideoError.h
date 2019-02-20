@@ -17,6 +17,9 @@ typedef enum {
     MTGRewardVideoAdErrorNoAdsAvailable = -1100,
     MTGRewardVideoAdErrorInvalidCustomEvent = -1200,
 
+    MTGRewardVideoAdUnLoaded = -2000,
+    MTGRewardVideoAdViewControllerInvalid = -2100,
+
 } MTGRewardVideoErrorCode;
 
 

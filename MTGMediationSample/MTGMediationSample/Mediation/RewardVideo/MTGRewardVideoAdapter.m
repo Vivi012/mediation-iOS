@@ -25,6 +25,8 @@
 @property (nonatomic, copy)  NSString *networkName;
 @property (nonatomic, strong) NSDictionary *mediationSettings;
 @property (nonatomic, assign)  BOOL hasExpired;
+@property (nonatomic, assign)  BOOL hasCancelPreviousPerform;
+
 
 @property (nonatomic,strong) NSPort *emptyPort;
 
@@ -60,9 +62,8 @@
         [self startTimeoutTimer:duration];
         
         self.completionHandler = completion;
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.rewardedVideoCustomEvent requestRewardedVideoWithCustomEventInfo:adInfo];
-        });
+
+        [self.rewardedVideoCustomEvent requestRewardedVideoWithCustomEventInfo:adInfoWithMediationSetting];
     } else {
         
         NSError *error = [NSError errorWithDomain:MTGRewardVideoAdsSDKDomain code:MTGRewardVideoAdErrorInvalidCustomEvent userInfo:nil];
@@ -85,8 +86,7 @@
 
 -(void)dealloc{
 
-//    [NSObject cancelPreviousPerformRequestsWithTarget:self];
-    
+    [self cancelPreviousPerform];
     _completionHandler = nil;
     // Make sure the custom event isn't released synchronously as objects owned by the custom event
 //    [self keepObjectAliveForCurrentRunLoopIteration:_rewardedVideoCustomEvent];
@@ -118,21 +118,11 @@
     if (duration < 1) {
         duration = 10;
     }
-    
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(duration * NSEC_PER_SEC)), dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [self timeout];
-    });
-    
-    
-//    NSRunLoop *runLoop = [NSRunLoop currentRunLoop];
-//
-//    if (!_emptyPort) {
-//        _emptyPort = [NSMachPort port];
-//    }
-//    [runLoop addPort:_emptyPort forMode:NSDefaultRunLoopMode];
-//    [runLoop runMode:NSRunLoopCommonModes beforeDate:[NSDate distantFuture]];//[runLoop run];
-//    [self performSelector:@selector(timeout) withObject:nil afterDelay:duration];
 
+    dispatch_async(dispatch_get_main_queue(), ^{
+
+        [self performSelector:@selector(timeout) withObject:nil afterDelay:duration];
+    });
 }
 
 - (void)timeout{
@@ -142,21 +132,15 @@
     [self sendLoadFailedWithError:error];
 }
 
-- (void)cancelPerformSelect{
+- (void)cancelPreviousPerform{
     
-//    CFRunLoopStop(CFRunLoopGetCurrent());
-
-//    CFRunLoopStop(CFRunLoopGetCurrent());
-//    NSThread *thread = [NSThread currentThread];
-//    [thread cancel];
-
+    if (self.hasCancelPreviousPerform) {
+        return;
+    }
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(timeout) object:nil];
+    self.hasCancelPreviousPerform = YES;
 }
-- (void)didStopLoading{
 
-//    if (!_hasExpired) {
-//        [NSObject cancelPreviousPerformRequestsWithTarget:self];
-//    }
-}
 
 - (void)sendLoadFailedWithError:(NSError *)error{
 
@@ -195,13 +179,13 @@
 
 - (void)rewardedVideoDidLoadAdForCustomEvent:(MTGRewardVideoCustomEvent *)customEvent{
     
-    [self didStopLoading];
+    [self cancelPreviousPerform];
     [self sendLoadSuccess];
 }
 
 - (void)rewardedVideoDidFailToLoadAdForCustomEvent:(MTGRewardVideoCustomEvent *)customEvent error:(NSError *)error{
     
-    [self didStopLoading];
+    [self cancelPreviousPerform];
     [self sendLoadFailedWithError:error];
 }
 

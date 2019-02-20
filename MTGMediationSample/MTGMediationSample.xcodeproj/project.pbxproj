@@ -63,6 +63,10 @@
 		CAAD3D5F21F9687B007EF61B /* MTGInterstitialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAAD3D5E21F9687B007EF61B /* MTGInterstitialViewController.m */; };
 		CAAD3D6121F989DF007EF61B /* MTGRewardVideoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CAAD3D6021F989DF007EF61B /* MTGRewardVideoViewController.xib */; };
 		CAAD3D6321F989F6007EF61B /* MTGInterstitialViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CAAD3D6221F989F6007EF61B /* MTGInterstitialViewController.xib */; };
+		CACE7F4F221BADE00074A8BB /* MTGInterstitialAdManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CACE7F4E221BADE00074A8BB /* MTGInterstitialAdManager.m */; };
+		CACE7F52221BAE070074A8BB /* MTGInterstitialAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = CACE7F51221BAE070074A8BB /* MTGInterstitialAdapter.m */; };
+		CACE7F59221BCD280074A8BB /* MTGInterstitialCustomEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = CACE7F58221BCD280074A8BB /* MTGInterstitialCustomEvent.m */; };
+		CACE7F5C221BCD410074A8BB /* MTGInterstitialError.m in Sources */ = {isa = PBXBuildFile; fileRef = CACE7F5B221BCD410074A8BB /* MTGInterstitialError.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -105,6 +109,7 @@
 		99A24FBF2212CBED00318FE3 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		99A24FC12212CBF800318FE3 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		99A24FC32212CC0200318FE3 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		CA0E89E8221CF5EB00F45C14 /* MTGPrivateInterstitialDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MTGPrivateInterstitialDelegate.h; sourceTree = "<group>"; };
 		CA2556EE22129DE9005FF563 /* MTGRewardVideoReward.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MTGRewardVideoReward.h; sourceTree = "<group>"; };
 		CA2556EF22129DE9005FF563 /* MTGRewardVideoReward.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MTGRewardVideoReward.m; sourceTree = "<group>"; };
 		CA2556F522142124005FF563 /* MTGRewardVideoError.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MTGRewardVideoError.h; sourceTree = "<group>"; };
@@ -151,6 +156,16 @@
 		CAAD3D5E21F9687B007EF61B /* MTGInterstitialViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MTGInterstitialViewController.m; sourceTree = "<group>"; };
 		CAAD3D6021F989DF007EF61B /* MTGRewardVideoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MTGRewardVideoViewController.xib; sourceTree = "<group>"; };
 		CAAD3D6221F989F6007EF61B /* MTGInterstitialViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MTGInterstitialViewController.xib; sourceTree = "<group>"; };
+		CACE7F4C221BA7640074A8BB /* MTGInterstitialConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTGInterstitialConstants.h; sourceTree = "<group>"; };
+		CACE7F4D221BADE00074A8BB /* MTGInterstitialAdManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MTGInterstitialAdManager.h; sourceTree = "<group>"; };
+		CACE7F4E221BADE00074A8BB /* MTGInterstitialAdManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MTGInterstitialAdManager.m; sourceTree = "<group>"; };
+		CACE7F50221BAE070074A8BB /* MTGInterstitialAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MTGInterstitialAdapter.h; sourceTree = "<group>"; };
+		CACE7F51221BAE070074A8BB /* MTGInterstitialAdapter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MTGInterstitialAdapter.m; sourceTree = "<group>"; };
+		CACE7F53221BAF740074A8BB /* MTGInterstitialAdManagerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MTGInterstitialAdManagerDelegate.h; sourceTree = "<group>"; };
+		CACE7F57221BCD280074A8BB /* MTGInterstitialCustomEvent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MTGInterstitialCustomEvent.h; sourceTree = "<group>"; };
+		CACE7F58221BCD280074A8BB /* MTGInterstitialCustomEvent.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MTGInterstitialCustomEvent.m; sourceTree = "<group>"; };
+		CACE7F5A221BCD410074A8BB /* MTGInterstitialError.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MTGInterstitialError.h; sourceTree = "<group>"; };
+		CACE7F5B221BCD410074A8BB /* MTGInterstitialError.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MTGInterstitialError.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -394,6 +409,17 @@
 		CAAD3D3321F71E0E007EF61B /* Interstitials */ = {
 			isa = PBXGroup;
 			children = (
+				CACE7F4C221BA7640074A8BB /* MTGInterstitialConstants.h */,
+				CACE7F53221BAF740074A8BB /* MTGInterstitialAdManagerDelegate.h */,
+				CACE7F4D221BADE00074A8BB /* MTGInterstitialAdManager.h */,
+				CACE7F4E221BADE00074A8BB /* MTGInterstitialAdManager.m */,
+				CACE7F50221BAE070074A8BB /* MTGInterstitialAdapter.h */,
+				CACE7F51221BAE070074A8BB /* MTGInterstitialAdapter.m */,
+				CACE7F57221BCD280074A8BB /* MTGInterstitialCustomEvent.h */,
+				CACE7F58221BCD280074A8BB /* MTGInterstitialCustomEvent.m */,
+				CACE7F5A221BCD410074A8BB /* MTGInterstitialError.h */,
+				CACE7F5B221BCD410074A8BB /* MTGInterstitialError.m */,
+				CA0E89E8221CF5EB00F45C14 /* MTGPrivateInterstitialDelegate.h */,
 			);
 			path = Interstitials;
 			sourceTree = "<group>";
@@ -535,9 +561,12 @@
 				99A24F912212AC2600318FE3 /* MTGIronSourceInterstitialAdapter.m in Sources */,
 				CAAD3D3C21F722AA007EF61B /* MTGMediationManager.m in Sources */,
 				CAAD3D5C21F9682E007EF61B /* MTGRewardVideoViewController.m in Sources */,
+				CACE7F52221BAE070074A8BB /* MTGInterstitialAdapter.m in Sources */,
 				CAAD3D3421F71E0E007EF61B /* MTGRewardVideoAdManager.m in Sources */,
 				CAAD3D5F21F9687B007EF61B /* MTGInterstitialViewController.m in Sources */,
+				CACE7F4F221BADE00074A8BB /* MTGInterstitialAdManager.m in Sources */,
 				CA83AFBF21F064C700655A95 /* main.m in Sources */,
+				CACE7F5C221BCD410074A8BB /* MTGInterstitialError.m in Sources */,
 				CA83AFB121F064C700655A95 /* AppDelegate.m in Sources */,
 				CAAD3D3721F71E0E007EF61B /* MTGRewardVideoCustomEvent.m in Sources */,
 				CAAD3D2521F71E06007EF61B /* MTGIronSourceRewardVideoAdapter.m in Sources */,
@@ -547,6 +576,7 @@
 				99A24F8C2212AC1000318FE3 /* MTGMintegralInterstitialAdapter.m in Sources */,
 				CAAD3D3821F71E0E007EF61B /* MTGAdServerCommunicator.m in Sources */,
 				CA2556F022129DE9005FF563 /* MTGRewardVideoReward.m in Sources */,
+				CACE7F59221BCD280074A8BB /* MTGInterstitialCustomEvent.m in Sources */,
 				CA2556F722142124005FF563 /* MTGRewardVideoError.m in Sources */,
 				CAAD3D3921F71E0E007EF61B /* MTGRewardVideo.m in Sources */,
 			);

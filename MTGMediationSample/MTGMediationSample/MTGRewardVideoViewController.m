@@ -113,6 +113,10 @@
     [self showMsg:msg];
 }
 
+-(void)rewardVideoAdDidPlayForAdUnitID:(NSString *)adUnitID{
+    
+}
+
 - (void)rewardVideoAdDidFailToPlayForAdUnitID:(NSString *)adUnitID
                                         error:(NSError *)error{
     

@@ -106,19 +106,24 @@ static MTGRewardVideo *gSharedInstance = nil;
     if (!adManager) {
         NSLog(@"The reward video could not be shown: "
               @"no ads have been loaded for adUnitID: %@", adUnitID);
-        
+        NSError *error = [NSError errorWithDomain:MTGRewardVideoAdsSDKDomain code:MTGRewardVideoAdUnLoaded userInfo:nil];
+        [sharedInstance rewardVideoAdDidFailToPlayForAdUnitID:adUnitID error:error];
         return;
     }
     
     if (!viewController) {
         NSLog(@"The reward video could not be shown: "
                           @"a nil view controller was passed to -presentRewardedVideoAdForAdUnitID:fromViewController:.");
-        
+        NSError *error = [NSError errorWithDomain:MTGRewardVideoAdsSDKDomain code:MTGRewardVideoAdViewControllerInvalid userInfo:nil];
+        [sharedInstance rewardVideoAdDidFailToPlayForAdUnitID:adUnitID error:error];
         return;
     }
     
     if (![viewController.view.window isKeyWindow]) {
         NSLog(@"Attempting to present a rewarded video ad in non-key window. The ad may not render properly.");
+        NSError *error = [NSError errorWithDomain:MTGRewardVideoAdsSDKDomain code:MTGRewardVideoAdViewControllerInvalid userInfo:nil];
+        [sharedInstance rewardVideoAdDidFailToPlayForAdUnitID:adUnitID error:error];
+        return;
     }
     
     [adManager presentRewardedVideoFromViewController:viewController];
