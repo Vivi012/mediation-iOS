@@ -12,7 +12,7 @@
 			<key>network</key>
 			<string>ironsource</string>
 			<key>timeout</key>
-			<integer>15</integer>
+			<integer>45</integer>
 			<key>placementname</key>
 			<string>test1</string>
 		</dict>
@@ -26,7 +26,7 @@
 			<key>network</key>
 			<string>mintegral</string>
 			<key>timeout</key>
-			<integer>15</integer>
+			<integer>45</integer>
 			<key>unitid</key>
 			<string>21319</string>
 		</dict>
