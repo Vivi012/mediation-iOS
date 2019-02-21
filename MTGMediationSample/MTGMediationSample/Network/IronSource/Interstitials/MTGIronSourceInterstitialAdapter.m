@@ -66,10 +66,18 @@
 }
 
 - (void)presentInterstitialFromViewController:(UIViewController *)viewController{
-    if (self.placementName && [self.placementName length] != 0) {
-        [IronSource showInterstitialWithViewController:viewController placement:self.placementName];
-    } else {
-        [IronSource showInterstitialWithViewController:viewController];
+    if([self hasAdAvailable]){
+        if (self.placementName && [self.placementName length] != 0) {
+            [IronSource showInterstitialWithViewController:viewController placement:self.placementName];
+        } else {
+            [IronSource showInterstitialWithViewController:viewController];
+        }
+    }else{
+        NSString *errorMsg = @"current interstitialVideo data not available";
+        NSError *error = [NSError errorWithDomain:@"com.ironsource"  code:-2 userInfo:@{NSLocalizedDescriptionKey : errorMsg}];
+        if (self.delegate && [self.delegate respondsToSelector:@selector(didFailToLoadInterstitialWithError:)]) {
+            [self.delegate didFailToLoadInterstitialWithError:error];
+        }
     }
 }
 

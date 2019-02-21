@@ -90,10 +90,19 @@ static BOOL hasSendCallBack = NO;
 
 - (void)presentRewardedVideoFromViewController:(UIViewController *)viewController{
     
-    if (self.placementName && [self.placementName length] != 0) {
-        [IronSource showRewardedVideoWithViewController:viewController placement:self.placementName];
+    if ([self hasAdAvailable]) {
+        if (self.placementName && [self.placementName length] != 0) {
+            [IronSource showRewardedVideoWithViewController:viewController placement:self.placementName];
+        } else {
+            [IronSource showRewardedVideoWithViewController:viewController];
+        }
     } else {
-        [IronSource showRewardedVideoWithViewController:viewController];
+        NSError *error = [NSError errorWithDomain:@"com.ironsource" code:-1 userInfo:@{NSLocalizedDescriptionKey : @"loadFail"}];
+        
+        if (self.delegate && [self.delegate respondsToSelector:@selector(rewardedVideoDidFailToLoadAdForCustomEvent: error:)]) {
+            [self.delegate rewardedVideoDidFailToLoadAdForCustomEvent:self error:error];
+            
+        }
     }
 }
 
