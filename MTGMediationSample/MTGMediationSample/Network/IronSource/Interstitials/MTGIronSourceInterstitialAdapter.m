@@ -73,7 +73,7 @@
             [IronSource showInterstitialWithViewController:viewController];
         }
     }else{
-        NSString *errorMsg = @"current interstitialVideo showFail";
+        NSString *errorMsg = @"current interstitialVideo showFail，video not ready";
         NSError *error = [NSError errorWithDomain:@"com.ironsource"  code:-2 userInfo:@{NSLocalizedDescriptionKey : errorMsg}];
         if (self.delegate && [self.delegate respondsToSelector:@selector(didFailToPresentInterstitialWithError:)]) {
             [self.delegate didFailToPresentInterstitialWithError:error];
