@@ -73,10 +73,10 @@
             [IronSource showInterstitialWithViewController:viewController];
         }
     }else{
-        NSString *errorMsg = @"current interstitialVideo data not available";
+        NSString *errorMsg = @"current interstitialVideo showFail";
         NSError *error = [NSError errorWithDomain:@"com.ironsource"  code:-2 userInfo:@{NSLocalizedDescriptionKey : errorMsg}];
-        if (self.delegate && [self.delegate respondsToSelector:@selector(didFailToLoadInterstitialWithError:)]) {
-            [self.delegate didFailToLoadInterstitialWithError:error];
+        if (self.delegate && [self.delegate respondsToSelector:@selector(didFailToPresentInterstitialWithError:)]) {
+            [self.delegate didFailToPresentInterstitialWithError:error];
         }
     }
 }
