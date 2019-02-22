@@ -97,10 +97,10 @@ static BOOL hasSendCallBack = NO;
             [IronSource showRewardedVideoWithViewController:viewController];
         }
     } else {
-        NSError *error = [NSError errorWithDomain:@"com.ironsource" code:-1 userInfo:@{NSLocalizedDescriptionKey : @"loadFail"}];
+        NSError *error = [NSError errorWithDomain:@"com.ironsource" code:-1 userInfo:@{NSLocalizedDescriptionKey : @"current interstitialVideo showFail"}];
         
-        if (self.delegate && [self.delegate respondsToSelector:@selector(rewardedVideoDidFailToLoadAdForCustomEvent: error:)]) {
-            [self.delegate rewardedVideoDidFailToLoadAdForCustomEvent:self error:error];
+        if (self.delegate && [self.delegate respondsToSelector:@selector(rewardVideoAdDidFailToPlayForCustomEvent: error:)]) {
+            [self.delegate rewardVideoAdDidFailToPlayForCustomEvent:self error:error];
             
         }
     }

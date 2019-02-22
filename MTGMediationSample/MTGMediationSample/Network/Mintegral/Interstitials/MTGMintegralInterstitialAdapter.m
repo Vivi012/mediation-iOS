@@ -88,10 +88,10 @@ static BOOL isInterstitialSuccess = NO;
     if([self hasAdAvailable]){
         [self.mtgInterstitialVideoAdManager showFromViewController:viewController];
     }else{
-        NSString *errorMsg = @"current rewardVideo data not available";
+        NSString *errorMsg = @"current rewardVideo showFail";
         NSError *error = [NSError errorWithDomain:@"com.mintegral"  code:-2 userInfo:@{NSLocalizedDescriptionKey : errorMsg}];
-        if (self.delegate && [self.delegate respondsToSelector:@selector(didFailToLoadInterstitialWithError:)]) {
-            [self.delegate didFailToLoadInterstitialWithError:error];
+        if (self.delegate && [self.delegate respondsToSelector:@selector(didFailToPresentInterstitialWithError:)]) {
+            [self.delegate didFailToPresentInterstitialWithError:error];
         }
     }
 }

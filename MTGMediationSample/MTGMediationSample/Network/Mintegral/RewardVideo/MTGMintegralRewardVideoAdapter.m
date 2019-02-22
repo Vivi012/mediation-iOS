@@ -93,12 +93,12 @@
         }
         
     } else {
-        NSError *error = [NSError errorWithDomain:@"com.mintegral" code:-1 userInfo:@{NSLocalizedDescriptionKey : @"loadFail"}];
+        NSError *error = [NSError errorWithDomain:@"com.mintegral" code:-1 userInfo:@{NSLocalizedDescriptionKey : @"current rewardVideo showFail"}];
         
-            if (self.delegate && [self.delegate respondsToSelector:@selector(rewardedVideoDidFailToLoadAdForCustomEvent: error:)]) {
-                [self.delegate rewardedVideoDidFailToLoadAdForCustomEvent:self error:error];
-                
-            }
+        if (self.delegate && [self.delegate respondsToSelector:@selector(rewardVideoAdDidFailToPlayForCustomEvent: error:)]) {
+            [self.delegate rewardVideoAdDidFailToPlayForCustomEvent:self error:error];
+            
+        }
     }
 }
 
