@@ -8,12 +8,20 @@
 
 #import <Foundation/Foundation.h>
 
-NS_ASSUME_NONNULL_BEGIN
+#define kCurrentMediationVersion  1.0.0
 
 @interface MTGMediationManager : NSObject
 
-+(void)setAppId:(NSString *)appId appKey:(NSString *)appKey;
+
+ // will support later
+/**
+ request remote adInfo
+
+ @param appId Mintegral appId
+ @param appKey Mintegral appkey
+ */
+//+(void)setAppId:(NSString *)appId appKey:(NSString *)appKey;
 
 @end
 
-NS_ASSUME_NONNULL_END
+

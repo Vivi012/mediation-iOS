@@ -10,9 +10,10 @@
 
 @implementation MTGMediationManager
 
-
+/*
 +(void)setAppId:(NSString *)appId appKey:(NSString *)appKey{
-    
+ 
+    // will support later
 }
-
+*/
 @end
