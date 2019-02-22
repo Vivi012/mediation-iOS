@@ -97,7 +97,7 @@ static BOOL hasSendCallBack = NO;
             [IronSource showRewardedVideoWithViewController:viewController];
         }
     } else {
-        NSError *error = [NSError errorWithDomain:@"com.ironsource" code:-1 userInfo:@{NSLocalizedDescriptionKey : @"current rewardVideo showFail"}];
+        NSError *error = [NSError errorWithDomain:@"com.ironsource" code:-1 userInfo:@{NSLocalizedDescriptionKey : @"current rewardVideo showFail，video not ready"}];
         
         if (self.delegate && [self.delegate respondsToSelector:@selector(rewardVideoAdDidFailToPlayForCustomEvent: error:)]) {
             [self.delegate rewardVideoAdDidFailToPlayForCustomEvent:self error:error];
