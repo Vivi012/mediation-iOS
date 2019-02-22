@@ -64,15 +64,16 @@
         self.userId = [NSString stringWithFormat:@"%@",[info objectForKey:MTG_REWARDVIDEO_USER]];
     }
     
-    if (![MintegralAdapterHelper isSDKInitialized]) {
-        
-        [[MTGSDK sharedInstance] setAppID:appId ApiKey:appKey];
-        [MintegralAdapterHelper sdkInitialized];
-    }
-    
-    
-    [[MTGRewardAdManager sharedInstance] loadVideo:self.adUnit delegate:self];
-    
+    dispatch_async(dispatch_get_main_queue(), ^{
+
+        if (![MintegralAdapterHelper isSDKInitialized]) {
+            
+            [[MTGSDK sharedInstance] setAppID:appId ApiKey:appKey];
+            [MintegralAdapterHelper sdkInitialized];
+        }
+
+        [[MTGRewardAdManager sharedInstance] loadVideo:self.adUnit delegate:self];
+    });
 }
 
 - (BOOL)hasAdAvailable{

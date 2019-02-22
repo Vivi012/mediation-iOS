@@ -33,38 +33,7 @@
     self.adUnitId = (adUnitInfos.count > 0)?adUnitInfos[0]: nil;
 }
 
-- (void)startTimeoutTimer:(NSTimeInterval)duration{
-    
-    if (duration < 1) {
-        duration = 10;
-    }
-
-    NSRunLoop *runLoop = [NSRunLoop currentRunLoop];
-
-    if (!_emptyPort) {
-        _emptyPort = [NSPort port];
-    }
-    [runLoop addPort:_emptyPort forMode:NSDefaultRunLoopMode];
-    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(timeout) object:nil];
-    [runLoop runMode:NSRunLoopCommonModes beforeDate:[NSDate distantFuture]];
-//    [runLoop run];
-    [self performSelector:@selector(timeout) withObject:nil afterDelay:duration inModes:@[NSDefaultRunLoopMode]];
-    
-}
-
-
-- (void)timeout{
-
-    NSLog(@"%@",NSStringFromSelector(_cmd));
-}
-
 - (IBAction)loadRewardVideoAction:(id)sender {
-
-//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-//        [self startTimeoutTimer:3];
-//    });
-//    return;
-    
 
     if (!self.adUnitId) {
         NSString *msg = @"Your adUnitId is nil";
@@ -77,7 +46,6 @@
 }
 
 - (IBAction)showRewardVideoAction:(id)sender {
-//    MTGRewardVideoDelegate
 
     if ([MTGRewardVideo hasAdAvailableForAdUnitID:self.adUnitId]) {
         [MTGRewardVideo presentRewardVideoAdForAdUnitID:self.adUnitId fromViewController:self];

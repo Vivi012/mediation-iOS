@@ -57,19 +57,22 @@ static BOOL isInterstitialSuccess = NO;
     
     self.adUnit = unitId;
     
-    if (![MintegralAdapterHelper isSDKInitialized]) {
+    dispatch_async(dispatch_get_main_queue(), ^{
+       
+        if (![MintegralAdapterHelper isSDKInitialized]) {
+            
+            [[MTGSDK sharedInstance] setAppID:appId ApiKey:appKey];
+            [MintegralAdapterHelper sdkInitialized];
+        }
         
-        [[MTGSDK sharedInstance] setAppID:appId ApiKey:appKey];
-        [MintegralAdapterHelper sdkInitialized];
-    }
-    
-    if (!self.mtgInterstitialVideoAdManager) {
-        self.mtgInterstitialVideoAdManager = [[MTGInterstitialVideoAdManager alloc] initWithUnitID:self.adUnit delegate:self];
-    }
-    
-    isInterstitialSuccess = NO;
-    [self.mtgInterstitialVideoAdManager loadAd];
-    
+        if (!self.mtgInterstitialVideoAdManager) {
+            self.mtgInterstitialVideoAdManager = [[MTGInterstitialVideoAdManager alloc] initWithUnitID:self.adUnit delegate:self];
+        }
+        
+        isInterstitialSuccess = NO;
+        [self.mtgInterstitialVideoAdManager loadAd];
+        
+    });
 }
 
 - (BOOL)hasAdAvailable{
