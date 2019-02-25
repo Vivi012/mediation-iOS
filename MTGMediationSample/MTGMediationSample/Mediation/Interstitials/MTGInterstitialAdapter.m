@@ -149,9 +149,8 @@
     
     if (self.completionHandler && ![self.completionHandler isEqual:[NSNull null]]) {
         
-        NSLog([NSString stringWithFormat: @"current unit%@ loadSuccess,   ",self.adUnitID],
-              [NSString stringWithFormat: @"and ad network is:%@",self.networkName]
-              );
+        NSLog(@"current unit%@ loadSuccess,   ",self.adUnitID);
+        NSLog(@"and ad network is:%@",self.networkName);
         self.completionHandler(YES, nil);
     }
     self.completionHandler = nil;

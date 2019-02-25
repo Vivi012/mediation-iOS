@@ -147,8 +147,10 @@ if ([NSThread isMainThread]) {  \
         
         [self.adapter getAdWithInfo:adInfo completionHandler:^(BOOL success, NSError * _Nonnull error) {
             if (success) {
-                [self sendLoadSuccess];
                 *stop = YES;
+                dispatch_semaphore_signal(sem);
+
+                [self sendLoadSuccess];
             }else{
                 
                 [self.adapter unregisterDelegate];
@@ -159,9 +161,10 @@ if ([NSThread isMainThread]) {  \
                     [self sendLoadFailedWithError:error];
                 }
                 //else: continue next request loop
+                
+                dispatch_semaphore_signal(sem);
             }
             
-            dispatch_semaphore_signal(sem);
         }];
         
         dispatch_semaphore_wait(sem, DISPATCH_TIME_FOREVER);
