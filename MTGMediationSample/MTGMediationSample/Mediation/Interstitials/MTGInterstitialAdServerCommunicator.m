@@ -8,8 +8,7 @@
 
 #import "MTGInterstitialAdServerCommunicator.h"
 #import "MTGAdInfo.h"
-#import "MTGRewardVideoError.h"
-
+#import "MTGInterstitialError.h"
 
 @implementation MTGInterstitialAdServerCommunicator
 
@@ -36,7 +35,7 @@
     }
     // we will support send request for remote ad infos later
     if (_delegate && [_delegate respondsToSelector:@selector(communicatorDidFailWithError:)]) {
-        NSError *error = [NSError errorWithDomain:MTGRewardVideoAdsSDKDomain code:MTGRewardVideoAdErrorAdDataInValid userInfo:nil];
+        NSError *error = [NSError errorWithDomain:MTGInterstitialAdsSDKDomain code:MTGInterstitialAdErrorInvalidAdUnitID userInfo:nil];
         [_delegate communicatorDidFailWithError:error];
     }
 }
