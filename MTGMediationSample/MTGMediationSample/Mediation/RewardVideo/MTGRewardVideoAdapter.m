@@ -84,18 +84,8 @@
 
     [self cancelPreviousPerform];
     _completionHandler = nil;
-    // Make sure the custom event isn't released synchronously as objects owned by the custom event
-//    [self keepObjectAliveForCurrentRunLoopIteration:_rewardedVideoCustomEvent];
 }
 
-//- (void)keepObjectAliveForCurrentRunLoopIteration:(id)anObject{
-//
-//    [self performSelector:@selector(performNoOp:) withObject:anObject afterDelay:0];
-//}
-//
-//- (void)performNoOp:(id)anObject{
-//    ; // noop
-//}
 
 - (MTGRewardVideoCustomEvent *)buildRewardedVideoCustomEventFromCustomClass:(Class)customClass{
 

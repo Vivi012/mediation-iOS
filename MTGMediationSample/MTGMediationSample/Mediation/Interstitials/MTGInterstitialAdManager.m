@@ -156,13 +156,13 @@ if ([NSThread isMainThread]) {  \
                 [self.adapter unregisterDelegate];
                 self.adapter = nil;
                 
+                dispatch_semaphore_signal(sem);
+
                 //if the last loop failed
                 if (idx == (infos.count - 1)) {
                     [self sendLoadFailedWithError:error];
                 }
                 //else: continue next request loop
-                
-                dispatch_semaphore_signal(sem);
             }
             
         }];
