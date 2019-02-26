@@ -44,7 +44,7 @@
 		99A24FBE2212CBE400318FE3 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99A24FBD2212CBE400318FE3 /* MobileCoreServices.framework */; };
 		99A24FC02212CBED00318FE3 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99A24FBF2212CBED00318FE3 /* Accelerate.framework */; };
 		99A24FC22212CBF800318FE3 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99A24FC12212CBF800318FE3 /* AVFoundation.framework */; };
-		99A24FC42212CC0200318FE3 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99A24FC32212CC0200318FE3 /* WebKit.framework */; };
+		99A24FC42212CC0200318FE3 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99A24FC32212CC0200318FE3 /* WebKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		CA0E89ED221D09BB00F45C14 /* MTGInterstitialAdServerCommunicator.m in Sources */ = {isa = PBXBuildFile; fileRef = CA0E89EC221D09BB00F45C14 /* MTGInterstitialAdServerCommunicator.m */; };
 		CA0E89F0221D393300F45C14 /* InterstitialAdInfosData2.plist in Resources */ = {isa = PBXBuildFile; fileRef = CA0E89EE221D393300F45C14 /* InterstitialAdInfosData2.plist */; };
 		CA0E89F1221D393300F45C14 /* InterstitialAdInfosData.plist in Resources */ = {isa = PBXBuildFile; fileRef = CA0E89EF221D393300F45C14 /* InterstitialAdInfosData.plist */; };
@@ -819,7 +819,7 @@
 					"$(PROJECT_DIR)/MTGMediationSample/Network/Sdk/Mintegral",
 				);
 				INFOPLIST_FILE = MTGMediationSample/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -843,7 +843,7 @@
 					"$(PROJECT_DIR)/MTGMediationSample/Network/Sdk/Mintegral",
 				);
 				INFOPLIST_FILE = MTGMediationSample/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
