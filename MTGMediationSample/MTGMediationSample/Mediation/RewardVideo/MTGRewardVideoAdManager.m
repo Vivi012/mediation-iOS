@@ -51,10 +51,7 @@
 }
 
 - (BOOL)hasAdAvailable{
-    
-    if (self.loading) {
-        return NO;
-    }
+
     if (!self.adapter) {
         return NO;
     }
@@ -62,17 +59,7 @@
 }
 
 - (void)presentRewardedVideoFromViewController:(UIViewController *)viewController{
-    // If we've already played an ad, don't allow playing of another since we allow one play per load.
-    if (self.loading) {
-        NSError *error = [NSError errorWithDomain:MTGRewardVideoAdsSDKDomain code:MTGRewardVideoAdErrorCurrentUnitIsLoading userInfo:nil];
-        [self sendShowFailedWithError:error];
-        return;
-    }
-    if (![self hasAdAvailable]) {
-        NSError *error = [NSError errorWithDomain:MTGRewardVideoAdsSDKDomain code:MTGRewardVideoAdErrorNoAdsAvailable userInfo:nil];
-        [self sendShowFailedWithError:error];
-        return;
-    }
+
     [self.adapter presentRewardedVideoFromViewController:viewController];
 }
 
@@ -80,16 +67,21 @@
 
 - (void)sendLoadFailedWithError:(NSError *)error{
     
-    if (_delegate && [_delegate respondsToSelector:@selector(rewardVideoAdDidFailToLoadForAdUnitID:error:)]) {
-        [_delegate rewardVideoAdDidFailToLoadForAdUnitID:self.adUnitID error:error];
-    }
+    dispatch_async(dispatch_get_main_queue(), ^{
+       
+        if (self.delegate && [self.delegate respondsToSelector:@selector(rewardVideoAdDidFailToLoadForAdUnitID:error:)]) {
+            [self.delegate rewardVideoAdDidFailToLoadForAdUnitID:self.adUnitID error:error];
+        }
+    });
 }
 
 - (void)sendLoadSuccess{
     
-    if (_delegate && [_delegate respondsToSelector:@selector(rewardVideoAdDidLoadForAdUnitID:)]) {
-        [_delegate rewardVideoAdDidLoadForAdUnitID:self.adUnitID];
-    }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (self.delegate && [self.delegate respondsToSelector:@selector(rewardVideoAdDidLoadForAdUnitID:)]) {
+            [self.delegate rewardVideoAdDidLoadForAdUnitID:self.adUnitID];
+        }
+    });
 }
 
 - (void)sendShowFailedWithError:(NSError *)error{
@@ -137,7 +129,6 @@
             if (success) {
                 *stop = YES;
                 dispatch_semaphore_signal(sem);
-
                 [self sendLoadSuccess];
 
             }else{
@@ -173,49 +164,49 @@
 - (void)rewardVideoAdDidLoadForAdUnitID:(NSString *)adUnitID{
     
     if (_delegate && [_delegate respondsToSelector:@selector(rewardVideoAdDidLoadForAdUnitID:)]) {
-        [_delegate rewardVideoAdDidLoadForAdUnitID:adUnitID];
+        [_delegate rewardVideoAdDidLoadForAdUnitID:self.adUnitID];
     }
 }
 
 - (void)rewardVideoAdDidFailToLoadForAdUnitID:(NSString *)adUnitID error:(NSError *)error{
     
     if (_delegate && [_delegate respondsToSelector:@selector(rewardVideoAdDidFailToLoadForAdUnitID:error:)]) {
-        [_delegate rewardVideoAdDidFailToLoadForAdUnitID:adUnitID error:error];
+        [_delegate rewardVideoAdDidFailToLoadForAdUnitID:self.adUnitID error:error];
     }
 }
 
 - (void)rewardVideoAdDidShowForAdUnitID:(NSString *)adUnitID{
  
     if (_delegate && [_delegate respondsToSelector:@selector(rewardVideoAdDidShowForAdUnitID:)]) {
-        [_delegate rewardVideoAdDidShowForAdUnitID:adUnitID];
+        [_delegate rewardVideoAdDidShowForAdUnitID:self.adUnitID];
     }
 }
 
 - (void)rewardVideoAdDidFailToPlayForAdUnitID:(NSString *)adUnitID error:(NSError *)error{
     
     if (_delegate && [_delegate respondsToSelector:@selector(rewardVideoAdDidFailToPlayForAdUnitID:error:)]) {
-        [_delegate rewardVideoAdDidFailToPlayForAdUnitID:adUnitID error:error];
+        [_delegate rewardVideoAdDidFailToPlayForAdUnitID:self.adUnitID error:error];
     }
 }
 
 - (void)rewardVideoAdWillDisappearForAdUnitID:(NSString *)adUnitID{
     
     if (_delegate && [_delegate respondsToSelector:@selector(rewardVideoAdWillDisappearForAdUnitID:)]) {
-        [_delegate rewardVideoAdWillDisappearForAdUnitID:adUnitID];
+        [_delegate rewardVideoAdWillDisappearForAdUnitID:self.adUnitID];
     }
 }
 
 - (void)rewardVideoAdShouldRewardForAdUnitID:(NSString *)adUnitID reward:(MTGRewardVideoReward *)reward{
     
     if (_delegate && [_delegate respondsToSelector:@selector(rewardVideoAdShouldRewardForAdUnitID:reward:)]) {
-        [_delegate rewardVideoAdShouldRewardForAdUnitID:adUnitID reward:reward];
+        [_delegate rewardVideoAdShouldRewardForAdUnitID:self.adUnitID reward:reward];
     }
 }
 
 - (void)rewardVideoAdDidReceiveTapEventForAdUnitID:(NSString *)adUnitID{
     
     if (_delegate && [_delegate respondsToSelector:@selector(rewardVideoAdDidReceiveTapEventForAdUnitID:)]) {
-        [_delegate rewardVideoAdDidReceiveTapEventForAdUnitID:adUnitID];
+        [_delegate rewardVideoAdDidReceiveTapEventForAdUnitID:self.adUnitID];
     }
 }
 

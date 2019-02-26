@@ -70,9 +70,6 @@ if ([NSThread isMainThread]) {  \
 
 -(BOOL)ready{
 
-    if (self.loading) {
-        return NO;
-    }
     if (!self.adapter) {
         return NO;
     }
@@ -81,17 +78,7 @@ if ([NSThread isMainThread]) {  \
 
 
 - (void)presentInterstitialFromViewController:(UIViewController *)controller{
-    // If we've already played an ad, don't allow playing of another since we allow one play per load.
-    if (self.loading) {
-        NSError *error = [NSError errorWithDomain:MTGInterstitialAdsSDKDomain code:MTGInterstitialAdErrorCurrentUnitIsLoading userInfo:nil];
-        [self sendShowFailedWithError:error];
-        return;
-    }
-    if (![self ready]) {
-        NSError *error = [NSError errorWithDomain:MTGInterstitialAdsSDKDomain code:MTGInterstitialAdErrorCurrentUnitIsLoading userInfo:nil];
-        [self sendShowFailedWithError:error];
-        return;
-    }
+
     [self.adapter presentInterstitialFromViewController:controller];
 }
 
@@ -100,19 +87,22 @@ if ([NSThread isMainThread]) {  \
 
 - (void)sendLoadFailedWithError:(NSError *)error{
     
-    INVOKE_IN_MAINTHREAD(
-         if (self.delegate && [self.delegate respondsToSelector:@selector(manager:didFailToLoadInterstitialWithError:)]) {
-             [self.delegate manager:self didFailToLoadInterstitialWithError:error];
-         }
-     );
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        if (self.delegate && [self.delegate respondsToSelector:@selector(manager:didFailToLoadInterstitialWithError:)]) {
+            [self.delegate manager:self didFailToLoadInterstitialWithError:error];
+        }
+    });
 }
 
 - (void)sendLoadSuccess{
-    INVOKE_IN_MAINTHREAD(
-         if (self.delegate && [self.delegate respondsToSelector:@selector(managerDidLoadInterstitial:)]) {
-             [self.delegate managerDidLoadInterstitial:self];
-         }
-    );
+
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (self.delegate && [self.delegate respondsToSelector:@selector(managerDidLoadInterstitial:)]) {
+
+            [self.delegate managerDidLoadInterstitial:self];
+        }
+    });
 }
 
 - (void)sendShowFailedWithError:(NSError *)error{
