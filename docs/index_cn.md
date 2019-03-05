@@ -370,7 +370,7 @@ MTGInterstitialAdManager *interstitialManager = [[MTGInterstitialAdManager alloc
 ## ChangeLog
 版本号 | changeLog | 发布时间
 ------|-----------|------
-1.0.0	|聚合ironsource一期|
+1.0.0	|聚合ironsource一期|2019.03.04
 
 
 
